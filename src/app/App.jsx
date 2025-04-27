@@ -1,24 +1,17 @@
-import { useState } from 'react'
+import { RouterProvider } from "react-router-dom";
+import { router } from "@/app/router";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Suspense } from "react";
+import LoadingScreen  from "@/shared/components/LoadingScreen";
 
-function App() {
-  const [count, setCount] = useState(0)
+const queryClient = new QueryClient();
 
+export default function App() {
   return (
-    <>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <QueryClientProvider client={queryClient}>
+      <Suspense fallback={<LoadingScreen />}>
+        <RouterProvider router={router} />
+      </Suspense>
+    </QueryClientProvider>
+  );
 }
-
-export default App
