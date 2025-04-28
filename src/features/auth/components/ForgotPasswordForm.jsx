@@ -4,9 +4,8 @@ import { loginSchema } from "../schemas/login.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import InputField from "@/shared/components/InputField";
 import { Link } from "react-router-dom";
-import Button from "@/shared/components/Button";
 
-export function LoginForm() {
+export function ForgotPasswordForm() {
   const { login } = useAuth();
 
   const {
@@ -24,9 +23,8 @@ export function LoginForm() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col gap-6 padd-l padd-r bg-white min-h-screen justify-center text-center ite"
+      className="flex flex-col gap-6 padd-l padd-r bg-white min-h-screen justify-center text-center"
     >
-      <h3>Connectez-vous à votre compte</h3>
       <InputField
         type="email"
         {...register("email")}
@@ -40,14 +38,11 @@ export function LoginForm() {
         placeholder={"Password"}
       />
       <Link to="/forgot-password">Mot de passe oublié ?</Link>
-
-      <div>
-        <Button type="submit">
-          {isSubmitting ? "connexioin" : "Se connecter"}
-        </Button>
-      </div>
+      <button type="submit">
+        {isSubmitting ? "connexioin" : "Se connecter"}
+      </button>
       <div className=" items-center flex flex-col xl:flex-row gap-6 justify-center">
-        <small>Vous n'avez pas encore de compte ?</small>
+        <p>Vous n'avez pas encore de compte ?</p>
         <Link to="/register">Créer un compte</Link>
       </div>
     </form>

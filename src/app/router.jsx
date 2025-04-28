@@ -8,13 +8,17 @@ import DashboardLayout from "./DashboardLayout";
 import ProtectedRoute from "./ProtectedRoute";
 import SmartHomeRedirect from "./SmartHomeRedirect";
 
-// Pages (lazy loadées)
+// Page de test
 import TestPage from "./TestPage";
+
+// Pages (lazy loadées)
 const LandingPage = lazy(() => import("@/features/landing/pages/LandingPage"));
 const DashboardHome = lazy(() =>
   import("@/features/dashboard/pages/DashboardHome")
 );
 const LoginPage = lazy(() => import("@/features/auth/pages/LoginPage"));
+const ForgotPasswordPage = lazy(() => import("@/features/auth/pages/ForgotPasswordPage"));
+const RegisterPage = lazy(() => import("@/features/auth/pages/SignupPage"));
 const HomePage = lazy(() => import("@/features/home/pages/HomePage"));
 const NotFoundPage = lazy(() => import("@/shared/pages/NotFoundPage"));
 
@@ -31,17 +35,19 @@ export const router = createBrowserRouter([
     element: <AuthLayout />, 
     children: [
       { path: "/login", element: <LoginPage /> },
+      { path: "/register", element: <RegisterPage /> },
+      { path: "/forgot-password", element: <ForgotPasswordPage /> },
     ],
   },
+  // {
+  //   element: <ProtectedRoute />,
+  //   children: [
+  //   ],
+  // },
   {
     element: <ProtectedRoute />,
     children: [
       { path: "/home", element: <HomePage /> },
-    ],
-  },
-  {
-    element: <ProtectedRoute />,
-    children: [
       {
         element: <DashboardLayout />,
         children: [

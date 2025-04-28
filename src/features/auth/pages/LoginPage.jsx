@@ -1,9 +1,13 @@
 import { LoginForm } from "../components/LoginForm";
+import { useAuthStore } from "../store/auth.store";
 
 export default function LoginPage() {
+  const {user} = useAuthStore();
+  console.log(user);
+  
   return (
     <>
-      <LoginForm />
+        <LoginForm />
       <div className="flex flex-col gap-y-6 padd min-h-screen justify-center">
         <h3>Connectez-vous à votre espace BADAM</h3>
         <p>

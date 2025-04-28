@@ -10,10 +10,10 @@ export function useAuth() {
 
   const loginMutation = useMutation({
     mutationFn: AuthAPI.login,
-    onSuccess: (data) => {
+    onSuccess: ({ data }) => {
       setUser(data.user);
-      toastSuccess("Connexion réussie !");
-      navigate("/test");
+      toastSuccess(data.message);
+      navigate("/home");
     },
     onError: (error) => {
       const message = error?.response?.data?.message || "Erreur inconnue";
@@ -21,8 +21,36 @@ export function useAuth() {
     },
   });
 
+  const signupMutation = useMutation({
+    mutationFn: AuthAPI.register,
+    onSuccess: ({ data }) => {
+      setUser(data.user);
+      toastSuccess(data.message);
+      navigate("/login");
+    },
+    onError: (error) => {
+      const message = error?.response?.data?.message || "Erreur inconnue";
+      toastError(message);
+    },
+  });
+
+  const logoutMutation = useMutation({
+    mutationFn: AuthAPI.logout,
+    onSuccess: ({ data }) => {
+      setUser(null);
+      toastSuccess(data.message);
+      navigate("/login");
+    },
+    onError: ({data}) => {
+      toastError(data.message);
+    },
+  });
+
   return {
     login: loginMutation.mutate,
+    signup: signupMutation.mutate,
+    logout: logoutMutation.mutate,
     isLoggingIn: loginMutation.isPending,
+    isLoggingOut: logoutMutation.isPending,
   };
 }
