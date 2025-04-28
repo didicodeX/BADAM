@@ -9,45 +9,50 @@ body {
   @apply bg-background-50 text-text-900;
 }
 
-
 h1 {
-  @apply text-3xl sm:text-4xl md:text-5xl font-bold leading-tight
+  @apply text-3xl sm:text-4xl md:text-5xl font-bold leading-tight;
 }
 
 h2 {
-  @apply text-2xl sm:text-3xl md:text-4xl font-semibold leading-snug
+  @apply text-2xl sm:text-3xl md:text-4xl font-semibold leading-snug;
 }
 
 h3 {
-  @apply text-xl sm:text-2xl md:text-3xl font-semibold leading-normal
+  @apply text-xl sm:text-2xl md:text-3xl font-semibold leading-normal;
 }
 
 h4 {
-  @apply text-lg sm:text-xl md:text-2xl font-medium leading-normal
+  @apply text-lg sm:text-xl md:text-2xl font-medium leading-normal;
 }
 
-p{
- @apply text-base lg:text-lg font-normal leading-relaxed
+p {
+  @apply text-base lg:text-lg font-normal leading-relaxed;
 }
 
 small {
-  @apply text-sm font-normal leading-normal
+  @apply text-sm font-normal leading-normal;
 }
 
 .text-large {
-  @apply text-lg md:text-lg lg:text-xl font-normal leading-relaxed
+  @apply text-lg md:text-lg lg:text-xl font-normal leading-relaxed;
 }
 
 .text-xsmall {
-  @apply text-xs font-medium leading-snug
+  @apply text-xs font-medium leading-snug;
 }
 
-.padding {
-  @apply px-6 md:px-12 lg:px-24
+.padd-l {
+  @apply pl-6 md:pl-12 lg:pl-24;
+}
+.padd-r {
+  @apply pr-6 md:pr-12 lg:pr-24;
+}
+.padd {
+  @apply px-6 md:px-12 lg:px-24;
 }
 
-section {
-  @apply p-6 border-b border-b-background-200
+.section {
+  @apply p-6 border-b border-b-background-200;
 }
 
 ::selection {
@@ -55,9 +60,13 @@ section {
 }
 
 input::placeholder {
-  @apply text-text-700
+  @apply text-text-700;
 }
 
 :focus-visible {
   @apply outline outline-2 outline-cta-500;
+}
+
+a {
+  @apply text-sm text-cta-500 underline;
 }

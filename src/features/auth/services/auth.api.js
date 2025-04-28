@@ -12,6 +12,6 @@ export const logout = () => {
   return api.post("/auth/logout");
 };
 
-export const me = () => {
+export const getMe = () => {
   return api.get("/auth/me");
 };

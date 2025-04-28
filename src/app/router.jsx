@@ -3,6 +3,7 @@ import { lazy } from "react";
 
 // Layouts
 import PublicLayout from "./PublicLayout";
+import AuthLayout from "./AuthLayout"; 
 import DashboardLayout from "./DashboardLayout";
 import ProtectedRoute from "./ProtectedRoute";
 import SmartHomeRedirect from "./SmartHomeRedirect";
@@ -23,17 +24,19 @@ export const router = createBrowserRouter([
     children: [
       { path: "/", element: <SmartHomeRedirect /> },
       { path: "/landing", element: <LandingPage /> },
-      {
-        path: "/home",
-        element: (
-          <ProtectedRoute>
-            <HomePage />
-          </ProtectedRoute>
-        ),
-      },
       { path: "/test", element: <TestPage /> },
+    ],
+  },
+  {
+    element: <AuthLayout />, 
+    children: [
       { path: "/login", element: <LoginPage /> },
-      { path: "*", element: <NotFoundPage /> },
+    ],
+  },
+  {
+    element: <ProtectedRoute />,
+    children: [
+      { path: "/home", element: <HomePage /> },
     ],
   },
   {
@@ -43,9 +46,9 @@ export const router = createBrowserRouter([
         element: <DashboardLayout />,
         children: [
           { path: "/dashboard", element: <DashboardHome /> },
-          { path: "*", element: <NotFoundPage /> },
         ],
       },
     ],
   },
+  { path: "*", element: <NotFoundPage /> }
 ]);
