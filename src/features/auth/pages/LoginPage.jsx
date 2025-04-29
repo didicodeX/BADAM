@@ -1,8 +1,17 @@
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { LoginForm } from "../components/LoginForm";
 import { useAuthStore } from "../store/auth.store";
 
 export default function LoginPage() {
-  const {user} = useAuthStore();
+  const { user } = useAuthStore();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user) {
+      navigate("/home");
+    }
+  }, [user, navigate]);
   console.log(user);
   
   return (

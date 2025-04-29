@@ -1,10 +1,11 @@
 // PublicLayout.jsx
+import Navbar from "@/shared/components/Navbar";
 import { Outlet } from "react-router-dom";
 
 export default function PublicLayout() {
   return (
     <div>
-      <header>Navbar ici</header>
+      <Navbar/>
       <main>
         <Outlet />
       </main>

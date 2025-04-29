@@ -10,7 +10,6 @@ export function useInitialUser(){
       try {
         const response = await getMe();
         setUser(response.data.user)
-        console.log(response.data.user)
       }catch(error){
         setUser(null)
         console.log(error)

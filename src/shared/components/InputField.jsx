@@ -13,13 +13,13 @@ export default function InputField({ placeholder, error, type = "text", ...rest 
         {...rest}
         type={isPassword && showPassword ? "text" : type} 
         placeholder={placeholder}
-        className="w-full px-6 py-3 border rounded border-text-200 pr-10"
+        className="w-full px-6 py-3 border rounded-md border-text-200 pr-10"
       />
       {isPassword && (
         <button
           type="button"
           onClick={togglePassword}
-          className="absolute right-5 top-5 -translate-y-1/2 text-text-700"
+          className="absolute right-0 top-5 -translate-y-1/2 text-text-700"
         >
           {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
         </button>

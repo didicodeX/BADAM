@@ -3,7 +3,7 @@ export default function Button({ children, onClick, type = "button" }) {
     <button
       type={type}
       onClick={onClick}
-      className="px-6 py-3 bg-cta-700 text-white w-fit rounded-lg"
+      className="px-6 py-3 bg-cta-700 text-white w-fit rounded-md"
     >
       {children}
     </button>
