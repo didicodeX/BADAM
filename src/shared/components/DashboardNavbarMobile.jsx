@@ -1,19 +1,15 @@
-import { useState } from "react";
 import {
   Menu,
-  Search,
   X,
   User,
-  ArrowLeft,
-  Plus,
   LayoutDashboard,
   Heart,
   Bell,
   Settings,
   HelpCircle,
   LogOut,
+  Plus
 } from "lucide-react";
-import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuthStore } from "@/features/auth/store/auth.store";
 // eslint-disable-next-line no-unused-vars
@@ -22,26 +18,20 @@ import { useAuth } from "@/features/auth/hooks/useAuth";
 import { getInitials } from "../utils/getInitials";
 import SearchInput from "./SearchInput";
 import { capitalizeFirstLetter } from "../utils/capitalizeFirstLetter";
+import Button from "./Button";
 
-export default function NavbarMobile({
+export default function DashboardNavbarMobile({
   menuOpen,
   setMenuOpen,
-  forceOpenSearchOnMount = false,
 }) {
   const { user } = useAuthStore();
   const { logout } = useAuth();
-  const [searchOpen, setSearchOpen] = useState(forceOpenSearchOnMount);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (forceOpenSearchOnMount) {
-      sessionStorage.removeItem("badam:search:autoFocus");
-    }
-  }, [forceOpenSearchOnMount]);
+
 
   return (
     <header className="fixed top-0 left-0 w-full bg-background px-4 py-3 shadow-sm z-50 h-14 bg-background-50">
-      {!searchOpen ? (
         <div className="flex items-center justify-between">
           {menuOpen ? (
             <X
@@ -55,24 +45,21 @@ export default function NavbarMobile({
             />
           )}
 
-          <div className="text-xl font-bold">
+          <div className="text-xl text-center font-bold w-full">
             <Link to="/">
               BA<span className="text-cta-500">DAM</span>
             </Link>
           </div>
 
-          <Search
-            className="w-6 h-6 text-primary cursor-pointer"
-            onClick={() => setSearchOpen(true)}
-          />
+          <Link
+          to="/dashboard/create"
+          className="flex items-center gap-1 text-sm px-4  py-2 bg-cta-700 text-white w-fit rounded-md"
+        >
+          <Plus className="w-4 h-4" />
+          Créer
+        </Link>
+          
         </div>
-      ) : (
-        <SearchInput
-          mobile
-          autoFocus={forceOpenSearchOnMount}
-          onClose={() => setSearchOpen(false)}
-        />
-      )}
 
       <AnimatePresence>
         {menuOpen && (

@@ -13,6 +13,7 @@ import SmartHomeRedirect from "./SmartHomeRedirect";
 import TestPage from "./TestPage";
 import SearchPage from "@/features/search/pages/SearchPage";
 
+// Lazy-loaded pages
 const LandingPage = lazy(() => import("@/features/landing/pages/LandingPage"));
 const DashboardHome = lazy(() => import("@/features/dashboard/pages/DashboardHome"));
 const LoginPage = lazy(() => import("@/features/auth/pages/LoginPage"));
@@ -21,8 +22,14 @@ const RegisterPage = lazy(() => import("@/features/auth/pages/SignupPage"));
 const HomePage = lazy(() => import("@/features/home/pages/HomePage"));
 const NotFoundPage = lazy(() => import("@/shared/pages/NotFoundPage"));
 
+// Dashboard sidebar pages
+const CreateTraining = lazy(() => import("@/features/dashboard/pages/CreateTraining"));
+const FollowedSessions = lazy(() => import("@/features/dashboard/pages/FollowedSessions"));
+const CreatedTrainings = lazy(() => import("@/features/dashboard/pages/CreatedTrainings"));
+const CreatedSessions = lazy(() => import("@/features/dashboard/pages/CreatedSessions"));
+const Favorites = lazy(() => import("@/features/dashboard/pages/Favorites"));
+
 export const router = createBrowserRouter([
-  // ✅ Routes publiques
   {
     element: <PublicLayout />,
     children: [
@@ -32,7 +39,6 @@ export const router = createBrowserRouter([
     ],
   },
 
-  // ✅ /search est ici, avec AppLayout — public MAIS avec UI adaptative
   {
     element: <AppLayout />,
     children: [
@@ -40,7 +46,6 @@ export const router = createBrowserRouter([
     ],
   },
 
-  // ✅ Auth pages
   {
     element: <AuthLayout />,
     children: [
@@ -50,7 +55,6 @@ export const router = createBrowserRouter([
     ],
   },
 
-  // ✅ Protected routes
   {
     element: <ProtectedRoute />,
     children: [
@@ -64,11 +68,15 @@ export const router = createBrowserRouter([
         element: <DashboardLayout />,
         children: [
           { path: "/dashboard", element: <DashboardHome /> },
+          { path: "/dashboard/create", element: <CreateTraining /> },
+          { path: "/dashboard/followed-sessions", element: <FollowedSessions /> },
+          { path: "/dashboard/created-trainings", element: <CreatedTrainings /> },
+          { path: "/dashboard/created-sessions", element: <CreatedSessions /> },
+          { path: "/dashboard/favorites", element: <Favorites /> },
         ],
       },
     ],
   },
 
-  // 404
   { path: "*", element: <NotFoundPage /> },
 ]);

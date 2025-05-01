@@ -2,6 +2,7 @@ import { useAuth } from "@/features/auth/hooks/useAuth";
 import { useAuthStore } from "@/features/auth/store/auth.store";
 import AuthDebug from "@/shared/components/AuthDebug";
 import Button from "@/shared/components/Button";
+import UserMenu from "@/shared/components/UserMenu";
 
 export default function HomePage() {
   const { user } = useAuthStore();
@@ -13,6 +14,7 @@ export default function HomePage() {
   return (
     <>
       <h1>Home Page</h1>
+      {/* <UserMenu user={user} /> */}
       <img src={user.avatar} alt="" />
       <Button onClick={handleLogout}>deconnexion</Button>
       <AuthDebug/>
