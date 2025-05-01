@@ -29,32 +29,32 @@ export default function DashboardSidebar() {
   const navItems = [
     {
       icon: <Home className="w-5 h-5" />,
-      label: "Home",
+      label: "Accueil",
       to: "home",
     },
     {
       icon: <Plus className="w-5 h-5" />,
-      label: "Create training",
+      label: " Créer une formation",
       to: "create",
     },
     {
       icon: <CalendarCheck2 className="w-5 h-5" />,
-      label: "Sessions followed",
+      label: "Mes sessions suivies",
       to: "followed-sessions",
     },
     {
       icon: <BookOpen className="w-5 h-5" />,
-      label: "Trainings created",
+      label: "Mes formations créées",
       to: "created-trainings",
     },
     {
       icon: <CalendarClock className="w-5 h-5" />,
-      label: "Sessions created",
+      label: "Mes sessions créées",
       to: "created-sessions",
     },
     {
       icon: <Heart className="w-5 h-5" />,
-      label: "Favorites",
+      label: "Mes favories",
       to: "favorites",
     },
   ];
