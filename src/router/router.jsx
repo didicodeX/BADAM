@@ -2,32 +2,47 @@ import { createBrowserRouter } from "react-router-dom";
 import { lazy } from "react";
 
 // Layouts
-import PublicLayout from "./PublicLayout";
-import AuthLayout from "./AuthLayout";
-import DashboardLayout from "./DashboardLayout";
-import AppLayout from "./AppLayout";
+import PublicLayout from "../layouts/PublicLayout";
+import AuthLayout from "../layouts/AuthLayout";
+import DashboardLayout from "../layouts/DashboardLayout";
+import AppLayout from "../layouts/AppLayout";
 import ProtectedRoute from "./ProtectedRoute";
 import SmartHomeRedirect from "./SmartHomeRedirect";
 
 // Page de test
-import TestPage from "./TestPage";
+import TestPage from "../test/TestPage";
 import SearchPage from "@/features/search/pages/SearchPage";
+import DashboardRoutes from "@/features/dashboard";
 
 // Lazy-loaded pages
 const LandingPage = lazy(() => import("@/features/landing/pages/LandingPage"));
-const DashboardHome = lazy(() => import("@/features/dashboard/pages/DashboardHome"));
+const DashboardHome = lazy(() =>
+  import("@/features/dashboard/pages/home/DashboardHome")
+);
 const LoginPage = lazy(() => import("@/features/auth/pages/LoginPage"));
-const ForgotPasswordPage = lazy(() => import("@/features/auth/pages/ForgotPasswordPage"));
+const ForgotPasswordPage = lazy(() =>
+  import("@/features/auth/pages/ForgotPasswordPage")
+);
 const RegisterPage = lazy(() => import("@/features/auth/pages/SignupPage"));
 const HomePage = lazy(() => import("@/features/home/pages/HomePage"));
 const NotFoundPage = lazy(() => import("@/shared/pages/NotFoundPage"));
 
 // Dashboard sidebar pages
-const CreateTraining = lazy(() => import("@/features/dashboard/pages/CreateTraining"));
-const FollowedSessions = lazy(() => import("@/features/dashboard/pages/FollowedSessions"));
-const CreatedTrainings = lazy(() => import("@/features/dashboard/pages/CreatedTrainings"));
-const CreatedSessions = lazy(() => import("@/features/dashboard/pages/CreatedSessions"));
-const Favorites = lazy(() => import("@/features/dashboard/pages/Favorites"));
+const CreateTraining = lazy(() =>
+  import("@/features/dashboard/pages/create-training/CreateTraining")
+);
+const FollowedSessions = lazy(() =>
+  import("@/features/dashboard/pages/followed-sessions/FollowedSessions")
+);
+const CreatedTrainings = lazy(() =>
+  import("@/features/dashboard/pages/created-trainings/CreatedTrainings")
+);
+const CreatedSessions = lazy(() =>
+  import("@/features/dashboard/pages/created-sessions/CreatedSessions")
+);
+const Favorites = lazy(() =>
+  import("@/features/dashboard/pages/favorites/Favorites")
+);
 
 export const router = createBrowserRouter([
   {
@@ -41,9 +56,7 @@ export const router = createBrowserRouter([
 
   {
     element: <AppLayout />,
-    children: [
-      { path: "/search", element: <SearchPage /> },
-    ],
+    children: [{ path: "/search", element: <SearchPage /> }],
   },
 
   {
@@ -62,18 +75,15 @@ export const router = createBrowserRouter([
         element: <AppLayout />,
         children: [
           { path: "/home", element: <HomePage /> },
+          { path: "/profile", element: <HomePage /> },
+          { path: "/settings", element: <HomePage /> },
         ],
       },
       {
+        path: "/dashboard",
         element: <DashboardLayout />,
-        children: [
-          { path: "/dashboard", element: <DashboardHome /> },
-          { path: "/dashboard/create", element: <CreateTraining /> },
-          { path: "/dashboard/followed-sessions", element: <FollowedSessions /> },
-          { path: "/dashboard/created-trainings", element: <CreatedTrainings /> },
-          { path: "/dashboard/created-sessions", element: <CreatedSessions /> },
-          { path: "/dashboard/favorites", element: <Favorites /> },
-        ],
+
+        children: [{ path: "*", element: <DashboardRoutes /> }],
       },
     ],
   },

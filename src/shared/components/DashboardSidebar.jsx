@@ -10,38 +10,52 @@ import {
   PanelRightClose,
   HelpCircle,
 } from "lucide-react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, useLocation, matchPath } from "react-router-dom";
 
 export default function DashboardSidebar() {
   const [isOpen, setIsOpen] = useState(true);
+  const location = useLocation();
 
   const toggleSidebar = () => setIsOpen(!isOpen);
 
+  // Permet de matcher les sous-routes avec end: false
+  const isMatch = (pattern) => {
+    return matchPath(
+      { path: `dashboard/${pattern}`, end: false },
+      location.pathname
+    );
+  };
+
   const navItems = [
+    {
+      icon: <Home className="w-5 h-5" />,
+      label: "Home",
+      to: "home",
+    },
     {
       icon: <Plus className="w-5 h-5" />,
       label: "Create training",
-      to: "/dashboard/create",
+      to: "create",
     },
     {
       icon: <CalendarCheck2 className="w-5 h-5" />,
       label: "Sessions followed",
-      to: "/dashboard/followed-sessions",
+      to: "followed-sessions",
     },
     {
       icon: <BookOpen className="w-5 h-5" />,
       label: "Trainings created",
-      to: "/dashboard/created-trainings",
+      to: "created-trainings",
     },
     {
       icon: <CalendarClock className="w-5 h-5" />,
       label: "Sessions created",
-      to: "/dashboard/created-sessions",
+      to: "created-sessions",
     },
     {
       icon: <Heart className="w-5 h-5" />,
       label: "Favorites",
-      to: "/dashboard/favorites",
+      to: "favorites",
     },
   ];
 
@@ -69,37 +83,27 @@ export default function DashboardSidebar() {
 
         {/* Navigation */}
         <nav className="flex flex-col gap-4">
-          <NavLink
-            end // 👈 important : correspond exactement à "/dashboard" uniquement
-            to="/dashboard"
-            className={({ isActive }) =>
-              `flex gap-3 w-full items-center text-text-700 hover:text-cta-500 ${
-                !isOpen ? "justify-center" : ""
-              } ${isActive ? "text-cta-500 font-semibold" : ""}`
-            }
-          >
-            <Home className="sm:w-5 sm:h-5 w-4 h-4" />
-            {isOpen && <span>Home</span>}
-          </NavLink>
+          {navItems.map(({ icon, label, to }) => {
+            const active =
+              isMatch(to) || location.pathname === `/dashboard/${to}`;
 
-          {navItems.map(({ icon, label, to }) => (
-            <NavLink
-              key={label}
-              to={to}
-              className={({ isActive }) =>
-                `flex gap-3 w-full items-center text-text-700 hover:text-cta-500 ${
+            return (
+              <Link
+                key={label}
+                to={`/dashboard/${to}`}
+                className={`flex gap-3 w-full items-center hover:text-cta-500 ${
                   !isOpen ? "justify-center" : ""
-                } ${isActive ? "text-cta-500 font-semibold" : ""}`
-              }
-            >
-              {icon}
-              {isOpen && <span>{label}</span>}
-            </NavLink>
-          ))}
+                } ${active ? "text-cta-500 font-semibold" : "text-text-700"}`}
+              >
+                {icon}
+                {isOpen && <span>{label}</span>}
+              </Link>
+            );
+          })}
         </nav>
       </div>
 
-      {/* Pied de page (aide) */}
+      {/* Footer (help) */}
       <div className="mt-auto pb-4">
         <Link
           to="/dashboard/help"
