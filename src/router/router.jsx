@@ -25,24 +25,13 @@ const ForgotPasswordPage = lazy(() =>
 );
 const RegisterPage = lazy(() => import("@/features/auth/pages/SignupPage"));
 const HomePage = lazy(() => import("@/features/home/pages/HomePage"));
+const ProfilePage = lazy(() => import("@/features/profile/pages/ProfilePage"));
+const SettingsPage = lazy(() =>
+  import("@/features/settings/pages/SettingsPage")
+);
+const NotificationsPage = lazy(() => import("@/features/notifications/pages/NotificationsPage"))
+const HelpPage = lazy(() => import("@/features/help/pages/HelpPage"))
 const NotFoundPage = lazy(() => import("@/shared/pages/NotFoundPage"));
-
-// Dashboard sidebar pages
-const CreateTraining = lazy(() =>
-  import("@/features/dashboard/pages/create-training/CreateTraining")
-);
-const FollowedSessions = lazy(() =>
-  import("@/features/dashboard/pages/followed-sessions/FollowedSessions")
-);
-const CreatedTrainings = lazy(() =>
-  import("@/features/dashboard/pages/created-trainings/CreatedTrainings")
-);
-const CreatedSessions = lazy(() =>
-  import("@/features/dashboard/pages/created-sessions/CreatedSessions")
-);
-const Favorites = lazy(() =>
-  import("@/features/dashboard/pages/favorites/Favorites")
-);
 
 export const router = createBrowserRouter([
   {
@@ -75,8 +64,10 @@ export const router = createBrowserRouter([
         element: <AppLayout />,
         children: [
           { path: "/home", element: <HomePage /> },
-          { path: "/profile", element: <HomePage /> },
-          { path: "/settings", element: <HomePage /> },
+          { path: "/profile", element: <ProfilePage /> },
+          { path: "/settings", element: <SettingsPage /> },
+          { path: "/help", element: <HelpPage /> },
+          { path: "/notifications", element: <NotificationsPage /> },
         ],
       },
       {

@@ -54,7 +54,7 @@ export default function SearchInput({
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
         placeholder="Rechercher une formation..."
-        className={`flex-1 bg-transparent text-sm outline-none placeholder-text-400 focus:outline-none ${
+        className={`flex-1 bg-transparent text-sm outline-none placeholder-text-400 px-6 py-0.5 focus:outline-none ${
           mobile ? "focus:border-b focus:border-cta-500" : ""
         }`}
       />

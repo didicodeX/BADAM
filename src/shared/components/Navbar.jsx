@@ -3,11 +3,13 @@ import {
   Heart,
   Bell,
 } from "lucide-react";
+
 import { useState, useEffect, useRef } from "react";
 import { useAuthStore } from "@/features/auth/store/auth.store";
 import { getInitials } from "../utils/getInitials";
 import SearchInput from "./SearchInput";
 import UserMenu from "./UserMenu"; // 👈 Crée ce fichier séparément
+import { baseStyle,solidStyle,outlineStyle } from "../lib/buttonStyle";
 
 export default function Navbar() {
   const { user } = useAuthStore();
@@ -46,9 +48,9 @@ export default function Navbar() {
   }, [userMenuOpen]);
 
   return (
-    <header className="fixed top-0 left-0 w-full flex items-center justify-between px-6 py-4 bg-background-50 z-50 shadow-sm h-14">
+    <header className="fixed top-0 left-0 w-full flex items-center justify-between px-6 py-4 bg-background-50 z-50  h-16">
       {/* Logo */}
-      <div className="text-xl font-bold">
+      <div className="text-2xl font-bold">
         <Link to="/">
           BA<span className="text-cta-500">DAM</span>
         </Link>
@@ -64,7 +66,7 @@ export default function Navbar() {
         {user ? (
           <>
             <Link
-              to="/mes-favoris"
+              to="/dashboard/favorites"
               className="flex items-center hover:text-cta-500 rounded"
             >
               <Heart className="w-5 h-5" />
@@ -85,10 +87,10 @@ export default function Navbar() {
           </>
         ) : (
           <>
-            <Link to="/login" className="hover:text-cta-500">
+            <Link to="/login" className={`${baseStyle} ${outlineStyle}`}>
               Se connecter
             </Link>
-            <Link to="/login" className="hover:text-cta-500">
+            <Link to="/login" className={`${baseStyle} ${solidStyle}`}>
               S'inscrire
             </Link>
           </>

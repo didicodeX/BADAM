@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import SearchInput from "./SearchInput";
 
+
 export default function NavbarMobilePublic({
   menuOpen,
   setMenuOpen,
@@ -65,14 +66,14 @@ export default function NavbarMobilePublic({
                 className="flex items-center gap-3 w-full hover:text-cta-500 rounded"
               >
                 <LogIn className="w-5 h-5" />
-                Connexion
+                Se connecter
               </Link>
               <Link
                 to="/register"
                 className="flex items-center gap-3 w-full hover:text-cta-500 rounded"
               >
                 <UserPlus className="w-5 h-5" />
-                Inscription
+                S'inscrire
               </Link>
             </nav>
 

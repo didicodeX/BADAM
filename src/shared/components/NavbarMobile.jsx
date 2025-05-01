@@ -93,7 +93,9 @@ export default function NavbarMobile({
                     {getInitials(user.name)}
                   </div>
                   <div>
-                    <p className="font-semibold">{capitalizeFirstLetter(user.name)}</p>
+                    <p className="font-semibold">
+                      {capitalizeFirstLetter(user.name)}
+                    </p>
                     <p className="text-sm text-text-400">{user.email}</p>
                   </div>
                 </div>
@@ -107,18 +109,18 @@ export default function NavbarMobile({
                   Profil
                 </Link>
                 <Link
-                  to="/dashboard"
+                  to="/dashboard/home"
                   className="flex items-center gap-3 w-full hover:text-cta-500 rounded"
                 >
                   <LayoutDashboard className="w-5 h-5" />
                   Dashboard
                 </Link>
                 <Link
-                  to="/favorites"
+                  to="/dashboard/favorites"
                   className="flex items-center gap-3 w-full hover:text-cta-500 rounded"
                 >
                   <Heart className="w-5 h-5" />
-                  Mes favoris
+                  Mes favories
                 </Link>
                 <Link
                   to="/notifications"

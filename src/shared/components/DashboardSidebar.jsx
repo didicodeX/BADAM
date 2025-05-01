@@ -106,7 +106,7 @@ export default function DashboardSidebar() {
       {/* Footer (help) */}
       <div className="mt-auto pb-4">
         <Link
-          to="/dashboard/help"
+          to="/help"
           className={`text-text-700 hover:text-cta-500 ${
             !isOpen ? "flex justify-center" : ""
           }`}

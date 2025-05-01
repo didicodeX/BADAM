@@ -20,12 +20,12 @@ export default function PublicLayout() {
   return (
     <div className="min-h-screen flex flex-col relative">
       {/* Navbar desktop */}
-      <div className="hidden sm:block">
+      <div className="hidden md:block">
         <Navbar />
       </div>
 
       {/* Navbar mobile */}
-      <div className="block sm:hidden">
+      <div className="block md:hidden">
         <NavbarMobilePublic menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
       </div>
 
@@ -38,7 +38,7 @@ export default function PublicLayout() {
       )}
 
       {/* Contenu principal */}
-      <main className={`${menuOpen ? "z-0" : "relative z-20"} pt-14 flex-1`}>
+      <main className={`${menuOpen ? "z-0" : "relative z-20"} pt-16 flex-1`}>
         <Outlet />
       </main>
 

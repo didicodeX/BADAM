@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import { useAuthStore } from "@/features/auth/store/auth.store";
 import { Bell, Plus } from "lucide-react";
 import { getInitials } from "../utils/getInitials";
-import UserMenu from "./UserMenu"; // 🔁 Reuse same dropdown component as Navbar
-
+import UserMenu from "./UserMenu";
+import { baseStyle, solidStyle } from "../lib/buttonStyle";
 export default function DashboardNavbar() {
   const { user } = useAuthStore();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -34,17 +34,17 @@ export default function DashboardNavbar() {
       <div className="flex gap-3 items-center relative" ref={menuRef}>
       <Link
           to="/dashboard/create"
-          className="flex items-center gap-1 text-sm px-4  py-2 bg-cta-700 text-white w-fit rounded-md"
+          className={`${baseStyle} ${solidStyle} flex items-center text-sm`}
         >
           <Plus className="w-4 h-4" />
           Créer
         </Link>
 
-        <Link 
+        <Link
           to="/notifications"
           className="flex items-center justify-center hover:text-cta-500"
         >
-          <Bell className="w-5 h-5"/>
+          <Bell className="w-5 h-5" />
         </Link>
 
         <div
@@ -54,7 +54,9 @@ export default function DashboardNavbar() {
           {getInitials(user.name)}
         </div>
 
-        {menuOpen && <UserMenu user={user} onClose={() => setMenuOpen(false)} />}
+        {menuOpen && (
+          <UserMenu user={user} onClose={() => setMenuOpen(false)} />
+        )}
       </div>
     </header>
   );

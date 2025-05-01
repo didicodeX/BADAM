@@ -28,12 +28,12 @@ export default function DashboardLayout() {
 
       <div className="flex-1 flex flex-col">
         {/* Navbar desktop */}
-        <div className="hidden sm:block">
+        <div className="hidden md:block">
           <DashboardNavbar />
         </div>
 
         {/* Navbar mobile */}
-        <div className="block sm:hidden">
+        <div className="block md:hidden">
           <DashboardNavbarMobile menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
         </div>
 
@@ -49,7 +49,7 @@ export default function DashboardLayout() {
 
           {/* Main content */}
           <main
-            className={`${menuOpen ? "z-0" : "relative z-20"} transition-all pt-24 px-4`}
+            className={`${menuOpen ? "z-0" : "relative z-20"} transition-all pt-16`}
           >
             <Outlet />
           </main>

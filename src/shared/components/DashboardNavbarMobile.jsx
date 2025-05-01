@@ -8,7 +8,7 @@ import {
   Settings,
   HelpCircle,
   LogOut,
-  Plus
+  Plus,
 } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuthStore } from "@/features/auth/store/auth.store";
@@ -16,50 +16,42 @@ import { useAuthStore } from "@/features/auth/store/auth.store";
 import { motion, AnimatePresence } from "framer-motion";
 import { useAuth } from "@/features/auth/hooks/useAuth";
 import { getInitials } from "../utils/getInitials";
-import SearchInput from "./SearchInput";
 import { capitalizeFirstLetter } from "../utils/capitalizeFirstLetter";
-import Button from "./Button";
-
-export default function DashboardNavbarMobile({
-  menuOpen,
-  setMenuOpen,
-}) {
+import { baseStyle, solidStyle } from "../lib/buttonStyle";
+export default function DashboardNavbarMobile({ menuOpen, setMenuOpen }) {
   const { user } = useAuthStore();
   const { logout } = useAuth();
   const navigate = useNavigate();
 
-
-
   return (
     <header className="fixed top-0 left-0 w-full bg-background px-4 py-3 shadow-sm z-50 h-14 bg-background-50">
-        <div className="flex items-center justify-between">
-          {menuOpen ? (
-            <X
-              className="w-6 h-6 text-primary cursor-pointer"
-              onClick={() => setMenuOpen(false)}
-            />
-          ) : (
-            <Menu
-              className="w-6 h-6 text-primary cursor-pointer"
-              onClick={() => setMenuOpen(true)}
-            />
-          )}
+      <div className="flex items-center justify-between">
+        {menuOpen ? (
+          <X
+            className="w-6 h-6 text-primary cursor-pointer"
+            onClick={() => setMenuOpen(false)}
+          />
+        ) : (
+          <Menu
+            className="w-6 h-6 text-primary cursor-pointer"
+            onClick={() => setMenuOpen(true)}
+          />
+        )}
 
-          <div className="text-xl text-center font-bold w-full">
-            <Link to="/">
-              BA<span className="text-cta-500">DAM</span>
-            </Link>
-          </div>
+        <div className="text-xl text-center font-bold w-full">
+          <Link to="/">
+            BA<span className="text-cta-500">DAM</span>
+          </Link>
+        </div>
 
-          <Link
+        <Link
           to="/dashboard/create"
-          className="flex items-center gap-1 text-sm px-4  py-2 bg-cta-700 text-white w-fit rounded-md"
+          className={`${baseStyle} ${solidStyle} flex items-center text-sm`}
         >
           <Plus className="w-4 h-4" />
           Créer
         </Link>
-          
-        </div>
+      </div>
 
       <AnimatePresence>
         {menuOpen && (
@@ -80,7 +72,9 @@ export default function DashboardNavbarMobile({
                     {getInitials(user.name)}
                   </div>
                   <div>
-                    <p className="font-semibold">{capitalizeFirstLetter(user.name)}</p>
+                    <p className="font-semibold">
+                      {capitalizeFirstLetter(user.name)}
+                    </p>
                     <p className="text-sm text-text-400">{user.email}</p>
                   </div>
                 </div>
@@ -105,7 +99,7 @@ export default function DashboardNavbarMobile({
                   className="flex items-center gap-3 w-full hover:text-cta-500 rounded"
                 >
                   <Heart className="w-5 h-5" />
-                  Mes favoris
+                  Mes favories
                 </Link>
                 <Link
                   to="/notifications"

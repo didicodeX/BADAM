@@ -27,12 +27,12 @@ export default function AppLayout() {
   return (
     <div className="min-h-screen flex flex-col">
       {/* Navbar desktop */}
-      <div className="hidden sm:block">
+      <div className="hidden md:block">
         <Navbar />
       </div>
 
       {/* Navbar mobile */}
-      <div className="block sm:hidden">
+      <div className="block md:hidden">
         {user ? (
           <NavbarMobile
             menuOpen={menuOpen}
@@ -56,7 +56,7 @@ export default function AppLayout() {
             onClick={() => setMenuOpen(false)}
           />
         )}
-        <main className={`${menuOpen ? "z-0" : "relative z-20"} transition-all pt-24`}>
+        <main className={`${menuOpen ? "z-0" : "relative z-20"} transition-all pt-16`}>
           <Outlet />
         </main>
       </div>
