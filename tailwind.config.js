@@ -24,6 +24,7 @@ export default {
         },
         cta: {
           50: '#FFF7ED',
+          100:'#ffedd5',
           200: '#FDD8AB',
           500: '#F77518',
           700: '#C1440E',

@@ -1,6 +1,19 @@
 import { SignupForm } from "../components/SignupForm";
+import { useAuthStore } from "../store/auth.store";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 export default function SignupPage() {
+  const { user } = useAuthStore();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user) {
+      navigate("/home");
+    }
+  }, [user, navigate]);
+  console.log(user);
+  
   return (
     <>
       <SignupForm />

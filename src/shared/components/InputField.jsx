@@ -19,7 +19,7 @@ export default function InputField({ placeholder, error, type = "text", ...rest 
         <button
           type="button"
           onClick={togglePassword}
-          className="absolute right-0 top-5 -translate-y-1/2 text-text-700"
+          className="absolute right-6 top-5 -translate-y-1/2 text-text-700"
         >
           {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
         </button>

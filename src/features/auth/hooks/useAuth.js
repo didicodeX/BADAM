@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import * as AuthAPI from "@/features/auth/services/auth.api";
+import * as AuthAPI from "@/features/auth/api/auth.api";
 import { useAuthStore } from "../store/auth.store";
 import { useNavigate } from "react-router-dom";
 import { toastSuccess, toastError } from "@/shared/lib/toast.jsx";
@@ -41,7 +41,7 @@ export function useAuth() {
       toastSuccess(data.message);
       navigate("/login");
     },
-    onError: ({data}) => {
+    onError: ({ data }) => {
       toastError(data.message);
     },
   });
