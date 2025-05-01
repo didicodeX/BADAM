@@ -2,9 +2,9 @@ import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useAuthStore } from "@/features/auth/store/auth.store";
 import { Bell, Plus } from "lucide-react";
-import { getInitials } from "../utils/getInitials";
-import UserMenu from "./UserMenu";
-import { baseStyle, solidStyle } from "../lib/buttonStyle";
+import { getInitials } from "@/shared/utils/getInitials";
+import UserMenu from "@/shared/components/UserMenu";
+
 export default function DashboardNavbar() {
   const { user } = useAuthStore();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -32,20 +32,6 @@ export default function DashboardNavbar() {
       </div>
 
       <div className="flex gap-3 items-center relative" ref={menuRef}>
-      <Link
-          to="/dashboard/create"
-          className={`${baseStyle} ${solidStyle} flex items-center text-sm`}
-        >
-          <Plus className="w-4 h-4" />
-          Créer
-        </Link>
-
-        <Link
-          to="/notifications"
-          className="flex items-center justify-center hover:text-cta-500"
-        >
-          <Bell className="w-5 h-5" />
-        </Link>
 
         <div
           className="w-10 h-10 rounded-full bg-cta-200 flex items-center justify-center hover:cursor-pointer"

@@ -22,12 +22,13 @@ h3 {
 }
 
 h4 {
-  @apply text-lg sm:text-xl md:text-2xl font-medium leading-normal;
+  @apply text-lg sm:text-xl md:text-2xl font-bold leading-normal;
 }
 
 p {
   @apply text-base lg:text-lg font-normal leading-relaxed;
 }
+
 
 small {
   @apply text-sm font-normal leading-normal;
@@ -47,8 +48,17 @@ small {
 .padd-r {
   @apply pr-6 md:pr-12 lg:pr-24;
 }
-.padd {
+.padd-t {
+  @apply pt-6 md:pt-12 lg:pt-24;
+}
+.padd-b {
+  @apply pb-6 md:pb-12 lg:pb-24;
+}
+.padd-x {
   @apply px-6 md:px-12 lg:px-24;
+}
+.padd-y {
+  @apply py-6 md:py-12 lg:py-24;
 }
 
 .section {
@@ -74,3 +84,8 @@ form a {
 input[type="search"]{
   background-color: transparent;
 }
+
+ textarea {
+  @apply w-full px-6 py-3 bg-transparent border rounded-md border-text-200 pr-10 resize-none h-24
+}
+

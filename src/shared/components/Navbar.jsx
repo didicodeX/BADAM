@@ -48,7 +48,7 @@ export default function Navbar() {
   }, [userMenuOpen]);
 
   return (
-    <header className="fixed top-0 left-0 w-full flex items-center justify-between px-6 py-4 bg-background-50 z-50  h-16">
+    <header className="fixed top-0 left-0 w-full flex items-center justify-between px-10 py-4 bg-background-50 z-50 shadow-sm h-16">
       {/* Logo */}
       <div className="text-2xl font-bold">
         <Link to="/">
@@ -87,10 +87,10 @@ export default function Navbar() {
           </>
         ) : (
           <>
-            <Link to="/login" className={`${baseStyle} ${outlineStyle}`}>
+            <Link to="/login" className={`${baseStyle} ${outlineStyle} text-sm`}>
               Se connecter
             </Link>
-            <Link to="/login" className={`${baseStyle} ${solidStyle}`}>
+            <Link to="/login" className={`${baseStyle} ${solidStyle} text-sm`}>
               S'inscrire
             </Link>
           </>

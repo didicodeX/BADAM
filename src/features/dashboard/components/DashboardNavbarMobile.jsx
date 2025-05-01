@@ -15,16 +15,17 @@ import { useAuthStore } from "@/features/auth/store/auth.store";
 // eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "framer-motion";
 import { useAuth } from "@/features/auth/hooks/useAuth";
-import { getInitials } from "../utils/getInitials";
-import { capitalizeFirstLetter } from "../utils/capitalizeFirstLetter";
-import { baseStyle, solidStyle } from "../lib/buttonStyle";
+import { getInitials } from "@/shared/utils/getInitials";
+import { capitalizeFirstLetter } from "@/shared/utils/capitalizeFirstLetter";
+// import SearchInput from "@/shared/components/SearchInput";
+// import { baseStyle, solidStyle } from "@/shared/lib/buttonStyle";
 export default function DashboardNavbarMobile({ menuOpen, setMenuOpen }) {
   const { user } = useAuthStore();
   const { logout } = useAuth();
   const navigate = useNavigate();
 
   return (
-    <header className="fixed top-0 left-0 w-full bg-background px-4 py-3 shadow-sm z-50 h-14 bg-background-50">
+    <header className="fixed top-0 left-0 w-full bg-background px-4 py-3 shadow-sm z-50 h-16 bg-background-50">
       <div className="flex items-center justify-between">
         {menuOpen ? (
           <X
@@ -44,13 +45,13 @@ export default function DashboardNavbarMobile({ menuOpen, setMenuOpen }) {
           </Link>
         </div>
 
-        <Link
-          to="/dashboard/create"
-          className={`${baseStyle} ${solidStyle} flex items-center text-sm`}
+        {/* <Link
+          to="/dashboard/create" className="flex items-center justify-center text-white bg-cta-700 w-8 px-2 rounded-full h-8"
         >
           <Plus className="w-4 h-4" />
-          Créer
-        </Link>
+        </Link> */}
+
+        {/* <SearchInput mobile onClose={false}/> */}
       </div>
 
       <AnimatePresence>

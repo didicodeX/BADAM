@@ -13,7 +13,7 @@ export default function InputField({ placeholder, error, type = "text", ...rest 
         {...rest}
         type={isPassword && showPassword ? "text" : type} 
         placeholder={placeholder}
-        className="w-full px-6 py-3 border rounded-md border-text-200 pr-10"
+        className="w-full px-6 py-3 bg-transparent border rounded-md border-text-200 pr-10"
       />
       {isPassword && (
         <button
