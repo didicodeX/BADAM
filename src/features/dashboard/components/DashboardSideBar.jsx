@@ -61,7 +61,7 @@ export default function DashboardSidebar() {
 
   return (
     <aside
-      className={`bg-background-50 mt-14 shadow-sm border-r border-r-text-100 transition-all duration-300 h-[calc(100vh-56px)] flex flex-col px-4 py-4 z-50 ${
+      className={`bg-background-50 mt-14 shadow-sm border-r border-r-text-200 h-[calc(100vh-56px)] flex flex-col px-4 py-4  ${
         isOpen ? "w-full" : "w-16"
       }`}
     >

@@ -43,22 +43,22 @@ small {
 }
 
 .padd-l {
-  @apply pl-6 md:pl-12 lg:pl-24;
+  @apply pl-6 md:pl-12;
 }
 .padd-r {
-  @apply pr-6 md:pr-12 lg:pr-24;
+  @apply pr-6 md:pr-12;
 }
 .padd-t {
-  @apply pt-6 md:pt-12 lg:pt-24;
+  @apply pt-6 md:pt-12;
 }
 .padd-b {
-  @apply pb-6 md:pb-12 lg:pb-24;
+  @apply pb-6 md:pb-12;
 }
 .padd-x {
-  @apply px-6 md:px-12 lg:px-24;
+  @apply px-6 md:px-12;
 }
 .padd-y {
-  @apply py-6 md:py-12 lg:py-24;
+  @apply py-6 md:py-12;
 }
 
 .section {

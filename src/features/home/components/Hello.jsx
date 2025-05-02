@@ -11,7 +11,7 @@ export default function Hello() {
         <img src={user.avatar} className="rounded-full" alt="avatar" />
       </div>
       <div>
-        <h1>Nous sommes ravis de vous retrouver, {user.name}</h1>
+        <h1>Nous sommes ravis de vous retrouver, <span className="capitalize">{user.name}</span></h1>
         <h4>
           <Link className="hover:text-cta-500" to="/profile">Modifier vos informations professionnelles</Link>
         </h4>
