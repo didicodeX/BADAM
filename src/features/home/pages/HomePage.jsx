@@ -21,7 +21,7 @@ export default function HomePage() {
     fetchSession();
   })
   return (
-    <div className="py-6 flex flex-col gap-6">
+    <div className="padd-y flex flex-col gap-6">
       <Hello/>
       <img src="/img/Hero.png" alt="" />
       <AuthDebug />

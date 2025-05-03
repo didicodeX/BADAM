@@ -17,7 +17,7 @@ export default function SignupPage() {
   return (
     <>
       <SignupForm />
-      <div className="flex flex-col gap-y-6 padd min-h-screen justify-center">
+      <div className="flex flex-col gap-y-6 padd-x min-h-screen justify-center">
         <h3>Une plateforme pédagogique pour les apprenants ambitieux</h3>
         <p>
           BADAM vous aide à suivre vos formations, à laisser des avis, à évaluer

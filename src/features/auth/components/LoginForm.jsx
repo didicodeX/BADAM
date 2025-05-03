@@ -24,7 +24,7 @@ export function LoginForm() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col gap-6 padd-l padd-r bg-white min-h-screen justify-center text-center ite"
+      className="flex flex-col gap-6 padd-l padd-r bg-white min-h-screen justify-center text-center"
     >
       <h3>Connectez-vous à votre compte</h3>
       <InputField

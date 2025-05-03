@@ -60,9 +60,9 @@ export default function CreateSessionPage() {
       <h2>Créer une nouvelle session</h2>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="border-t border-t-background-200"
+        className="border-t border-t-background-100"
       >
-        <section className="flex flex-col gap-6 py-6 border-b border-b-background-200">
+        <section className="flex flex-col gap-6 py-6 border-b border-b-background-100">
           <div>
             <h4>Image de couverture</h4>
             <p>
@@ -77,7 +77,7 @@ export default function CreateSessionPage() {
           />
         </section>
 
-        <section className="flex flex-col gap-6 py-6 border-b border-b-background-200">
+        <section className="flex flex-col gap-6 py-6 border-b border-b-background-100">
           <h4>Date et Heure</h4>
           <div className="flex flex-wrap gap-4">
             <DatePicker
@@ -111,7 +111,7 @@ export default function CreateSessionPage() {
           />
         </section>
 
-        <section className="flex flex-col gap-6 py-6 border-b border-b-background-200">
+        <section className="flex flex-col gap-6 py-6 border-b border-b-background-100">
           <h4>Nombre max de participants</h4>
           <InputField
             label="Nombre max de participants"

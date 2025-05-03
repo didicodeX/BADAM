@@ -1,15 +1,12 @@
 import { Link } from "react-router-dom";
-import {
-  Heart,
-  Bell,
-} from "lucide-react";
+import { Heart, Bell } from "lucide-react";
 
 import { useState, useEffect, useRef } from "react";
 import { useAuthStore } from "@/features/auth/store/auth.store";
 import { getInitials } from "../utils/getInitials";
 import SearchInput from "./SearchInput";
 import UserMenu from "./UserMenu"; // 👈 Crée ce fichier séparément
-import { baseStyle,solidStyle,outlineStyle } from "../lib/buttonStyle";
+import { baseStyle, solidStyle, outlineStyle } from "../lib/buttonStyle";
 
 export default function Navbar() {
   const { user } = useAuthStore();
@@ -78,16 +75,32 @@ export default function Navbar() {
               <Bell className="w-5 h-5" />
             </Link>
             <div
-              className="w-10 h-10 rounded-full bg-cta-200 flex items-center justify-center hover:cursor-pointer"
+              className="w-10 h-10 rounded-full overflow-hidden flex items-center justify-center hover:cursor-pointer transition-all border border-cta-200 hover:border-cta-500"
               onClick={() => setUserMenuOpen(!userMenuOpen)}
             >
-              {getInitials(user.name)}
+              {user.avatar ? (
+                <img
+                  src={user.avatar}
+                  alt="avatar"
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <div className="w-full h-full rounded-full bg-cta-100 text-cta-700 flex items-center justify-center ">
+                {getInitials(user.name)}
+              </div>
+              )}
             </div>
-            {userMenuOpen && <UserMenu user={user} onClose={() => setUserMenuOpen(false)} />}
+
+            {userMenuOpen && (
+              <UserMenu user={user} onClose={() => setUserMenuOpen(false)} />
+            )}
           </>
         ) : (
           <>
-            <Link to="/login" className={`${baseStyle} ${outlineStyle} text-sm`}>
+            <Link
+              to="/login"
+              className={`${baseStyle} ${outlineStyle} text-sm`}
+            >
               Se connecter
             </Link>
             <Link to="/login" className={`${baseStyle} ${solidStyle} text-sm`}>

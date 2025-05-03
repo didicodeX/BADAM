@@ -14,13 +14,25 @@ import { capitalizeFirstLetter } from "../utils/capitalizeFirstLetter";
 
 export default function UserMenu({ user, onClose }) {
   const { logout } = useAuth();
+console.log(user);
 
   return (
     <div className="absolute right-0 top-14 bg-background-50 border rounded shadow-md w-64 p-4 z-50">
       <div className="flex items-center gap-3 mb-4 border-b pb-2">
-        <div className="w-10 h-10 rounded-full bg-cta-200 flex items-center justify-center">
-          {getInitials(user.name)}
+        <div className="w-10 h-10 rounded-full overflow-hidden bg-cta-100 border border-cta-200 flex items-center justify-center">
+          {user.avatar ? (
+            <img
+              src={user.avatar}
+              alt="avatar"
+              className="w-full h-full object-cover"
+            />
+          ) : (
+            <span className="text-cta-700">
+              {getInitials(user.name)}
+            </span>
+          )}
         </div>
+
         <div>
           <p className="font-bold">{capitalizeFirstLetter(user.name)}</p>
           <p className="text-sm text-text-400">{user.email}</p>

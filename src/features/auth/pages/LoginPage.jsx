@@ -17,7 +17,7 @@ export default function LoginPage() {
   return (
     <>
         <LoginForm />
-      <div className="flex flex-col gap-y-6 padd min-h-screen justify-center">
+      <div className="flex flex-col gap-y-6 padd-x min-h-screen justify-center">
         <h3>Connectez-vous à votre espace BADAM</h3>
         <p>
           Saisissez votre adresse e-mail et votre mot de passe pour accéder à

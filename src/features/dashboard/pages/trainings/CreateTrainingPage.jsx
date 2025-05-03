@@ -35,9 +35,9 @@ export default function CreateTrainingPage() {
         <form
           onSubmit={handleSubmit(onSubmit)}
           encType="multipart/form-data"
-          className="border-t border-t-background-200"
+          className="border-t border-t-background-100"
         >
-          <section className="flex flex-col gap-6 py-6 border-b border-b-background-200">
+          <section className="flex flex-col gap-6 py-6 border-b border-b-background-100">
             <h3>Ajouter des images et des vidéos</h3>
             <div>
               <h4>Images</h4>
@@ -66,7 +66,7 @@ export default function CreateTrainingPage() {
               {...register("videos")}
             />
           </section>
-          <section className="flex flex-col gap-6 py-6 border-b border-b-background-200">
+          <section className="flex flex-col gap-6 py-6 border-b border-b-background-100">
             <h3>Aperçu de la formation</h3>
             <div>
               <h4>Titre de la formation</h4>

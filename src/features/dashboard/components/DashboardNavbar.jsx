@@ -32,12 +32,21 @@ export default function DashboardNavbar() {
       </div>
 
       <div className="flex gap-3 items-center relative" ref={menuRef}>
-
         <div
-          className="w-10 h-10 rounded-full bg-cta-200 flex items-center justify-center hover:cursor-pointer"
+          className="w-10 h-10 rounded-full overflow-hidden flex items-center justify-center hover:cursor-pointer transition-all border border-cta-200 hover:border-cta-500"
           onClick={() => setMenuOpen((prev) => !prev)}
         >
-          {getInitials(user.name)}
+          {user.avatar ? (
+            <img
+              src={user.avatar}
+              alt="avatar"
+              className="w-full h-full object-cover"
+            />
+          ) : (
+            <div className="w-full h-full rounded-full bg-cta-100 text-cta-700 flex items-center justify-center ">
+              {getInitials(user.name)}
+            </div>
+          )}
         </div>
 
         {menuOpen && (

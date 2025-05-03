@@ -6,9 +6,9 @@ export default function Hello() {
   console.log(user);
 
   return (
-    <div className="padd-x padd-t flex flex-col gap-2 lg:flex-row">
-      <div className="w-[113px] ">
-        <img src={user.avatar} className="rounded-full" alt="avatar" />
+    <div className="padd-x padd-t flex flex-col gap-6 xl:flex-row">
+      <div className="w-28 h-28">
+        <img src={user.avatar} className="rounded-full object-cover h-full" alt="avatar" />
       </div>
       <div>
         <h1>Nous sommes ravis de vous retrouver, <span className="capitalize">{user.name}</span></h1>

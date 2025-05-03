@@ -22,6 +22,10 @@ export default function DashboardNavbarMobile({ menuOpen, setMenuOpen }) {
   const { user } = useAuthStore();
   const { logout } = useAuth();
   const navigate = useNavigate();
+  const goToProfile = () => {
+    navigate("/profile");
+    setMenuOpen(false);
+  };
 
   return (
     <header className="fixed top-0 left-0 w-full bg-background px-4 py-3 shadow-sm z-50 h-16 bg-background-50">
@@ -43,7 +47,6 @@ export default function DashboardNavbarMobile({ menuOpen, setMenuOpen }) {
             BA<span className="text-cta-500">DAM</span>
           </Link>
         </div>
-
       </div>
 
       <AnimatePresence>
@@ -58,19 +61,29 @@ export default function DashboardNavbarMobile({ menuOpen, setMenuOpen }) {
             <div className="flex flex-col gap-y-6 hover:cursor-pointer">
               {user && (
                 <div
-                  className="flex items-center gap-3 mb-6"
-                  onClick={() => navigate("/profile")}
-                >
-                  <div className="w-10 h-10 rounded-full bg-cta-200 flex items-center justify-center">
-                    {getInitials(user.name)}
-                  </div>
-                  <div>
-                    <p className="font-semibold">
-                      {capitalizeFirstLetter(user.name)}
-                    </p>
-                    <p className="text-sm text-text-400">{user.email}</p>
-                  </div>
+                className="flex items-center gap-3 mb-6"
+                onClick={() => goToProfile()}
+              >
+                <div className="w-10 h-10 rounded-full overflow-hidden flex items-center justify-center hover:cursor-pointer transition-all border border-cta-200 hover:border-cta-500">
+                  {user.avatar ? (
+                    <img
+                      src={user.avatar}
+                      alt="avatar"
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <div className="w-full h-full rounded-full bg-cta-100 text-cta-700 flex items-center justify-center ">
+                      {getInitials(user.name)}
+                    </div>
+                  )}
                 </div>
+                <div>
+                  <p className="font-semibold">
+                    {capitalizeFirstLetter(user.name)}
+                  </p>
+                  <p className="text-sm text-text-400">{user.email}</p>
+                </div>
+              </div>
               )}
               <nav className="space-y-4 ">
                 <Link
