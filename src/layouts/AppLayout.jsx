@@ -4,6 +4,7 @@ import NavbarMobilePublic from "@/shared/components/NavbarMobilePublic";
 import { Outlet, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useAuthStore } from "@/features/auth/store/auth.store";
+import Footer from "@/shared/components/Footer";
 
 export default function AppLayout() {
   const { user } = useAuthStore();
@@ -59,6 +60,9 @@ export default function AppLayout() {
         <main className={`${menuOpen ? "z-0" : "relative z-20"} transition-all pt-16`}>
           <Outlet />
         </main>
+      </div>
+      <div>
+        <Footer/>
       </div>
     </div>
   );

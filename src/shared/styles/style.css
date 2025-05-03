@@ -93,3 +93,29 @@ input[type="search"]{
   @apply w-full px-6 py-3 bg-transparent border rounded-md border-text-200 pr-10 resize-none h-24
 }
 
+/* Chrome, Edge, Safari */
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="time"]::-webkit-calendar-picker-indicator {
+  display: none;
+  -webkit-appearance: none;
+}
+
+/* Firefox */
+input[type="date"]::-moz-focus-inner,
+input[type="time"]::-moz-focus-inner {
+  border: 0;
+}
+
+input[type="date"],
+input[type="time"] {
+  appearance: none;            /* Standard */
+  -moz-appearance: textfield;  /* Firefox */
+  -webkit-appearance: none;    /* Chrome/Safari */
+  background: none;
+}
+
+/* Supprime le bouton clair dans Safari */
+input[type="date"]::-webkit-clear-button,
+input[type="time"]::-webkit-clear-button {
+  display: none;
+}

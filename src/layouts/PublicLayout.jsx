@@ -2,6 +2,7 @@ import { Outlet } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Navbar from "@/shared/components/Navbar";
 import NavbarMobilePublic from "@/shared/components/NavbarMobilePublic";
+import Footer from "@/shared/components/Footer";
 
 export default function PublicLayout() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -42,7 +43,7 @@ export default function PublicLayout() {
         <Outlet />
       </main>
 
-      <footer className={`${menuOpen ? "z-0" : "relative z-20"}`}>Footer ici</footer>
+      <footer className={`${menuOpen ? "z-0" : "relative z-20"}`}><Footer variant="minimal"/> </footer>
     </div>
   );
 }
