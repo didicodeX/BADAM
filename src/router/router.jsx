@@ -16,9 +16,6 @@ import DashboardRoutes from "@/features/dashboard";
 
 // Lazy-loaded pages
 const LandingPage = lazy(() => import("@/features/landing/pages/LandingPage"));
-const DashboardHome = lazy(() =>
-  import("@/features/dashboard/pages/home/DashboardHome")
-);
 const LoginPage = lazy(() => import("@/features/auth/pages/LoginPage"));
 const ForgotPasswordPage = lazy(() =>
   import("@/features/auth/pages/ForgotPasswordPage")

@@ -104,6 +104,7 @@ export default function NavbarMobile({
                 <Link
                   to="/profile"
                   className="flex items-center gap-3 w-full hover:text-cta-500 rounded"
+                  onClick={() => setMenuOpen(false)}
                 >
                   <User className="w-5 h-5" />
                   Profil
@@ -111,13 +112,15 @@ export default function NavbarMobile({
                 <Link
                   to="/dashboard/home"
                   className="flex items-center gap-3 w-full hover:text-cta-500 rounded"
+                  onClick={() => setMenuOpen(false)}
                 >
                   <LayoutDashboard className="w-5 h-5" />
                   Dashboard
                 </Link>
                 <Link
-                  to="/dashboard/favorites"
+                  to="/dashboard/sessions/favorites"
                   className="flex items-center gap-3 w-full hover:text-cta-500 rounded"
+                  onClick={() => setMenuOpen(false)}
                 >
                   <Heart className="w-5 h-5" />
                   Mes favories
@@ -125,6 +128,7 @@ export default function NavbarMobile({
                 <Link
                   to="/notifications"
                   className="flex items-center gap-3 w-full hover:text-cta-500 rounded"
+                  onClick={() => setMenuOpen(false)}
                 >
                   <Bell className="w-5 h-5" />
                   Notifications
@@ -132,6 +136,7 @@ export default function NavbarMobile({
                 <Link
                   to="/settings"
                   className="flex items-center gap-3 w-full hover:text-cta-500 rounded"
+                  onClick={() => setMenuOpen(false)}
                 >
                   <Settings className="w-5 h-5" />
                   Paramètres
@@ -140,6 +145,7 @@ export default function NavbarMobile({
                 <Link
                   to="/help"
                   className="flex items-center gap-3 w-full hover:text-cta-500 rounded"
+                  onClick={() => setMenuOpen(false)}
                 >
                   <HelpCircle className="w-5 h-5" />
                   Aide

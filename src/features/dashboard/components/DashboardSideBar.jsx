@@ -18,7 +18,6 @@ export default function DashboardSidebar() {
 
   const toggleSidebar = () => setIsOpen(!isOpen);
 
-  // Permet de matcher les sous-routes avec end: false
   const isMatch = (pattern) => {
     return matchPath(
       { path: `dashboard/${pattern}`, end: false },
@@ -26,43 +25,27 @@ export default function DashboardSidebar() {
     );
   };
 
-  const navItems = [
-    {
-      icon: <Home className="w-5 h-5" />,
-      label: "Accueil",
-      to: "home",
-    },
-    {
-      icon: <Plus className="w-5 h-5" />,
-      label: " Créer une formation",
-      to: "create",
-    },
-    {
-      icon: <CalendarCheck2 className="w-5 h-5" />,
-      label: "Mes sessions suivies",
-      to: "followed-sessions",
-    },
-    {
-      icon: <BookOpen className="w-5 h-5" />,
-      label: "Mes formations créées",
-      to: "created-trainings",
-    },
-    {
-      icon: <CalendarClock className="w-5 h-5" />,
-      label: "Mes sessions créées",
-      to: "created-sessions",
-    },
-    {
-      icon: <Heart className="w-5 h-5" />,
-      label: "Mes favories",
-      to: "favorites",
-    },
-  ];
+  const renderItem = (to, label, icon) => {
+    const active = isMatch(to) || location.pathname === `/dashboard/${to}`;
+
+    return (
+      <Link
+        key={label}
+        to={`/dashboard/${to}`}
+        className={`flex gap-3 w-full items-center hover:text-cta-500 transition-all ${
+          !isOpen ? "justify-center" : ""
+        } ${active ? "text-cta-500 font-semibold" : "text-text-700"}`}
+      >
+        {icon}
+        {isOpen && <span>{label}</span>}
+      </Link>
+    );
+  };
 
   return (
     <aside
-      className={`bg-background-50 mt-14 shadow-sm border-r border-r-text-200 h-[calc(100vh-56px)] flex flex-col px-4 py-4  ${
-        isOpen ? "w-full" : "w-16"
+      className={`bg-background-50 mt-14 shadow-sm border-r border-r-text-200 h-[calc(100vh-56px)] flex flex-col px-4 py-4 ${
+        isOpen ? "w-64" : "w-16"
       }`}
     >
       {/* Haut de la sidebar */}
@@ -81,29 +64,22 @@ export default function DashboardSidebar() {
           )}
         </button>
 
-        {/* Navigation */}
+        {/* Navigation générale */}
         <nav className="flex flex-col gap-4">
-          {navItems.map(({ icon, label, to }) => {
-            const active =
-              isMatch(to) || location.pathname === `/dashboard/${to}`;
+          {renderItem("home", "Accueil", <Home className="w-5 h-5" />)}
+          {renderItem("trainings/create", "Créer une formation", <Plus className="w-5 h-5" />)}
+          {renderItem("trainings/created", "Mes formations créées", <BookOpen className="w-5 h-5" />)}
+        </nav>
 
-            return (
-              <Link
-                key={label}
-                to={`/dashboard/${to}`}
-                className={`flex gap-3 w-full items-center hover:text-cta-500 ${
-                  !isOpen ? "justify-center" : ""
-                } ${active ? "text-cta-500 font-semibold" : "text-text-700"}`}
-              >
-                {icon}
-                {isOpen && <span>{label}</span>}
-              </Link>
-            );
-          })}
+        {/* Section Sessions */}
+        <nav className="mt-4 flex flex-col gap-4">
+          {renderItem("sessions/followed", "Mes sessions suivies", <CalendarCheck2 className="w-5 h-5" />)}
+          {renderItem("sessions/created", "Mes sessions créées", <CalendarClock className="w-5 h-5" />)}
+          {renderItem("sessions/favorites", "Mes favoris", <Heart className="w-5 h-5" />)}
         </nav>
       </div>
 
-      {/* Footer (help) */}
+      {/* Footer (aide) */}
       <div className="mt-auto pb-4">
         <Link
           to="/help"

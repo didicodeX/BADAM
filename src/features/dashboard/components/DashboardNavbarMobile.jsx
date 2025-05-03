@@ -17,8 +17,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useAuth } from "@/features/auth/hooks/useAuth";
 import { getInitials } from "@/shared/utils/getInitials";
 import { capitalizeFirstLetter } from "@/shared/utils/capitalizeFirstLetter";
-// import SearchInput from "@/shared/components/SearchInput";
-// import { baseStyle, solidStyle } from "@/shared/lib/buttonStyle";
+
 export default function DashboardNavbarMobile({ menuOpen, setMenuOpen }) {
   const { user } = useAuthStore();
   const { logout } = useAuth();
@@ -45,13 +44,6 @@ export default function DashboardNavbarMobile({ menuOpen, setMenuOpen }) {
           </Link>
         </div>
 
-        {/* <Link
-          to="/dashboard/create" className="flex items-center justify-center text-white bg-cta-700 w-8 px-2 rounded-full h-8"
-        >
-          <Plus className="w-4 h-4" />
-        </Link> */}
-
-        {/* <SearchInput mobile onClose={false}/> */}
       </div>
 
       <AnimatePresence>
@@ -84,20 +76,23 @@ export default function DashboardNavbarMobile({ menuOpen, setMenuOpen }) {
                 <Link
                   to="/profile"
                   className="flex items-center gap-3 w-full hover:text-cta-500 rounded"
+                  onClick={() => setMenuOpen(false)}
                 >
                   <User className="w-5 h-5" />
                   Profil
                 </Link>
                 <Link
-                  to="/dashboard"
+                  to="/dashboard/home"
                   className="flex items-center gap-3 w-full hover:text-cta-500 rounded"
+                  onClick={() => setMenuOpen(false)}
                 >
                   <LayoutDashboard className="w-5 h-5" />
                   Dashboard
                 </Link>
                 <Link
-                  to="/favorites"
+                  to="/dashboard/sessions/favorites"
                   className="flex items-center gap-3 w-full hover:text-cta-500 rounded"
+                  onClick={() => setMenuOpen(false)}
                 >
                   <Heart className="w-5 h-5" />
                   Mes favories
@@ -105,6 +100,7 @@ export default function DashboardNavbarMobile({ menuOpen, setMenuOpen }) {
                 <Link
                   to="/notifications"
                   className="flex items-center gap-3 w-full hover:text-cta-500 rounded"
+                  onClick={() => setMenuOpen(false)}
                 >
                   <Bell className="w-5 h-5" />
                   Notifications
@@ -112,6 +108,7 @@ export default function DashboardNavbarMobile({ menuOpen, setMenuOpen }) {
                 <Link
                   to="/settings"
                   className="flex items-center gap-3 w-full hover:text-cta-500 rounded"
+                  onClick={() => setMenuOpen(false)}
                 >
                   <Settings className="w-5 h-5" />
                   Paramètres
@@ -120,6 +117,7 @@ export default function DashboardNavbarMobile({ menuOpen, setMenuOpen }) {
                 <Link
                   to="/help"
                   className="flex items-center gap-3 w-full hover:text-cta-500 rounded"
+                  onClick={() => setMenuOpen(false)}
                 >
                   <HelpCircle className="w-5 h-5" />
                   Aide

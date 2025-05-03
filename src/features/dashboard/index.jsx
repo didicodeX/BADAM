@@ -2,41 +2,74 @@ import { Routes, Route, Outlet } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import LoadingScreen from "@/shared/components/LoadingScreen";
 
-// Pages lazy-loaded
-const DashboardHome = lazy(() => import("./pages/home/DashboardHome"));
-const CreateTraining = lazy(() => import("./pages/create-training/CreateTraining"));
-const Favorites = lazy(() => import("./pages/favorites/Favorites"));
-const FollowedSessions = lazy(() => import("./pages/followed-sessions/FollowedSessions"));
+// Lazy-loaded pages
+const DashboardHomePage = lazy(() => import("./pages/home/DashboardHomePage"));
 
-const CreatedTrainings = lazy(() => import("./pages/created-trainings/CreatedTrainings"));
-const TrainingDetail = lazy(() => import("./pages/created-trainings/TrainingDetail"));
-const TrainingEdit = lazy(() => import("./pages/created-trainings/TrainingEdit"));
+// Trainings
+const CreateTrainingPage = lazy(() =>
+  import("./pages/trainings/CreateTrainingPage")
+);
+const EditTrainingPage = lazy(() =>
+  import("./pages/trainings/EditTrainingPage")
+);
+const TrainingDetailPage = lazy(() =>
+  import("./pages/trainings/TrainingDetailPage")
+);
+const CreatedTrainingsPage = lazy(() =>
+  import("./pages/trainings/CreatedTrainingsPage")
+);
 
-const CreatedSessions = lazy(() => import("./pages/created-sessions/CreatedSessions"));
-const SessionDetail = lazy(() => import("./pages/created-sessions/SessionDetail"));
-const SessionEdit = lazy(() => import("./pages/created-sessions/SessionEdit"));
+// Sessions
+const CreateSessionPage = lazy(() =>
+  import("./pages/sessions/CreateSessionPage")
+);
+const EditSessionPage = lazy(() => import("./pages/sessions/EditSessionPage"));
+const SessionDetailPage = lazy(() =>
+  import("./pages/sessions/SessionDetailPage")
+);
+const CreatedSessionsPage = lazy(() =>
+  import("./pages/sessions/CreatedSessionsPage")
+);
+const FollowedSessionsPage = lazy(() =>
+  import("./pages/sessions/FollowedSessionsPage")
+);
+const FavoritesPage = lazy(() => import("./pages/sessions/FavoritesPage"));
+const SessionParticipantsPage = lazy(() =>
+  import("./pages/sessions/SessionParticipantsPage")
+);
+const SessionFeedbackPage = lazy(() =>
+  import("./pages/sessions/SessionFeedbackPage")
+);
 
 export default function DashboardRoutes() {
   return (
     <Suspense fallback={<LoadingScreen />}>
       <Routes>
-        <Route path="home" element={<DashboardHome />} />
-        <Route path="create" element={<CreateTraining />} />
-        <Route path="favorites" element={<Favorites />} />
-        <Route path="followed-sessions" element={<FollowedSessions />} />
+        <Route path="home" element={<DashboardHomePage />} />
 
-        {/* Trainings nested routes */}
-        <Route path="created-trainings" element={<Outlet />}>
-          <Route index element={<CreatedTrainings />} />
-          <Route path=":trainingId" element={<TrainingDetail />} />
-          <Route path=":trainingId/edit" element={<TrainingEdit />} />
+        {/* Trainings */}
+        <Route path="trainings">
+          {/* <Route index element={<TrainingsListPage />} /> */}
+          <Route path="create" element={<CreateTrainingPage />} />
+          <Route path="created" element={<CreatedTrainingsPage />} />
+          <Route path=":trainingId" element={<TrainingDetailPage />} />
+          <Route path=":trainingId/edit" element={<EditTrainingPage />} />
         </Route>
 
-        {/* Sessions nested routes */}
-        <Route path="created-sessions" element={<Outlet />}>
-          <Route index element={<CreatedSessions />} />
-          <Route path=":sessionId" element={<SessionDetail />} />
-          <Route path=":sessionId/edit" element={<SessionEdit />} />
+        {/* Sessions */}
+        <Route path="sessions">
+          {/* <Route index element={<SessionsListPage />} /> */}
+          <Route path="create" element={<CreateSessionPage />} />
+          <Route path="created" element={<CreatedSessionsPage />} />
+          <Route path="followed" element={<FollowedSessionsPage />} />
+          <Route path="favorites" element={<FavoritesPage />} />
+        </Route>
+
+        <Route path=":sessionId">
+          <Route index element={<SessionDetailPage />} />
+          <Route path="edit" element={<EditSessionPage />} />
+          <Route path="participants" element={<SessionParticipantsPage />} />
+          <Route path="feedbacks" element={<SessionFeedbackPage />} />
         </Route>
       </Routes>
     </Suspense>
