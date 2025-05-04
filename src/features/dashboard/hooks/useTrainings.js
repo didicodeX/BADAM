@@ -2,7 +2,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import * as TrainingAPI from "@/features/dashboard/api/trainings.api";
 import { useTrainingStore } from "../store/training.store";
 import { useNavigate } from "react-router-dom";
-import { toastSuccess, toastError } from "@/shared/lib/toast";
+import { toastSuccess, toastError } from "@/shared/components/toast";
 
 export function useTraining(id) {
   const navigate = useNavigate();
@@ -22,12 +22,27 @@ export function useTraining(id) {
     },
   });
 
+  const updateTrainingMutation = useMutation({
+    mutationFn: ({ id, updatedData }) =>
+      TrainingAPI.updateTraining(id, updatedData),
+    onSuccess: ({ data }) => {
+      console.log(data);
+      toastSuccess(data.message);
+      navigate(`/dashboard/trainings/${data.training._id}`);
+    },
+    onError: (error) => {
+      const message = error?.response?.data?.message || "Erreur inconnue";
+      toastError(message);
+    },
+  });
+  
   const deleteTrainingMutation = useMutation({
     mutationFn: TrainingAPI.deleteTraining,
-    onSuccess: ({data} ) => {
-      console.log(data)
+    onSuccess: ({ data }) => {
+      console.log(data);
       toastSuccess(data.message);
       myTrainingsQuery.refetch();
+      navigate("/dashboard/trainings/created");
     },
   });
 
@@ -49,10 +64,7 @@ export function useTraining(id) {
     isLoadingMyTrainings: myTrainingsQuery.isLoading,
     isErrorMyTrainings: myTrainingsQuery.isError,
     deleteTraining: deleteTrainingMutation.mutate,
-    myTraining: myTrainingQuery.mutate,
-    isLoadingMyTraining: myTrainingQuery.isLoading,
-
-    // 👇 Formation par ID
+    updateTraining: updateTrainingMutation.mutate,
     training: myTrainingQuery.data?.data,
     isLoadingTraining: myTrainingQuery.isLoading,
     isErrorTraining: myTrainingQuery.isError,

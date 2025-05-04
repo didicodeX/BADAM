@@ -1,13 +1,21 @@
 import { toast } from "sonner";
 import { Check, X, CircleAlert, TriangleAlert } from "lucide-react";
-import { toastBaseStyle } from "@/shared/lib/toastStyle"; // <<< import ici
+
+const toastBaseStyle = {
+  fontFamily: "Inter, sans-serif",
+  fontWeight: "700",
+  fontSize: "18px",
+  lineHeight: "32px",
+  letterSpacing: "0",
+  boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.1)",
+};
 
 // SUCCESS
 export function toastSuccess(message) {
   toast(message, {
     style: {
       ...toastBaseStyle,
-      backgroundColor: "#C8DEB8", 
+      backgroundColor: "#C8DEB8",
       color: "#3F5B30",
     },
     icon: <Check size={22} className="text-success-700" />,

@@ -6,7 +6,7 @@ import { useAuthStore } from "@/features/auth/store/auth.store";
 import { getInitials } from "../utils/getInitials";
 import SearchInput from "./SearchInput";
 import UserMenu from "./UserMenu"; // 👈 Crée ce fichier séparément
-import { baseStyle, solidStyle, outlineStyle } from "../lib/buttonStyle";
+import { baseStyle, solidStyle, outlineStyle } from "../styles/buttonStyle";
 
 export default function Navbar() {
   const { user } = useAuthStore();
@@ -86,8 +86,8 @@ export default function Navbar() {
                 />
               ) : (
                 <div className="w-full h-full rounded-full bg-cta-100 text-cta-700 flex items-center justify-center ">
-                {getInitials(user.name)}
-              </div>
+                  {getInitials(user.name)}
+                </div>
               )}
             </div>
 

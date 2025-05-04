@@ -82,7 +82,13 @@ input::placeholder {
 }
 
 form a {
-  @apply text-sm text-cta-500 underline;
+  @apply text-sm text-cta-500 ;
+}
+main div form {
+  @apply border-t border-t-background-100
+}
+form a:hover {
+  @apply underline
 }
 
 input[type="search"]{

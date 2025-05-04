@@ -2,7 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import * as ProfileAPI from "@/features/profile/api/profile.api";
 import { useAuthStore } from "@/features/auth/store/auth.store";
 import { useNavigate } from "react-router-dom";
-import { toastSuccess, toastError } from "@/shared/lib/toast";
+import { toastSuccess, toastError } from "@/shared/components/toast";
 
 export function useProfile() {
   const navigate = useNavigate();
@@ -35,6 +35,6 @@ export function useProfile() {
 
   return {
     updateProfile: updateProfileMutation.mutate,
-    deleteUser: deleteUserMutation.mutate
+    deleteUser: deleteUserMutation.mutate,
   };
 }

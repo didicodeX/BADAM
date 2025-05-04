@@ -1,5 +1,6 @@
 import { Dialog } from "@headlessui/react";
 import { X, Trash } from "lucide-react";
+import Button from "./Button";
 
 export default function ConfirmDeleteModal({
   isOpen,
@@ -40,7 +41,7 @@ export default function ConfirmDeleteModal({
 
           {/* Actions */}
           <div className="flex justify-end gap-3">
-            <button
+            <Button variant="outline"
               onClick={() => {
                 console.log("Cancel");
                 
@@ -49,8 +50,8 @@ export default function ConfirmDeleteModal({
               className="px-4 py-2 text-sm rounded hover:bg-cta-100 text-orange-700"
             >
               Cancel
-            </button>
-            <button
+            </Button>
+            <Button
               onClick={() => {
                 console.log("Confirm");
                 
@@ -59,7 +60,7 @@ export default function ConfirmDeleteModal({
               className="px-4 py-2 text-sm rounded bg-cta-700/90 text-white hover:bg-cta-700"
             >
               {confirmText}
-            </button>
+            </Button>
           </div>
         </div>
       </div>

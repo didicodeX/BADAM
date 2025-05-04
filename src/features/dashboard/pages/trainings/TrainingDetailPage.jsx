@@ -92,14 +92,13 @@ export default function TrainingDetailPage() {
         <h3>Sessions créées pour cette formation</h3>
       </div>
       <ConfirmDeleteModal
-  isOpen={showConfirmDelete}
-  onClose={() => setShowConfirmDelete(false)}
-  onConfirm={handleConfirmDelete}
-  title="Supprimer cette formation"
-  message="Cette action est irréversible. Es-tu sûr de vouloir supprimer cette formation ?"
-  confirmText="Supprimer"
-/>
-
+        isOpen={showConfirmDelete}
+        onClose={() => setShowConfirmDelete(false)}
+        onConfirm={handleConfirmDelete}
+        title="Supprimer cette formation"
+        message="Cette action est irréversible. Es-tu sûr de vouloir supprimer cette formation ?"
+        confirmText="Supprimer"
+      />
     </Content>
   );
 }
