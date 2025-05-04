@@ -38,7 +38,7 @@ export default function SearchInput({
     >
       {mobile && (
         <ArrowLeft
-          className="w-5 h-5 text-primary cursor-pointer"
+          className="w-5 h-5 cursor-pointer"
           onClick={() => {
             setQuery("");
             if (onClose) onClose(); // onClose est appelé ici
@@ -68,7 +68,7 @@ export default function SearchInput({
       )}
 
       {!mobile && !isFocused && !query && (
-        <Search className="w-5 h-5 text-primary" />
+        <Search className="w-5 h-5" />
       )}
     </div>
   );

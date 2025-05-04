@@ -16,7 +16,7 @@ export default function CreateTrainingPage() {
   
     const onSubmit = (data) => {
       const formData = new FormData();
-      formData.append("titre", data.titre);
+      formData.append("title", data.title);
       formData.append("description", data.description);
   
       for (const file of data.images || []) {
@@ -77,7 +77,7 @@ export default function CreateTrainingPage() {
             </div>
             <InputField
               placeholder={"Titre de la formation"}
-              {...register("titre", { required: "Ce champs est requis" })}
+              {...register("title", { required: "Ce champs est requis" })}
             />
             {errors.titre && (
               <p className="text-red-500 text-sm">{errors.titre.message}</p>
@@ -91,11 +91,11 @@ export default function CreateTrainingPage() {
               </p>
             </div>
             <textarea
-              maxLength={140}
+              maxLength={800}
               className="w-full min-h-[80px] border rounded p-2"
               {...register("description", {
                 required: "La description est requise",
-                maxLength: 140,
+                maxLength: 800,
               })}
             ></textarea>
             {errors.description && (

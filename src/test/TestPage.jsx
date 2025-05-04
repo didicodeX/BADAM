@@ -1,5 +1,5 @@
 import CreateSessionPage from "@/features/dashboard/pages/sessions/CreateSessionPage";
-import ActionMenu from "@/shared/components/ActionMenu";
+import ActionMenu from "@/features/dashboard/components/ActionMenuTraining";
 import Footer from "@/shared/components/Footer";
 import Formateur from "@/shared/components/Formateur";
 import LocationPicker from "@/shared/components/LocationPicker";
@@ -10,7 +10,7 @@ import Status from "@/shared/components/Status";
 export default function TestPage() {
   return (
     <div>
-<CreateSessionPage/>
+      <CreateSessionPage />
     </div>
   );
 }

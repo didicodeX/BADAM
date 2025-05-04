@@ -1,5 +1,5 @@
-import { useMutation } from "@tanstack/react-query";
-import * as TrainingAPI from "@/features/dashboard/api/training.api";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import * as TrainingAPI from "@/features/dashboard/api/trainings.api";
 import { useTrainingStore } from "../store/training.store";
 import { useNavigate } from "react-router-dom";
 import { toastSuccess, toastError } from "@/shared/lib/toast";
@@ -22,7 +22,24 @@ export function useTraining() {
     },
   });
 
+  const deleteTrainingMutation = useMutation({
+    mutationFn: TrainingAPI.deleteTraining,
+    onSuccess: ({ data }) => {
+      toastSuccess(data.message);
+      myTrainingsQuery.refetch();
+    },
+  });
+
+  const myTrainingsQuery = useQuery({
+    queryKey: ["my-trainings"],
+    queryFn: TrainingAPI.getMyTraining,
+  });
+
   return {
     createTraining: createTrainingMutation.mutate,
+    myTrainings: myTrainingsQuery.data?.data || [],
+    isLoadingMyTrainings: myTrainingsQuery.isLoading,
+    isErrorMyTrainings: myTrainingsQuery.isError,
+    deleteTraining: deleteTrainingMutation.mutate,
   };
 }
