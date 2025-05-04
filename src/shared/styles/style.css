@@ -119,3 +119,12 @@ input[type="date"]::-webkit-clear-button,
 input[type="time"]::-webkit-clear-button {
   display: none;
 }
+
+/* Dans tailwind.css ou global.css */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}

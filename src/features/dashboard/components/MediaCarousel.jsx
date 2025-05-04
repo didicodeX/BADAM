@@ -6,17 +6,17 @@ import "swiper/css/pagination";
 
 export default function MediaCarousel({ media = [] }) {
   return (
-    <div className="relative w-full max-w-4xl mx-auto">
+    <div className="relative bg-red-500 w-full max-w-80  sm:max-w-[500px] lg:max-w-[1000px]">
       <Swiper
         modules={[Navigation, Pagination]}
-        spaceBetween={16}
-        slidesPerView={2}
+        spaceBetween={12}
+        slidesPerView={1}
         navigation
         pagination={{
           clickable: true,
           el: ".swiper-pagination-custom",
         }}
-        className="rounded-lg overflow-hidden"
+        className="rounded-lg overflow-hidden w-full"
       >
         {media.map((item, index) => (
           <SwiperSlide key={index}>

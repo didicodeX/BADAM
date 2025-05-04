@@ -1,5 +1,9 @@
+import Content from "@/shared/components/Content";
+
 export default function EditTrainingPage() {
-  return <>
-  <h1>EditTrainingPage</h1>
-  </>;
+  return (
+    <Content>
+      <h1>EditTrainingPage</h1>
+    </Content>
+  );
 }

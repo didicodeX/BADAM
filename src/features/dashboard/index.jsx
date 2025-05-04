@@ -52,9 +52,9 @@ export default function DashboardRoutes() {
           {/* <Route index element={<TrainingsListPage />} /> */}
           <Route path="create" element={<CreateTrainingPage />} />
           <Route path="created" element={<CreatedTrainingsPage />} />
-          <Route path=":trainingId" element={<TrainingDetailPage />} />
-          <Route path=":trainingId/edit" element={<EditTrainingPage />} />
-          <Route path=":trainingId/sessions/create" element={<CreateSessionPage />} />
+          <Route path=":id" element={<TrainingDetailPage />} />
+          <Route path=":id/edit" element={<EditTrainingPage />} />
+          <Route path=":id/sessions/create" element={<CreateSessionPage />} />
         </Route>
 
         {/* Sessions */}
@@ -65,7 +65,7 @@ export default function DashboardRoutes() {
           <Route path="favorites" element={<FavoritesPage />} />
         </Route>
 
-        <Route path=":sessionId">
+        <Route path=":id">
           <Route index element={<SessionDetailPage />} />
           <Route path="edit" element={<EditSessionPage />} />
           <Route path="participants" element={<SessionParticipantsPage />} />

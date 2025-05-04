@@ -3,6 +3,7 @@ import LoadingScreen from "@/shared/components/LoadingScreen";
 import { useTraining } from "../../hooks/useTrainings";
 import TrainingCard from "../../components/TrainingCard";
 import { Search } from "lucide-react";
+import Content from "@/shared/components/Content";
 
 export default function CreatedTrainingsPage() {
   const [isFocused, setIsFocused] = useState(false);
@@ -11,7 +12,7 @@ export default function CreatedTrainingsPage() {
   console.log(myTrainings);
 
   return (
-    <div className="padd-x padd-y flex flex-col gap-6 md:gap-10">
+    <Content>
       <h2>Mes formations créées</h2>
       <div className="flex flex-col gap-8">
         <div className="py-4 flex justify-center">
@@ -23,7 +24,7 @@ export default function CreatedTrainingsPage() {
             <input
               type="search"
               placeholder="Rechercher une formation..."
-              className="bg-transparent text-sm outline-none focus:outline-none "
+              className="w-full  text-sm outline-none focus:outline-none"
               onFocus={() => setIsFocused(true)}
               onBlur={() => setIsFocused(false)}
             />
@@ -42,6 +43,6 @@ export default function CreatedTrainingsPage() {
           ))}
         </div>
       </div>
-    </div>
+    </Content>
   );
 }

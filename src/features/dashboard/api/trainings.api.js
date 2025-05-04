@@ -4,9 +4,13 @@ export const createTraining = (payload) => {
   return api.post("/trainings?folderType=training", payload);
 };
 
-export const getMyTraining = ()=>{
+export const getMyTrainings = ()=>{
   return api.get("/trainings/me");
 }
+
+export const getMyTraining = (id) => {
+  return api.get(`/trainings/${id}`);
+};
 
 export const deleteTraining = (id) => {
   return api.delete(`/trainings/${id}`);
