@@ -18,7 +18,7 @@ export default function ActionMenuTraining({ formationId, closeMenu, onRequestDe
 
   const handleDeleteClick = (e) => {
     e.stopPropagation();
-    onRequestDelete(); // ← on déclenche la modale gérée par le parent
+    onRequestDelete();
   };
 
   return (

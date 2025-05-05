@@ -1,18 +1,40 @@
 import { Pencil, Trash2 } from "lucide-react";
-import ActionItem from "@/shared/components/ActionItem";
-export default function ActionMenuSession() {
+import { useNavigate } from "react-router-dom";
+
+export default function ActionMenuSession({
+  sessionId,
+  closeMenu,
+  onRequestDelete,
+}) {
+  const navigate = useNavigate();
+
+  const handleEdit = (e) => {
+    e.stopPropagation();
+    navigate(`/dashboard/sessions/${sessionId}/edit`);
+    closeMenu();
+  };
+
+  const handleDeleteClick = (e) => {
+    e.stopPropagation();
+    onRequestDelete(); 
+  };
+
   return (
     <div>
-      <div className="flex flex-col gap-y-6 rounded-[5px] px-5 py-5 w-[304px] h-fit text-text-900 ">
-        {" "}
-        <ActionItem
-          icon={<Pencil className="w-4 h-4 text-text-500" />}
-          text="Modifier la session"
-        />
-        <ActionItem
-          icon={<Trash2 className="w-4 h-4 text-error-500" />}
-          text="Supprimer la session"
-        />
+      <div className="bg-background-50 border rounded-md shadow-md w-56 p-2 space-y-1 ">
+        <button
+          onClick={handleEdit}
+          className="w-full flex items-center gap-2 px-3 py-2 hover:bg-background-100 rounded text-sm text-left"
+        >
+          <Pencil className="w-4 h-4 text-cta-500" />
+          Modifier la session
+        </button>
+        <button
+          onClick={handleDeleteClick}
+          className="w-full flex items-center gap-2 px-3 py-2 hover:bg-background-100 rounded text-sm text-left"
+        >
+          <Trash2 className="w-4 h-4 text-error-500" /> Supprimer la session
+        </button>
       </div>
     </div>
   );

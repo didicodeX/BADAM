@@ -1,14 +1,25 @@
 import { useState } from "react";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import ImageGrid from "@/shared/components/ImageGrid";
 import DatePicker from "@/shared/components/DatePicker";
 import TimePicker from "@/shared/components/TimePicker";
 import InputField from "@/shared/components/InputField";
 import LocationPicker from "@/shared/components/LocationPicker";
 import Button from "@/shared/components/Button";
+import { useParams } from "react-router-dom";
+import { useTraining } from "../../hooks/useTrainings";
+import { useSession } from "../../hooks/useSessions";
 
 export default function CreateSessionPage() {
+  const { id: trainingId } = useParams();
+  console.log("trainingId depuis useParams:", trainingId); // 🔍
+  const { training } = useTraining(trainingId);
+  console.log("create session" ,trainingId);
+  
+  const { createSession } = useSession(trainingId);
   const [selectedImage, setSelectedImage] = useState(null);
+
+  const media = training?.images || [];
 
   const {
     handleSubmit,
@@ -30,31 +41,39 @@ export default function CreateSessionPage() {
 
   const onSubmit = (data) => {
     const startDateTime = new Date(data.startDate);
-    startDateTime.setHours(data.startTime.getHours(), data.startTime.getMinutes(), 0, 0);
-  
+    startDateTime.setHours(
+      data.startTime.getHours(),
+      data.startTime.getMinutes(),
+      0,
+      0
+    );
+
     const endDateTime = new Date(data.endDate);
-    endDateTime.setHours(data.endTime.getHours(), data.endTime.getMinutes(), 0, 0);
-  
+    endDateTime.setHours(
+      data.endTime.getHours(),
+      data.endTime.getMinutes(),
+      0,
+      0
+    );
+
     const payload = {
       address: data.address,
       maxParticipants: parseInt(data.maxParticipants, 10),
       startDateTime,
       endDateTime,
-      image: selectedImage, // si tu veux l'inclure ici
+      coverImage: selectedImage,
     };
-  
-    console.log(payload);
+
+    console.log( "id: " , trainingId, "\npayload: ", payload);
+    
+
+    createSession({ trainingId, ...payload });
   };
-  
 
   const handleImageSelect = (img) => {
     setSelectedImage(img);
   };
-  const media = [
-    "https://res.cloudinary.com/duvjrq5ca/image/upload/v1746188847/projects/BADAM/formations/1746188845514-Frame%2013.png.png",
-    "https://res.cloudinary.com/duvjrq5ca/video/upload/v1746188848/projects/BADAM/formations/1746188845974-185787-876545918_small.mp4.mp4",
-    "/video/[_Traduction_Française_]_Beautiful_People_-_Ed_Sheeran_ft._Khalid(360p).mp4"
-  ];
+
   return (
     <div className="padd-x padd-y flex flex-col gap-6 md:gap-10">
       <h2>Créer une nouvelle session</h2>

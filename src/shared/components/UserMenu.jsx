@@ -48,7 +48,7 @@ console.log(user);
           Dashboard
         </Link>
         <Link
-          to="/dashboard/favorites"
+          to="/dashboard/sessions/favorites"
           className="flex items-center gap-2 hover:text-cta-500"
         >
           <Heart className="w-4 h-4" />

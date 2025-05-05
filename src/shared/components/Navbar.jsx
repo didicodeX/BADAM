@@ -63,7 +63,7 @@ export default function Navbar() {
         {user ? (
           <>
             <Link
-              to="/dashboard/favorites"
+              to="/dashboard/sessions/favorites"
               className="flex items-center hover:text-cta-500 rounded"
             >
               <Heart className="w-5 h-5" />

@@ -11,7 +11,6 @@ import MediaPreviewList from "../../components/MediaPreviewList";
 import ProgressBar from "../../components/ProgressBar";
 
 export default function CreateTrainingPage() {
-  // const [uploadProgress, setUploadProgress] = useState(0);
   const [globalProgress, setGlobalProgress] = useState(0);
 
   const {

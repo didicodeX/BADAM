@@ -52,9 +52,15 @@ export default function DashboardRoutes() {
           {/* <Route index element={<TrainingsListPage />} /> */}
           <Route path="create" element={<CreateTrainingPage />} />
           <Route path="created" element={<CreatedTrainingsPage />} />
-          <Route path=":id" element={<TrainingDetailPage />} />
-          <Route path=":id/edit" element={<EditTrainingPage />} />
-          <Route path=":id/sessions/create" element={<CreateSessionPage />} />
+
+          {/* Trainings :id */}
+          <Route path=":id">
+            <Route index element={<TrainingDetailPage />} />
+            <Route path="edit" element={<EditTrainingPage />} />
+            <Route path="edit" element={<EditTrainingPage />} />
+            <Route path="sessions/create" element={<CreateSessionPage />} />
+          </Route>
+          {/*   */}
         </Route>
 
         {/* Sessions */}
@@ -63,14 +69,17 @@ export default function DashboardRoutes() {
           <Route path="created" element={<CreatedSessionsPage />} />
           <Route path="followed" element={<FollowedSessionsPage />} />
           <Route path="favorites" element={<FavoritesPage />} />
-        </Route>
 
-        <Route path=":id">
-          <Route index element={<SessionDetailPage />} />
-          <Route path="edit" element={<EditSessionPage />} />
-          <Route path="participants" element={<SessionParticipantsPage />} />
-          <Route path="feedbacks" element={<SessionFeedbackPage />} />
+          {/* Sessions :id */}
+          <Route path=":id">
+            <Route index element={<SessionDetailPage />} />
+            <Route path="edit" element={<EditSessionPage />} />
+            <Route path="participants" element={<SessionParticipantsPage />} />
+            <Route path="feedbacks" element={<SessionFeedbackPage />} />
+          </Route>
+          {/*  */}
         </Route>
+        {/*  */}
       </Routes>
     </Suspense>
   );
