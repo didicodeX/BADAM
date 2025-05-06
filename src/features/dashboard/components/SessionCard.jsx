@@ -73,7 +73,7 @@ export default function SessionCard({
           <Status
             taken={session.currentNbParticipants}
             total={session.maxParticipants}
-            expired={session.status !== "Available"}
+            expired={new Date(session.endDateTime) < new Date()}
           />
         </div>
         <div className="relative" ref={menuRef}>

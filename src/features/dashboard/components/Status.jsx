@@ -7,7 +7,7 @@ export default function Status({ taken = 0, total = 0, expired = false }) {
     );
   }
 
-  if (taken === 0) {
+  if (taken === 0 && total !== 0) {
     return (
       <span className="w-fit mt-2 bg-success-50 text-success-500 text-xs font-semibold px-3 py-1.5 rounded-full shadow">
         Disponible
@@ -22,6 +22,14 @@ export default function Status({ taken = 0, total = 0, expired = false }) {
       </span>
     );
   }
+
+  if (!expired && taken >= total && total > 0) {
+    return (
+      <span className="w-fit mt-2 bg-warning-50 text-warning-600 text-xs font-semibold px-3 py-1.5 rounded-full shadow">
+        Complet
+      </span>
+    );
+  }  
 
   return (
     <span className="w-fit mt-2 bg-success-50 text-success-500 text-xs font-semibold px-3 py-1.5 rounded-full shadow">

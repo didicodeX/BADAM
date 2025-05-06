@@ -1,6 +1,6 @@
 export default function ProgressBar({ value = 0 }) {
   return (
-    <div className="fixed inset-0 z-[9999] bg-black/30 backdrop-blur-sm flex items-center justify-center">
+    <div className="fixed inset-0 z-[9999] bg-black/30 backdrop-blur-sm flex items-center justify-center px-4">
       <div className="w-full max-w-md bg-background-50 rounded-xl shadow-lg p-6 space-y-4 text-center">
         <p className="text-text-800 font-medium">Téléversement en cours…</p>
 
@@ -10,7 +10,6 @@ export default function ProgressBar({ value = 0 }) {
             style={{ width: `${value}%` }}
           />
         </div>
-
         <p className="text-sm text-text-500">{value}%</p>
       </div>
     </div>

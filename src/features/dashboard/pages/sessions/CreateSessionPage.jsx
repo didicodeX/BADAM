@@ -12,10 +12,10 @@ import { useSession } from "../../hooks/useSessions";
 
 export default function CreateSessionPage() {
   const { id: trainingId } = useParams();
-  console.log("trainingId depuis useParams:", trainingId); // 🔍
+  console.log("trainingId depuis useParams:", trainingId);
   const { training } = useTraining(trainingId);
-  console.log("create session" ,trainingId);
-  
+  console.log("create session", trainingId);
+
   const { createSession } = useSession(trainingId);
   const [selectedImage, setSelectedImage] = useState(null);
 
@@ -39,7 +39,10 @@ export default function CreateSessionPage() {
     },
   });
 
+  console.log("selectedImage : ",selectedImage);
   const onSubmit = (data) => {
+    console.log("selectedImage : ",selectedImage);
+
     const startDateTime = new Date(data.startDate);
     startDateTime.setHours(
       data.startTime.getHours(),
@@ -58,14 +61,13 @@ export default function CreateSessionPage() {
 
     const payload = {
       address: data.address,
-      maxParticipants: parseInt(data.maxParticipants, 10),
+      maxParticipants: parseInt(data.maxParticipants, 10) || 0,
       startDateTime,
       endDateTime,
       coverImage: selectedImage,
     };
 
-    console.log( "id: " , trainingId, "\npayload: ", payload);
-    
+    console.log("id: ", trainingId, "\npayload: ", payload);
 
     createSession({ trainingId, ...payload });
   };

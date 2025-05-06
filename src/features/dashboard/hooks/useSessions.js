@@ -39,6 +39,18 @@ export function useSession(id, trainingId) {
     enabled: !!id,
   });
 
+  const mySessionDetailsQuery = useQuery({
+    queryKey: ["my-session-details"],
+    queryFn: () => SessionAPI.getMySessionDetails(id),
+    enabled: !!id
+  })
+
+  const sessionDetailsQuery = useQuery({
+    queryKey: ["my-session-details"],
+    queryFn: () => SessionAPI.getSessionDetails(id),
+    enabled: !!id
+  })
+
   const deleteSessionMutation = useMutation({
     mutationFn: SessionAPI.deleteSession,
     onSuccess: ({data}) => {
@@ -55,11 +67,15 @@ export function useSession(id, trainingId) {
     isLoadingSession: mySessionQuery.isLoading,
     isErrorSession: mySessionQuery.isError,
     mySessions: mySessionsQuery.data?.data || [],
-    isLoadingSessons: mySessionsQuery.isLoading,
+    isLoadingSessions: mySessionsQuery.isLoading,
     isErrorSessions: mySessionsQuery.isError,
     mySessionsByTraining: mySessionsByTrainingQuery.data?.data || [],
     isLoadingSessionsByTraining: mySessionsByTrainingQuery.isLoading,
     isErrorSessionsByTraining: mySessionsByTrainingQuery.isError,
+    mySessionDetail: mySessionDetailsQuery.data?.data || [],
+    isLoadingMySessionDetail: mySessionDetailsQuery.isLoading,
+    sessionDetails:sessionDetailsQuery.data?.data || [],
+    isLoadingSessionDetails: sessionDetailsQuery.isLoading,
     deleteSession: deleteSessionMutation.mutate
   };
 }

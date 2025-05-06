@@ -54,9 +54,7 @@ export default function CreatedSessionsPage() {
             <div>
               <h4>{training.title}</h4>
               <small className="hover:text-cta-500 transition">
-                <Link
-                  to={`/dashboard/trainings/${training._id}`}
-                >
+                <Link to={`/dashboard/trainings/${training._id}`}>
                   Voir la formation
                 </Link>
               </small>
@@ -67,7 +65,7 @@ export default function CreatedSessionsPage() {
                   key={session._id}
                   id={session._id}
                   trainingTitle={training.title}
-                  trainingImage={training.images?.[0]}
+                  trainingImage={session.coverImage || training.images?.[0]}
                   session={session}
                 />
               ))}

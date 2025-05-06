@@ -35,7 +35,7 @@ export function useTraining(id) {
       toastError(message);
     },
   });
-  
+
   const deleteTrainingMutation = useMutation({
     mutationFn: TrainingAPI.deleteTraining,
     onSuccess: ({ data }) => {

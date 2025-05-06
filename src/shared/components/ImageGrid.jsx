@@ -10,8 +10,8 @@ export default function ImageGrid({ images = [], selected, onSelect }) {
           onClick={() => onSelect(img)}
           className={clsx(
             "border rounded overflow-hidden transition ring-offset-2 focus:outline-none",
-            selected === img
-              ? "ring-2 ring-cta-500 "
+            selected && selected.toString() === img.toString()
+              ? "ring-2 ring-cta-500"
               : "hover:ring-1 ring-text-300"
           )}
         >
