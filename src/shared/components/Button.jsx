@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { solidStyle, outlineStyle, baseStyle } from "../styles/buttonStyle";
 
 export default function Button({
@@ -6,18 +7,29 @@ export default function Button({
   disabled,
   type = "button",
   variant = "solid", // "solid" | "outline"
+  to, // lien optionnel
 }) {
   const variants = {
     solid: solidStyle,
     outline: outlineStyle,
   };
 
+  const className = `${baseStyle} ${variants[variant]}`;
+
+  if (to) {
+    return (
+      <Link to={to} className={className}>
+        {children}
+      </Link>
+    );
+  }
+
   return (
     <button
       type={type}
       disabled={disabled}
       onClick={onClick}
-      className={`${baseStyle} ${variants[variant]}`}
+      className={className}
     >
       {children}
     </button>

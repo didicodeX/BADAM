@@ -32,6 +32,9 @@ export const createSession = (trainingId, payload) => {
   return api.post(`/sessions/${trainingId}`, payload);
 };
 
+export const updateSession = (id,updatedData) => {
+  return api.patch(`/sessions/${id}`,updatedData)
+}
 export const deleteSession = (id) => {
   return api.delete(`/sessions/${id}`)
 }

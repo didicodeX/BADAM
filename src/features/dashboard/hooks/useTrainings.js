@@ -12,7 +12,6 @@ export function useTraining(id) {
     mutationFn: TrainingAPI.createTraining,
     onSuccess: ({ data }) => {
       console.log(data);
-      setTraining(data);
       toastSuccess("Formation créée avec succès !");
       navigate("/dashboard/trainings/created");
     },
@@ -54,7 +53,9 @@ export function useTraining(id) {
   const myTrainingQuery = useQuery({
     queryKey: ["my-training", id],
     queryFn: () => TrainingAPI.getMyTraining(id),
-
+    onSuccess: (data) => {
+      setTraining(data.data); // ← ici tu stockes le training
+    },
     enabled: !!id,
   });
 

@@ -50,7 +50,7 @@ export default function CreatedSessionsPage() {
 
         {/* Liste des formations et sessions */}
         {Object.values(groupedSessions).map(({ training, sessions }) => (
-          <div key={training._id} className="space-y-4">
+          <Section key={training._id}>
             <div>
               <h4>{training.title}</h4>
               <small className="hover:text-cta-500 transition">
@@ -70,7 +70,7 @@ export default function CreatedSessionsPage() {
                 />
               ))}
             </div>
-          </div>
+          </Section>
         ))}
       </Section>
     </Content>

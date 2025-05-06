@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useSession } from "../../hooks/useSessions";
 // import { formatDate } from "@/shared/utils/formatDate";
 import { format } from "date-fns";
@@ -13,6 +13,7 @@ import ReviewCard from "../../components/ReviewCard";
 import Content from "@/shared/components/Content";
 import ConfirmDeleteModal from "@/shared/components/ConfirmDeleteModal";
 import ActionMenuSession from "../../components/ActionMenuSession";
+import ParticipantCard from "../../components/ParticipantCard";
 
 export default function SessionDetailPage() {
   const { id } = useParams();
@@ -87,25 +88,30 @@ export default function SessionDetailPage() {
           <img
             src={image}
             alt="cover"
-            className="w-full md:h-[400px] max-w-[900px] rounded-xl"
+            className="w-full md:max-h-[400px] max-w-[900px] max-h-[300px] rounded-xl"
           />
-          <p>{training.description}</p>
-          <small className="font-medium">
-            {format(new Date(session.startDateTime), "MMMM d", {
-              locale: enUS,
-            })}{" "}
-            to{" "}
-            {format(new Date(session.endDateTime), "MMMM d", { locale: enUS })},{" "}
-            {format(new Date(session.startDateTime), "p", { locale: enUS })} to{" "}
-            {format(new Date(session.endDateTime), "p", { locale: enUS })} ADT
-          </small>
-          <div className="flex justify-between items-center">
+          <div className="flex flex-col gap-2">
+            <p>{training.description}</p>
+            <p className="font-bold">{session.address}</p>
+            <small className="font-bold">
+              {format(new Date(session.startDateTime), "MMMM d", {
+                locale: enUS,
+              })}{" "}
+              to{" "}
+              {format(new Date(session.endDateTime), "MMMM d", {
+                locale: enUS,
+              })}
+              , {format(new Date(session.startDateTime), "p", { locale: enUS })}{" "}
+              to {format(new Date(session.endDateTime), "p", { locale: enUS })}{" "}
+              ADT
+            </small>
+          </div>
+          <div>
             <Status
               taken={session.currentNbParticipants}
               total={session.maxParticipants}
               expired={new Date(session.endDateTime) < new Date()}
-            />{" "}
-            <Button>Gérer la session</Button>
+            />
           </div>
         </Section>
       </Section>
@@ -113,15 +119,29 @@ export default function SessionDetailPage() {
       {/* Section 2 - Participants */}
       <Section>
         <h4>Liste des participants</h4>
-        {registrations.length === 0 ? (
-          <small className="text-cta-500">
-            Aucun participant pour le moment.
-          </small>
-        ) : (
-          <ParticipantsList
-            participants={registrations.map((r) => r.participant)}
-          />
-        )}
+        <Section last>
+          {registrations.length === 0 ? (
+            <small className="text-cta-500">
+              Aucun participant pour le moment.
+            </small>
+          ) : (
+            <div className="flex gap-6">
+              <div className="flex items-center gap-4 flex-wrap w-1/2">
+                {registrations.slice(0, 5).map((r) => (
+                  <ParticipantCard key={r._id} participant={r.participant} />
+                ))}
+              </div>
+              {registrations.length > 5 && (
+                <Link
+                  className="w-14 h-14 rounded-full bg-background-100 flex items-center justify-center text-sm text-cta-500"
+                  to={`/dashboard/sessions/${session._id}/participants`}
+                >
+                  +{registrations.length - 5}
+                </Link>
+              )}
+            </div>
+          )}
+        </Section>
       </Section>
 
       {/* Section 3 - Avis */}
@@ -132,19 +152,19 @@ export default function SessionDetailPage() {
             Aucun avis n'a encore été laissé pour cette session.
           </small>
         ) : (
-          <div className="space-y-4">
-            {reviews.slice(0, 3).map((review) => (
-              <ReviewCard key={review._id} review={review} />
+          <Section last>
+            {reviews.slice(0, 3).map((review, index, array) => (
+              <Section key={review._id} last={index === array.length - 1}>
+                <ReviewCard review={review} />
+              </Section>
             ))}
+
             {reviews.length > 3 && (
-              <Button
-                variant="ghost"
-                to={`/dashboard/reviews/session/${session._id}`}
-              >
+              <Button to={`/dashboard/sessions/${session._id}/reviews`}>
                 Voir tous les avis
               </Button>
             )}
-          </div>
+          </Section>
         )}
       </Section>
       <ConfirmDeleteModal

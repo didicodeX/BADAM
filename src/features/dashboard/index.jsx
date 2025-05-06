@@ -37,8 +37,8 @@ const FavoritesPage = lazy(() => import("./pages/sessions/FavoritesPage"));
 const SessionParticipantsPage = lazy(() =>
   import("./pages/sessions/SessionParticipantsPage")
 );
-const SessionFeedbackPage = lazy(() =>
-  import("./pages/sessions/SessionFeedbackPage")
+const SessionReviewsPage = lazy(() =>
+  import("./pages/sessions/SessionReviewsPage")
 );
 
 export default function DashboardRoutes() {
@@ -75,7 +75,7 @@ export default function DashboardRoutes() {
             <Route index element={<SessionDetailPage />} />
             <Route path="edit" element={<EditSessionPage />} />
             <Route path="participants" element={<SessionParticipantsPage />} />
-            <Route path="feedbacks" element={<SessionFeedbackPage />} />
+            <Route path="reviews" element={<SessionReviewsPage />} />
           </Route>
           {/*  */}
         </Route>

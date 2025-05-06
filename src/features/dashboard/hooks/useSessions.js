@@ -28,7 +28,7 @@ export function useSession(id, trainingId) {
   });
 
   const mySessionsByTrainingQuery = useQuery({
-    queryKey: ["my-session-by-training",trainingId],
+    queryKey: ["my-session-by-training", trainingId],
     queryFn: () => SessionAPI.getSessionsByTraining(trainingId),
     enabled: !!trainingId,
   });
@@ -42,24 +42,34 @@ export function useSession(id, trainingId) {
   const mySessionDetailsQuery = useQuery({
     queryKey: ["my-session-details"],
     queryFn: () => SessionAPI.getMySessionDetails(id),
-    enabled: !!id
-  })
+    enabled: !!id,
+  });
 
   const sessionDetailsQuery = useQuery({
     queryKey: ["my-session-details"],
     queryFn: () => SessionAPI.getSessionDetails(id),
-    enabled: !!id
-  })
+    enabled: !!id,
+  });
+
+  const updateSessionMutation = useMutation({
+    mutationFn: ({ id, updatedData }) =>
+      SessionAPI.updateSession(id, updatedData),
+    onSuccess: ({ data }) => {
+      console.log(data);
+      toastSuccess(data.message);
+      navigate(`/dashboard/sessions/${data.session._id}`);
+    },
+  });
 
   const deleteSessionMutation = useMutation({
     mutationFn: SessionAPI.deleteSession,
-    onSuccess: ({data}) => {
-      console.log(data)
-      toastSuccess(data.message)
+    onSuccess: ({ data }) => {
+      console.log(data);
+      toastSuccess(data.message);
       mySessionsQuery.refetch();
       navigate("/dashboard/sessions/created");
-    }
-  })
+    },
+  });
 
   return {
     createSession: createSessionMutation.mutate,
@@ -74,8 +84,9 @@ export function useSession(id, trainingId) {
     isErrorSessionsByTraining: mySessionsByTrainingQuery.isError,
     mySessionDetail: mySessionDetailsQuery.data?.data || [],
     isLoadingMySessionDetail: mySessionDetailsQuery.isLoading,
-    sessionDetails:sessionDetailsQuery.data?.data || [],
+    sessionDetails: sessionDetailsQuery.data?.data || [],
     isLoadingSessionDetails: sessionDetailsQuery.isLoading,
-    deleteSession: deleteSessionMutation.mutate
+    updateSession: updateSessionMutation.mutate,
+    deleteSession: deleteSessionMutation.mutate,
   };
 }
