@@ -6,12 +6,18 @@ import { Loader, MoreVertical } from "lucide-react";
 import Content from "@/shared/components/Content";
 import MediaSlider from "../../components/Slider";
 import ConfirmDeleteModal from "@/shared/components/ConfirmDeleteModal";
+import { useSession } from "../../hooks/useSessions";
+import Section from "@/shared/components/Section";
+import SessionCard from "../../components/SessionCard";
 
 export default function TrainingDetailPage() {
   const { id } = useParams();
   const { training, isLoadingTraining, isErrorTraining } = useTraining(id);
+  const { mySessionsByTraining: sessions } = useSession(null, id);
+
   console.log("Training ID:", id);
   console.log("Training : ", training);
+  console.log("sessions : ", sessions);
 
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
 
@@ -80,17 +86,28 @@ export default function TrainingDetailPage() {
         </div>
       </div>
       {/* infos training */}
-      <div className="flex flex-col gap-6 ">
+      <Section>
         <h3>Informations sur la formation</h3>
         <div className="flex w-[400px] sm:w-[500px] md:w-[650px] lg:w-[900px xl:w-[1204px] overflow-hidden">
           {media.length > 0 && <MediaSlider slides={media} />}
         </div>
         <p>{training.description}</p>
-      </div>
+      </Section>
       {/* session creer */}
-      <div className="flex flex-col gap-6">
+      <Section last>
         <h3>Sessions créées pour cette formation</h3>
-      </div>
+        <div className="flex flex-wrap gap-6">
+          {sessions.map((session) => (
+            <SessionCard
+              key={session._id}
+              id={session._id}
+              trainingTitle={training.title}
+              trainingImage={session.coverImage || training.images?.[0]}
+              session={session}
+            />
+          ))}
+        </div>
+      </Section>
       <ConfirmDeleteModal
         isOpen={showConfirmDelete}
         onClose={() => setShowConfirmDelete(false)}

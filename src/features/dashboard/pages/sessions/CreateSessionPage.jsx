@@ -9,6 +9,8 @@ import Button from "@/shared/components/Button";
 import { useParams } from "react-router-dom";
 import { useTraining } from "../../hooks/useTrainings";
 import { useSession } from "../../hooks/useSessions";
+import Content from "@/shared/components/Content";
+import Section from "@/shared/components/Section";
 
 export default function CreateSessionPage() {
   const { id: trainingId } = useParams();
@@ -77,13 +79,13 @@ export default function CreateSessionPage() {
   };
 
   return (
-    <div className="padd-x padd-y flex flex-col gap-6 md:gap-10">
+    <Content className="padd-x padd-y flex flex-col gap-6 md:gap-10">
       <h2>Créer une nouvelle session</h2>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="border-t border-t-background-100"
       >
-        <section className="flex flex-col gap-6 py-6 border-b border-b-background-100">
+        <Section>
           <div>
             <h4>Image de couverture</h4>
             <p>
@@ -96,9 +98,9 @@ export default function CreateSessionPage() {
             selected={selectedImage}
             onSelect={handleImageSelect}
           />
-        </section>
+        </Section>
 
-        <section className="flex flex-col gap-6 py-6 border-b border-b-background-100">
+        <Section>
           <h4>Date et Heure</h4>
           <div className="flex flex-wrap gap-4">
             <DatePicker
@@ -130,9 +132,9 @@ export default function CreateSessionPage() {
             value={watch("address")}
             onChange={(address) => setValue("address", address)}
           />
-        </section>
+        </Section>
 
-        <section className="flex flex-col gap-6 py-6 border-b border-b-background-100">
+        <Section>
           <h4>Nombre max de participants</h4>
           <InputField
             label="Nombre max de participants"
@@ -141,12 +143,12 @@ export default function CreateSessionPage() {
             {...register("maxParticipants")}
             error={errors.maxParticipants}
           />
-        </section>
+        </Section>
 
-        <section className="flex flex-col gap-6 py-6">
+        <Section last>
           <Button type="submit">Créer la session</Button>
-        </section>
+        </Section>
       </form>
-    </div>
+    </Content>
   );
 }

@@ -28,9 +28,9 @@ export function useSession(id, trainingId) {
   });
 
   const mySessionsByTrainingQuery = useQuery({
-    queryKey: ["my-session-by-training"],
+    queryKey: ["my-session-by-training",trainingId],
     queryFn: () => SessionAPI.getSessionsByTraining(trainingId),
-    enabled: !!id,
+    enabled: !!trainingId,
   });
 
   const mySessionQuery = useQuery({

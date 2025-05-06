@@ -9,7 +9,7 @@ export const getMySessions = () => {
 };
 
 export const getSessionsByTraining = (trainingId) => {
-  return api.get(`/session/training/${trainingId}`)
+  return api.get(`/sessions/trainings/${trainingId}`)
 }
 
 export const getMySessionsWithCount = () => {

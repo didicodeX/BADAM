@@ -5,12 +5,13 @@ import { useSession } from "../../hooks/useSessions";
 import { Search } from "lucide-react";
 import SessionCard from "../../components/SessionCard";
 import { Link } from "react-router-dom";
+import Section from "@/shared/components/Section";
 
 export default function CreatedSessionsPage() {
   const [isFocused, setIsFocused] = useState(false);
-  const { mySessions, isLoadingSessons } = useSession();
+  const { mySessions, isLoadingSessions } = useSession();
 
-  if (isLoadingSessons) return <LoadingScreen />;
+  if (isLoadingSessions) return <LoadingScreen />;
 
   // Grouper les sessions par formation
   const groupedSessions = mySessions.reduce((acc, session) => {
@@ -28,8 +29,7 @@ export default function CreatedSessionsPage() {
   return (
     <Content>
       <h2>Mes sessions créées</h2>
-
-      <div className="flex flex-col gap-8">
+      <Section last>
         {/* Barre de recherche */}
         <div className="py-4 flex justify-center">
           <div
@@ -72,7 +72,7 @@ export default function CreatedSessionsPage() {
             </div>
           </div>
         ))}
-      </div>
+      </Section>
     </Content>
   );
 }

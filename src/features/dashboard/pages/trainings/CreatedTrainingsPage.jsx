@@ -4,6 +4,7 @@ import { useTraining } from "../../hooks/useTrainings";
 import TrainingCard from "../../components/TrainingCard";
 import { Search } from "lucide-react";
 import Content from "@/shared/components/Content";
+import Section from "@/shared/components/Section";
 
 export default function CreatedTrainingsPage() {
   const [isFocused, setIsFocused] = useState(false);
@@ -14,7 +15,7 @@ export default function CreatedTrainingsPage() {
   return (
     <Content>
       <h2>Mes formations créées</h2>
-      <div className="flex flex-col gap-8">
+      <Section>
         <div className="py-4 flex justify-center">
           <div
             className={`flex items-center justify-between border rounded-full focus:border-cta-500 px-6 py-3 w-full max-w-[500px] ${
@@ -42,7 +43,7 @@ export default function CreatedTrainingsPage() {
             />
           ))}
         </div>
-      </div>
+      </Section>
     </Content>
   );
 }
