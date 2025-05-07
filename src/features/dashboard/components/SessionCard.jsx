@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { MoreHorizontal } from "lucide-react";
 import { format } from "date-fns";
 import { enUS } from "date-fns/locale";
-import Status from "../components/Status";
+import Status from "../../../shared/components/Status";
 import ConfirmDeleteModal from "@/shared/components/ConfirmDeleteModal";
 import ActionMenuSession from "./ActionMenuSession";
 import { useSession } from "../hooks/useSessions";

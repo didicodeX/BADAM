@@ -65,7 +65,7 @@ export default function CreatedSessionsPage() {
                   key={session._id}
                   id={session._id}
                   trainingTitle={training.title}
-                  trainingImage={session.coverImage || training.images?.[0]}
+                  trainingImage={session.coverImage || training.images[0]}
                   session={session}
                 />
               ))}

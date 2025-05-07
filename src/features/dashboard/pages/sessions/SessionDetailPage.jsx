@@ -6,7 +6,7 @@ import { format } from "date-fns";
 import { enUS } from "date-fns/locale";
 import { Loader, MoreVertical } from "lucide-react";
 import Section from "@/shared/components/Section";
-import Status from "../../components/Status";
+import Status from "../../../../shared/components/Status";
 import Button from "@/shared/components/Button";
 import ParticipantsList from "../../components/ParticipantsList";
 import ReviewCard from "../../components/ReviewCard";
