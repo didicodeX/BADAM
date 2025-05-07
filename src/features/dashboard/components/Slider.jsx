@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-export default function MediaCarousel({ slides }) {
+export default function MediaSlider({ slides }) {
   const containerRef = useRef(null);
 
   const scrollLeft = () => {

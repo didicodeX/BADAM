@@ -1,10 +1,10 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient, useQuery } from "@tanstack/react-query";
 import * as HomeAPI from "../api/home.api";
 import { useHomeStore } from "../store/useHome.store";
 import { useEffect } from "react";
 import { toastError } from "@/shared/components/toast";
 
-export default function useHome() {
+export default function useHome(id) {
   const queryClient = useQueryClient();
 
   const { setSessions, setFavorites, favorites, toggleFavorite } =
@@ -54,9 +54,35 @@ export default function useHome() {
     }
   };
 
+  // const topRatedQuery = useQuery({
+  //   queryKey: ["top-rated"],
+  //   queryFn: HomeAPI.getTopRatedSessions
+  // })
+
+  const latestQuery = useQuery({
+    queryKey: ["latest"],
+    queryFn: HomeAPI.getLatestSessions
+  })
+
+  const sessionDetailQuery = useQuery({
+    queryKey: ["sesionDetail"],
+    queryFn: () => HomeAPI.getSessionsDetail(id),
+    enabled: !!id,
+  })
+  
+
   return {
     handleToggleFavorite,
     // isLoadingSessions: getAllSessionsQuery.isLoading,
     // isErrorSessions: getAllSessionsQuery.isError,
+
+    // topRated: topRatedQuery.data?.data || [],
+    // isLoadingtopRated: topRatedQuery.isLoading,
+
+    latest: latestQuery.data?.data || [],
+    isLoadinglatest: latestQuery.isLoading,
+
+    sessionDetail: sessionDetailQuery.data?.data || [],
+    isLoadingsessionDetail: sessionDetailQuery.isLoading,
   };
 }
