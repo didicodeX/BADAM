@@ -141,7 +141,7 @@ export default function DashboardNavbarMobile({ menuOpen, setMenuOpen }) {
             <div>
               <button
                 onClick={() => logout()}
-                className="flex items-center gap-2 text-error-500 hover:text-error-700"
+                className="flex items-center gap-2 text-error-500 hover:text-error-700 mb-16"
               >
                 <LogOut className="w-5 h-5" /> Se déconnecter
               </button>

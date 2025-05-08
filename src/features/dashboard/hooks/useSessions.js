@@ -55,7 +55,6 @@ export function useSession(id, trainingId) {
     mutationFn: ({ id, updatedData }) =>
       SessionAPI.updateSession(id, updatedData),
     onSuccess: ({ data }) => {
-      console.log(data);
       toastSuccess(data.message);
       navigate(`/dashboard/sessions/${data.session._id}`);
     },
@@ -64,7 +63,6 @@ export function useSession(id, trainingId) {
   const deleteSessionMutation = useMutation({
     mutationFn: SessionAPI.deleteSession,
     onSuccess: ({ data }) => {
-      console.log(data);
       toastSuccess(data.message);
       mySessionsQuery.refetch();
       navigate("/dashboard/sessions/created");

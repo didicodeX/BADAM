@@ -1,14 +1,12 @@
 import { useState, useRef, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useSession } from "../../hooks/useSessions";
-// import { formatDate } from "@/shared/utils/formatDate";
 import { format } from "date-fns";
 import { enUS } from "date-fns/locale";
 import { Loader, MoreVertical } from "lucide-react";
 import Section from "@/shared/components/Section";
-import Status from "../../components/Status";
+import Status from "../../../../shared/components/Status";
 import Button from "@/shared/components/Button";
-import ParticipantsList from "../../components/ParticipantsList";
 import ReviewCard from "../../components/ReviewCard";
 import Content from "@/shared/components/Content";
 import ConfirmDeleteModal from "@/shared/components/ConfirmDeleteModal";
@@ -18,8 +16,6 @@ import ParticipantCard from "../../components/ParticipantCard";
 export default function SessionDetailPage() {
   const { id } = useParams();
   const { mySessionDetail, isLoadingMySessionDetail } = useSession(id);
-
-  console.log(mySessionDetail);
 
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
 
@@ -83,7 +79,7 @@ export default function SessionDetailPage() {
       </div>
       {/* Section 1 - Informations sur la session */}
       <Section>
-        <h4>Informations sur la session</h4>
+        <h3>Informations sur la session</h3>
         <Section last>
           <img
             src={image}
@@ -118,7 +114,7 @@ export default function SessionDetailPage() {
 
       {/* Section 2 - Participants */}
       <Section>
-        <h4>Liste des participants</h4>
+        <h3>Liste des participants</h3>
         <Section last>
           {registrations.length === 0 ? (
             <small className="text-cta-500">
@@ -146,7 +142,7 @@ export default function SessionDetailPage() {
 
       {/* Section 3 - Avis */}
       <Section last>
-        <h4>Vos avis</h4>
+        <h3>Vos avis</h3>
         {reviews.length === 0 ? (
           <small className="text-cta-500">
             Aucun avis n'a encore été laissé pour cette session.

@@ -30,6 +30,8 @@ const NotificationsPage = lazy(() => import("@/features/notifications/pages/Noti
 const HelpPage = lazy(() => import("@/features/help/pages/HelpPage"))
 const NotFoundPage = lazy(() => import("@/shared/pages/NotFoundPage"));
 
+const SessionDetailPage = lazy(() => import("@/features/home/pages/SessionDetailPage"))
+
 export const router = createBrowserRouter([
   {
     element: <PublicLayout />,
@@ -61,6 +63,7 @@ export const router = createBrowserRouter([
         element: <AppLayout />,
         children: [
           { path: "/home", element: <HomePage /> },
+          { path: "/sessions/:id", element: <SessionDetailPage /> },
           { path: "/profile", element: <ProfilePage /> },
           { path: "/settings", element: <SettingsPage /> },
           { path: "/help", element: <HelpPage /> },

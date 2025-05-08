@@ -5,17 +5,17 @@ import TrainingCard from "../../components/TrainingCard";
 import { Search } from "lucide-react";
 import Content from "@/shared/components/Content";
 import Section from "@/shared/components/Section";
+import Button from "@/shared/components/Button";
 
 export default function CreatedTrainingsPage() {
   const [isFocused, setIsFocused] = useState(false);
   const { myTrainings, isLoadingMyTrainings } = useTraining();
   if (isLoadingMyTrainings) return <LoadingScreen />;
-  console.log(myTrainings);
 
   return (
     <Content>
       <h2>Mes formations créées</h2>
-      <Section>
+      <Section last>
         <div className="py-4 flex justify-center">
           <div
             className={`flex items-center justify-between border rounded-full focus:border-cta-500 px-6 py-3 w-full max-w-[500px] ${
@@ -43,6 +43,14 @@ export default function CreatedTrainingsPage() {
             />
           ))}
         </div>
+        {myTrainings.length === 0 && (
+          <div className="flex flex-col items-center gap-6">
+            <p className="text-center text-text-500 mt-8">
+              Aucune session formation pour le moment.
+            </p>
+            <Button to={"/dashboard/trainings/create"}>Creer</Button>
+          </div>
+        )}
       </Section>
     </Content>
   );

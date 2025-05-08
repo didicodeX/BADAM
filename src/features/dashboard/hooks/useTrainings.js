@@ -11,8 +11,7 @@ export function useTraining(id) {
   const createTrainingMutation = useMutation({
     mutationFn: TrainingAPI.createTraining,
     onSuccess: ({ data }) => {
-      console.log(data);
-      toastSuccess("Formation créée avec succès !");
+      toastSuccess(data.message);
       navigate("/dashboard/trainings/created");
     },
     onError: (error) => {
@@ -25,7 +24,6 @@ export function useTraining(id) {
     mutationFn: ({ id, updatedData }) =>
       TrainingAPI.updateTraining(id, updatedData),
     onSuccess: ({ data }) => {
-      console.log(data);
       toastSuccess(data.message);
       navigate(`/dashboard/trainings/${data.training._id}`);
     },
@@ -38,7 +36,6 @@ export function useTraining(id) {
   const deleteTrainingMutation = useMutation({
     mutationFn: TrainingAPI.deleteTraining,
     onSuccess: ({ data }) => {
-      console.log(data);
       toastSuccess(data.message);
       myTrainingsQuery.refetch();
       navigate("/dashboard/trainings/created");
