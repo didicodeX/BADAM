@@ -44,7 +44,7 @@ export default function CreateSessionPage() {
   });
 
   const onSubmit = async (data) => {
-    let coverImage = selectedImage;
+    let coverImage = selectedImage || training.images[0];
 
     if (uploadedImage) {
       const uploadedUrl = await uploadToCloudinary(uploadedImage, {

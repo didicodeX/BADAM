@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 
 export default function Hello() {
   const { user } = useAuthStore();
-  console.log(user);
   return (
     <div className="padd-x padd-t flex flex-col gap-6 xl:flex-row xl:items-center">
       <div className="w-28 h-28">

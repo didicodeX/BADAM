@@ -14,11 +14,7 @@ export default function TrainingDetailPage() {
   const { id } = useParams();
   const { training, isLoadingTraining, isErrorTraining } = useTraining(id);
   const { mySessionsByTraining: sessions } = useSession(null, id);
-
-  console.log("Training ID:", id);
-  console.log("Training : ", training);
-  console.log("sessions : ", sessions);
-
+  
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
 
   const [menuOpen, setMenuOpen] = useState(false);

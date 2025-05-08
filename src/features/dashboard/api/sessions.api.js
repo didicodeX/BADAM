@@ -1,9 +1,5 @@
 import { api } from "@/shared/lib/axios";
 
-export const getMyRegistrations = () => {
-  return api.get("/registrations"); // session suivies
-};
-
 export const getMySessions = () => {
   return api.get("/sessions/me");
 };
@@ -35,6 +31,7 @@ export const createSession = (trainingId, payload) => {
 export const updateSession = (id,updatedData) => {
   return api.patch(`/sessions/${id}`,updatedData)
 }
+
 export const deleteSession = (id) => {
   return api.delete(`/sessions/${id}`)
 }
