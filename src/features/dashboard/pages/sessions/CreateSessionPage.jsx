@@ -1,14 +1,29 @@
 import { useState } from "react";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
+import Content from "@/shared/components/Content";
+import Section from "@/shared/components/Section";
 import ImageGrid from "@/shared/components/ImageGrid";
+import MediaUploader from "../../components/MediaUploader";
+import MediaPreviewList from "../../components/MediaPreviewList";
+import InputField from "@/shared/components/InputField";
 import DatePicker from "@/shared/components/DatePicker";
 import TimePicker from "@/shared/components/TimePicker";
-import InputField from "@/shared/components/InputField";
 import LocationPicker from "@/shared/components/LocationPicker";
 import Button from "@/shared/components/Button";
+import { useParams } from "react-router-dom";
+import { useTraining } from "../../hooks/useTrainings";
+import { useSession } from "../../hooks/useSessions";
+import { uploadToCloudinary } from "@/shared/utils/uploadToCloudinary";
 
 export default function CreateSessionPage() {
-  const [selectedImage, setSelectedImage] = useState(null);
+  const { id: trainingId } = useParams();
+  const { training } = useTraining(trainingId);
+  const { createSession } = useSession(trainingId);
+
+  const media = training?.images || [];
+
+  const [selectedImage, setSelectedImage] = useState(null); // depuis ImageGrid
+  const [uploadedImage, setUploadedImage] = useState(null); // upload direct
 
   const {
     handleSubmit,
@@ -28,104 +43,107 @@ export default function CreateSessionPage() {
     },
   });
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
+    let coverImage = selectedImage || training.images[0];
+
+    if (uploadedImage) {
+      const uploadedUrl = await uploadToCloudinary(uploadedImage, {
+        folder: "projects/BADAM/trainings",
+        resourceType: "image",
+        setProgress: () => {},
+      });
+
+      if (uploadedUrl) {
+        coverImage = uploadedUrl;
+      }
+    }
+
     const startDateTime = new Date(data.startDate);
-    startDateTime.setHours(data.startTime.getHours(), data.startTime.getMinutes(), 0, 0);
-  
+    startDateTime.setHours(
+      data.startTime.getHours(),
+      data.startTime.getMinutes(),
+      0,
+      0
+    );
+
     const endDateTime = new Date(data.endDate);
-    endDateTime.setHours(data.endTime.getHours(), data.endTime.getMinutes(), 0, 0);
-  
+    endDateTime.setHours(
+      data.endTime.getHours(),
+      data.endTime.getMinutes(),
+      0,
+      0
+    );
+
     const payload = {
       address: data.address,
-      maxParticipants: parseInt(data.maxParticipants, 10),
+      maxParticipants: parseInt(data.maxParticipants, 10) || 0,
       startDateTime,
       endDateTime,
-      image: selectedImage, // si tu veux l'inclure ici
+      coverImage,
     };
-  
-    console.log(payload);
-  };
-  
 
-  const handleImageSelect = (img) => {
-    setSelectedImage(img);
+    createSession({ trainingId, ...payload });
   };
-  const media = [
-    "https://res.cloudinary.com/duvjrq5ca/image/upload/v1746188847/projects/BADAM/formations/1746188845514-Frame%2013.png.png",
-    "https://res.cloudinary.com/duvjrq5ca/video/upload/v1746188848/projects/BADAM/formations/1746188845974-185787-876545918_small.mp4.mp4",
-    "/video/[_Traduction_Française_]_Beautiful_People_-_Ed_Sheeran_ft._Khalid(360p).mp4"
-  ];
+
   return (
-    <div className="padd-x padd-y flex flex-col gap-6 md:gap-10">
+    <Content>
       <h2>Créer une nouvelle session</h2>
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="border-t border-t-background-100"
-      >
-        <section className="flex flex-col gap-6 py-6 border-b border-b-background-100">
-          <div>
-            <h4>Image de couverture</h4>
-            <p>
-              Choisissez une image qui correspond à l'ambiance, et évitez les
-              superpositions de texte distrayantes.
-            </p>
-          </div>
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+        <Section>
+          <h3>Image de couverture</h3>
+          <p>Choisissez une image parmi celles de la formation ou importez-en une nouvelle.</p>
+
+          {/* Sélection depuis la formation */}
           <ImageGrid
             images={media}
             selected={selectedImage}
-            onSelect={handleImageSelect}
+            onSelect={(img) => {
+              setSelectedImage(img);
+              setUploadedImage(null); // on annule l’upload si sélection manuelle
+            }}
           />
-        </section>
 
-        <section className="flex flex-col gap-6 py-6 border-b border-b-background-100">
-          <h4>Date et Heure</h4>
+          {/* Upload image personnalisée */}
+          <MediaUploader
+            accept="image"
+            onFilesAdded={(files) => {
+              const file = files[0];
+              setUploadedImage(file);
+              setSelectedImage(null); // on annule la sélection manuelle
+            }}
+          />
+
+          <MediaPreviewList
+            files={uploadedImage ? [uploadedImage] : []}
+            onRemove={() => setUploadedImage(null)}
+          />
+        </Section>
+
+        <Section>
+          <h3>Date et heure</h3>
           <div className="flex flex-wrap gap-4">
-            <DatePicker
-              label="Date de début"
-              name="startDate"
-              control={control}
-              error={errors.startDate}
-            />
-            <DatePicker
-              label="Date de fin"
-              name="endDate"
-              control={control}
-              error={errors.endDate}
-            />
-            <TimePicker
-              label="Heure de début"
-              name="startTime"
-              control={control}
-              error={errors.startTime}
-            />
-            <TimePicker
-              label="Heure de fin"
-              name="endTime"
-              control={control}
-              error={errors.endTime}
-            />
+            <DatePicker label="Date de début" name="startDate" control={control} error={errors.startDate} />
+            <DatePicker label="Date de fin" name="endDate" control={control} error={errors.endDate} />
+            <TimePicker label="Heure de début" name="startTime" control={control} error={errors.startTime} />
+            <TimePicker label="Heure de fin" name="endTime" control={control} error={errors.endTime} />
           </div>
-          <LocationPicker
-            value={watch("address")}
-            onChange={(address) => setValue("address", address)}
-          />
-        </section>
+          <LocationPicker value={watch("address")} onChange={(val) => setValue("address", val)} />
+        </Section>
 
-        <section className="flex flex-col gap-6 py-6 border-b border-b-background-100">
-          <h4>Nombre max de participants</h4>
+        <Section>
+          <h3>Participants</h3>
           <InputField
             label="Nombre max de participants"
-            name="maxParticipants"
             type="number"
             {...register("maxParticipants")}
             error={errors.maxParticipants}
           />
-        </section>
+        </Section>
 
-        <section className="flex flex-col gap-6 py-6">
+        <Section last>
           <Button type="submit">Créer la session</Button>
-        </section>
+        </Section>
       </form>
-    </div>
+    </Content>
   );
 }

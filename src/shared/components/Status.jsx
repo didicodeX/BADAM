@@ -1,9 +1,39 @@
-export default function Status() {
-  return (
-    <div>
-      <span className="bg-success-50 text-success-500 text-xs font-semibold px-3 py-1.5 gap-x-2.5 rounded-full shadow">
-        6 / 12 spots
+export default function Status({ taken = 0, total = 0, expired = false }) {
+  if (expired) {
+    return (
+      <span className="w-fit mt-2 bg-error-50 text-error-500 text-xs font-semibold px-3 py-1.5 rounded-full shadow">
+        Expirée
       </span>
-    </div>
+    );
+  }
+
+  if (taken === 0 && total !== 0) {
+    return (
+      <span className="w-fit mt-2 bg-success-50 text-success-500 text-xs font-semibold px-3 py-1.5 rounded-full shadow">
+        Disponible
+      </span>
+    );
+  }
+
+  if (total === 0) {
+    return (
+      <span className="w-fit mt-2 bg-warning-50 text-warning-600 text-xs font-semibold px-3 py-1.5 rounded-full shadow">
+        Limite non définie
+      </span>
+    );
+  }
+
+  if (!expired && taken >= total && total > 0) {
+    return (
+      <span className="w-fit mt-2 bg-warning-50 text-warning-600 text-xs font-semibold px-3 py-1.5 rounded-full shadow">
+        Complet
+      </span>
+    );
+  }  
+
+  return (
+    <span className="w-fit mt-2 bg-success-50 text-success-500 text-xs font-semibold px-3 py-1.5 rounded-full shadow">
+      {taken} / {total} places
+    </span>
   );
 }

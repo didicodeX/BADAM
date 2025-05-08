@@ -2,7 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import * as AuthAPI from "@/features/auth/api/auth.api";
 import { useAuthStore } from "../store/auth.store";
 import { useNavigate } from "react-router-dom";
-import { toastSuccess, toastError } from "@/shared/lib/toast.jsx";
+import { toastSuccess, toastError } from "@/shared/components/toast.jsx";
 
 export function useAuth() {
   const navigate = useNavigate();

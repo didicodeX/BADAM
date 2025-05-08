@@ -4,6 +4,7 @@ import { loginSchema } from "../schemas/login.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import InputField from "@/shared/components/InputField";
 import { Link } from "react-router-dom";
+import Button from "@/shared/components/Button";
 
 export function ForgotPasswordForm() {
   const { login } = useAuth();
@@ -38,9 +39,9 @@ export function ForgotPasswordForm() {
         placeholder={"Password"}
       />
       <Link to="/forgot-password">Mot de passe oublié ?</Link>
-      <button type="submit">
+      <Button type="submit">
         {isSubmitting ? "connexioin" : "Se connecter"}
-      </button>
+      </Button>
       <div className=" items-center flex flex-col xl:flex-row gap-6 justify-center">
         <p>Vous n'avez pas encore de compte ?</p>
         <Link to="/register">Créer un compte</Link>

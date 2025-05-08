@@ -82,7 +82,13 @@ input::placeholder {
 }
 
 form a {
-  @apply text-sm text-cta-500 underline;
+  @apply text-sm text-cta-500 ;
+}
+main div form {
+  @apply border-t border-t-background-100
+}
+form a:hover {
+  @apply underline
 }
 
 input[type="search"]{
@@ -118,4 +124,13 @@ input[type="time"] {
 input[type="date"]::-webkit-clear-button,
 input[type="time"]::-webkit-clear-button {
   display: none;
+}
+
+/* Dans tailwind.css ou global.css */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }

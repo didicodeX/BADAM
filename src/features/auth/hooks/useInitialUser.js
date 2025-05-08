@@ -9,7 +9,6 @@ export function useInitialUser() {
     async function fetchUser() {
       try {
         const response = await getMe();
-        console.log("Réponse de getMe() :", response.data.user);
         setUser(response.data.user);
       } catch (error) {
         setUser(null);

@@ -37,8 +37,8 @@ const FavoritesPage = lazy(() => import("./pages/sessions/FavoritesPage"));
 const SessionParticipantsPage = lazy(() =>
   import("./pages/sessions/SessionParticipantsPage")
 );
-const SessionFeedbackPage = lazy(() =>
-  import("./pages/sessions/SessionFeedbackPage")
+const SessionReviewsPage = lazy(() =>
+  import("./pages/sessions/SessionReviewsPage")
 );
 
 export default function DashboardRoutes() {
@@ -52,25 +52,34 @@ export default function DashboardRoutes() {
           {/* <Route index element={<TrainingsListPage />} /> */}
           <Route path="create" element={<CreateTrainingPage />} />
           <Route path="created" element={<CreatedTrainingsPage />} />
-          <Route path=":trainingId" element={<TrainingDetailPage />} />
-          <Route path=":trainingId/edit" element={<EditTrainingPage />} />
+
+          {/* Trainings :id */}
+          <Route path=":id">
+            <Route index element={<TrainingDetailPage />} />
+            <Route path="edit" element={<EditTrainingPage />} />
+            <Route path="edit" element={<EditTrainingPage />} />
+            <Route path="sessions/create" element={<CreateSessionPage />} />
+          </Route>
+          {/*   */}
         </Route>
 
         {/* Sessions */}
         <Route path="sessions">
           {/* <Route index element={<SessionsListPage />} /> */}
-          <Route path="create" element={<CreateSessionPage />} />
           <Route path="created" element={<CreatedSessionsPage />} />
           <Route path="followed" element={<FollowedSessionsPage />} />
           <Route path="favorites" element={<FavoritesPage />} />
-        </Route>
 
-        <Route path=":sessionId">
-          <Route index element={<SessionDetailPage />} />
-          <Route path="edit" element={<EditSessionPage />} />
-          <Route path="participants" element={<SessionParticipantsPage />} />
-          <Route path="feedbacks" element={<SessionFeedbackPage />} />
+          {/* Sessions :id */}
+          <Route path=":id">
+            <Route index element={<SessionDetailPage />} />
+            <Route path="edit" element={<EditSessionPage />} />
+            <Route path="participants" element={<SessionParticipantsPage />} />
+            <Route path="reviews" element={<SessionReviewsPage />} />
+          </Route>
+          {/*  */}
         </Route>
+        {/*  */}
       </Routes>
     </Suspense>
   );

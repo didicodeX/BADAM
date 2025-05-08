@@ -1,20 +1,35 @@
+import { Link } from "react-router-dom";
+import { solidStyle, outlineStyle, baseStyle } from "../styles/buttonStyle";
+
 export default function Button({
   children,
   onClick,
+  disabled,
   type = "button",
   variant = "solid", // "solid" | "outline"
+  to, // lien optionnel
 }) {
-  const baseStyle = "px-4 py-2 w-fit rounded-md  transition-all duration-200 border text-sm";
   const variants = {
-    solid: "bg-cta-700 text-white border-cta-700 hover:bg-transparent hover:border-cta-500 hover:text-cta-500",
-    outline: "bg-transparent text-cta-500 border-cta-500 hover:bg-cta-700 hover:border-cta-700 hover:text-white",
+    solid: solidStyle,
+    outline: outlineStyle,
   };
+
+  const className = `${baseStyle} ${variants[variant]}`;
+
+  if (to) {
+    return (
+      <Link to={to} className={className}>
+        {children}
+      </Link>
+    );
+  }
 
   return (
     <button
       type={type}
+      disabled={disabled}
       onClick={onClick}
-      className={`${baseStyle} ${variants[variant]}`}
+      className={className}
     >
       {children}
     </button>
