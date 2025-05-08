@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { format } from "date-fns";
-import { Loader, Heart, Share, MessageCircle } from "lucide-react";
+import { Loader, Heart, HeartPlus, Share, MessageCircle } from "lucide-react";
 import { enUS } from "date-fns/locale";
 import useHome from "../hooks/useHome";
 import Content from "@/shared/components/Content";
@@ -10,12 +10,17 @@ import Status from "@/shared/components/Status";
 import Button from "@/shared/components/Button";
 import ReviewCard from "@/features/dashboard/components/ReviewCard";
 import Formateur from "@/shared/components/Formateur";
+import useRegistration from "@/features/dashboard/hooks/useRegistration";
+import useFavorites from "@/features/dashboard/hooks/useFavorites";
 
 export default function SessionDetailPage() {
   const { id } = useParams();
-  const { sessionDetail, isLoadingsessionDetail } = useHome(id);
+  const { sessionDetail, isLoadingsessionDetail, handleToggleFavorite } =
+    useHome(id);
+  const { registerToSession, followedSessions } = useRegistration();
+  const { myFavorites, isLoadinMyFavorites } = useFavorites();
 
-  if (isLoadingsessionDetail) {
+  if (isLoadingsessionDetail || isLoadinMyFavorites) {
     return (
       <div className="flex justify-center items-center min-h-[200px]">
         <Loader className="animate-spin w-6 h-6 text-text-500" />
@@ -28,6 +33,12 @@ export default function SessionDetailPage() {
   const training = session.training;
   const createdBy = session.createdBy;
   const media = training.images;
+
+  const isFavorite = myFavorites.some((fav) => fav.session._id === session._id);
+  const isRegistered = followedSessions.some(
+    (reg) => reg.session._id === session._id
+  );
+  const isPast = new Date(session.endDateTime) < new Date();
 
   return (
     <Content>
@@ -59,14 +70,47 @@ export default function SessionDetailPage() {
             total={session.maxParticipants}
             expired={new Date(session.endDateTime) < new Date()}
           />
-          <div className="flex gap-2">
-            <Heart className="w-4 h-4 lg:w-5 lg:h-5" />
-            <Share className="w-4 h-4 lg:w-5 lg:h-5" />
-            <MessageCircle className="w-4 h-4 lg:w-5 lg:h-5" />
+          <div className="flex gap-2 items-center">
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                handleToggleFavorite(session._id);
+              }}
+              className="cursor-pointer transition-colors hover:text-cta-500 text-text-900"
+            >
+              {isFavorite ? (
+                <Heart className="w-4 h-4 lg:w-5 lg:h-5 text-cta-500 fill-current" />
+              ) : (
+                <HeartPlus className="w-4 h-4 lg:w-5 lg:h-5" />
+              )}
+            </button>
+            <button className="cursor-pointer transition-colors hover:text-cta-500 text-text-900">
+              <Share className="w-4 h-4 lg:w-5 lg:h-5" />
+            </button>
+            <button className="cursor-pointer transition-colors hover:text-cta-500 text-text-900">
+              <MessageCircle className="w-4 h-4 lg:w-5 lg:h-5" />
+            </button>
           </div>
         </div>
         <div className="flex justify-center">
-          <Button>S'inscrire</Button>
+          {!isRegistered ? (
+            <Button onClick={() => registerToSession(id)}>S'inscrire</Button>
+          ) : isPast ? (
+            <Button
+              variant="outline"
+              onClick={() => console.log("openReviewModal")}
+            >
+              Laisser un avis
+            </Button>
+          ) : (
+            <Button
+              variant="outline"
+              onClick={() => console.log("openChatPage")}
+            >
+              Accéder au chat
+            </Button>
+          )}
         </div>
       </Section>
       <Section>

@@ -1,7 +1,7 @@
 import { create } from "zustand";
 
 // Le store principal
-export const useFavoritetore = create((set) => ({
+export const useFavoriteStore = create((set) => ({
   sessions: [],
   favorites: [],
   setSessions: (sessions) => set({ sessions }),
@@ -19,9 +19,9 @@ export const useFavoritetore = create((set) => ({
 }));
 
 // 🔁 Hooks selectors : à utiliser dans les composants
-export const useSessions = () => useFavoritetore((state) => state.sessions);
-export const useFavorites = () => useFavoritetore((state) => state.favorites);
+export const useSessions = () => useFavoriteStore((state) => state.sessions);
+export const useFavorites = () => useFavoriteStore((state) => state.favorites);
 export const useToggleFavorite = () =>
-  useFavoritetore((state) => state.toggleFavorite);
+  useFavoriteStore((state) => state.toggleFavorite);
 export const useSetSessions = () =>
-  useFavoritetore((state) => state.setSessions);
+  useFavoriteStore((state) => state.setSessions);

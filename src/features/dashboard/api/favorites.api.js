@@ -11,10 +11,3 @@ export const addFavorite = (sessionId) => {
 export const removeFavorite = (sessionId) => {
     return api.delete(`/wishlist/${sessionId}`);
 }
-
-
-// ## Whislist
-
-// - POST URL/wishlist/:sessionId
-// - GET URL/wishlist
-// - DELETE URL/wishlist/:sessionId

@@ -1,17 +1,15 @@
-
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
 import * as FavoriteAPI from "../api/favorites.api";
-import { useFavoritetore } from "../store/favorite.store";
+import { useFavoriteStore } from "../store/favorite.store";
 
 export default function useFavorites() {
 
-  const { setFavorites, favorites } = useFavoritetore();
+  const { setFavorites, favorites } = useFavoriteStore();
   useEffect(() => {
     async function getFavorites() {
       try {
         const favoriteRes = await FavoriteAPI.getFavorites();
-        console.log(favoriteRes);
         setFavorites(favoriteRes.data.map((fav) => fav.session));
       } catch (error) {
         console.log(error);
@@ -19,6 +17,11 @@ export default function useFavorites() {
     }
     getFavorites();
   }, [setFavorites]);
+
+  const myFavoritesQuery = useQuery({
+    queryKey: ["my-favorites"],
+    queryFn: FavoriteAPI.getFavorites
+  })
 
   const removeFavoriteMutation = useMutation({
     mutationFn: FavoriteAPI.removeFavorite,
@@ -29,11 +32,12 @@ export default function useFavorites() {
   });
 
   const handleToggleFavorite = (sessionId) => {
-    // tu peux aussi check ici si tu veux un toggle (add/remove)
     removeFavoriteMutation.mutate(sessionId._id);
   };
 
   return {
     handleToggleFavorite,
+    myFavorites: myFavoritesQuery.data?.data || [],
+    isLoadinMyFavorites: myFavoritesQuery.isLoading
   };
 }

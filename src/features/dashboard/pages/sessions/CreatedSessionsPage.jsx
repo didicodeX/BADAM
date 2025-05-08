@@ -6,6 +6,7 @@ import { Search } from "lucide-react";
 import SessionCard from "../../components/SessionCard";
 import { Link } from "react-router-dom";
 import Section from "@/shared/components/Section";
+import Button from "@/shared/components/Button";
 
 export default function CreatedSessionsPage() {
   const [isFocused, setIsFocused] = useState(false);
@@ -72,6 +73,14 @@ export default function CreatedSessionsPage() {
             </div>
           </Section>
         ))}
+        {mySessions.length === 0 && (
+          <div className="flex flex-col items-center gap-6">
+            <p className="text-center text-text-500 mt-8">
+              Vous devez d'abord creer une session.
+            </p>
+            <Button to={"/dashboard/trainings/create"}>Creer</Button>
+          </div>
+        )}
       </Section>
     </Content>
   );

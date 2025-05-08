@@ -17,8 +17,6 @@ export default function SessionDetailPage() {
   const { id } = useParams();
   const { mySessionDetail, isLoadingMySessionDetail } = useSession(id);
 
-  console.log(mySessionDetail);
-
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
 
   const [menuOpen, setMenuOpen] = useState(false);

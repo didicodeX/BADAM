@@ -1,21 +1,14 @@
 import { useNavigate } from "react-router-dom";
 import { format } from "date-fns";
 import { enUS } from "date-fns/locale";
-import { Heart, HeartPlus } from "lucide-react";
+import { LogOut } from "lucide-react";
 import Status from "@/shared/components/Status";
 
-export default function FavoriteSessionCard({
-  id,
-  trainingTitle,
-  trainingImage,
-  session,
-  isFavorite,
-  onToggleFavorite,
-}) {
+export default function RegistrationCard({ id, trainingTitle, trainingImage, session, onUnfollow }) {
   const navigate = useNavigate();
 
   const handleCardClick = () => {
-    navigate(`/sessions/${id}`); // ou `/dashboard/sessions/${id}` si c’est dans ton dashboard
+    navigate(`/sessions/${id}`);
   };
 
   return (
@@ -33,24 +26,19 @@ export default function FavoriteSessionCard({
       <div className="flex justify-between gap-2 items-start">
         <div className="flex flex-col">
           <h4 className="line-clamp-1">{trainingTitle}</h4>
-          <small>{session.address}</small>
+          <small>{session.address || "Adresse inconnue"}</small>
           <sub>
-            {format(new Date(session.startDateTime), "MMMM d", {
-              locale: enUS,
-            })}{" "}
-            to{" "}
-            {format(new Date(session.endDateTime), "MMMM d", {
-              locale: enUS,
-            })}
-            ,{" "}
-            {format(new Date(session.startDateTime), "p", {
-              locale: enUS,
-            })}{" "}
-            to{" "}
-            {format(new Date(session.endDateTime), "p", {
-              locale: enUS,
-            })}{" "}
-            ADT
+            {session.startDateTime && session.endDateTime ? (
+              <>
+                {format(new Date(session.startDateTime), "MMMM d", { locale: enUS })}{" "}
+                to{" "}
+                {format(new Date(session.endDateTime), "MMMM d", { locale: enUS })},{" "}
+                {format(new Date(session.startDateTime), "p", { locale: enUS })} to{" "}
+                {format(new Date(session.endDateTime), "p", { locale: enUS })} ADT
+              </>
+            ) : (
+              "Date inconnue"
+            )}
           </sub>
           <Status
             taken={session.currentNbParticipants}
@@ -63,15 +51,11 @@ export default function FavoriteSessionCard({
           type="button"
           onClick={(e) => {
             e.stopPropagation();
-            onToggleFavorite();
+            onUnfollow();
           }}
-          className="cursor-pointer hover:bg-cta-100/80 p-1 rounded-full transition"
+          className="cursor-pointerp-1 rounded-full transition"
         >
-          {isFavorite ? (
-            <Heart className="w-5 h-5 text-cta-500 fill-current" />
-          ) : (
-            <HeartPlus className="w-5 h-5 text-cta-500" />
-          )}
+          <LogOut className="w-5 h-5 text-error-500 hover:text-error-700" />
         </button>
       </div>
     </div>

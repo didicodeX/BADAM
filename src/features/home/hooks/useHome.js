@@ -10,6 +10,11 @@ export default function useHome(id) {
   const { setSessions, setFavorites, favorites, toggleFavorite } =
     useHomeStore();
 
+  const allSessionsQuery = useQuery({
+    queryKey: ["all-sessions"],
+    queryFn: HomeAPI.getAllSessions,
+  });
+
   useEffect(() => {
     async function fetchInitialData() {
       try {
@@ -18,7 +23,6 @@ export default function useHome(id) {
           HomeAPI.getFavorites(), // ← nouvelle API à appeler
         ]);
         setSessions(sessionRes.data);
-        console.log("favoriteRes : \n", favoriteRes.data);
 
         setFavorites(favoriteRes.data.map((fav) => fav.session._id));
       } catch (err) {
@@ -61,15 +65,14 @@ export default function useHome(id) {
 
   const latestQuery = useQuery({
     queryKey: ["latest"],
-    queryFn: HomeAPI.getLatestSessions
-  })
+    queryFn: HomeAPI.getLatestSessions,
+  });
 
   const sessionDetailQuery = useQuery({
     queryKey: ["sesionDetail"],
     queryFn: () => HomeAPI.getSessionsDetail(id),
     enabled: !!id,
-  })
-  
+  });
 
   return {
     handleToggleFavorite,
@@ -78,6 +81,9 @@ export default function useHome(id) {
 
     // topRated: topRatedQuery.data?.data || [],
     // isLoadingtopRated: topRatedQuery.isLoading,
+
+    allSessions: allSessionsQuery.data?.data || [],
+    isLoadingAllSession: allSessionsQuery.isLoading,
 
     latest: latestQuery.data?.data || [],
     isLoadinglatest: latestQuery.isLoading,
