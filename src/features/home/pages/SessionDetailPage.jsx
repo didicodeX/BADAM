@@ -28,6 +28,9 @@ export default function SessionDetailPage() {
     );
   }
 
+  console.log(sessionDetail);
+  
+
   const session = sessionDetail.session;
   const reviews = sessionDetail.reviews;
   const training = session.training;

@@ -53,6 +53,9 @@ export default function SessionDetailPage() {
     );
   }
 
+  console.log(mySessionDetail);
+    
+
   const { session, registrations = [], reviews = [] } = mySessionDetail;
   const training = session.training;
   const image = session.coverImage || training.images?.[0];

@@ -53,7 +53,7 @@ export default function RegistrationCard({ id, trainingTitle, trainingImage, ses
             e.stopPropagation();
             onUnfollow();
           }}
-          className="cursor-pointerp-1 rounded-full transition"
+          className="cursor-pointerp-1 rounded-full transition pt-1"
         >
           <LogOut className="w-5 h-5 text-error-500 hover:text-error-700" />
         </button>

@@ -5,6 +5,7 @@ import { Outlet, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useAuthStore } from "@/features/auth/store/auth.store";
 import Footer from "@/shared/components/Footer";
+import ScrollToTop from "@/shared/components/ScrollToTop";
 
 export default function AppLayout() {
   const { user } = useAuthStore();
@@ -27,6 +28,7 @@ export default function AppLayout() {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <ScrollToTop />
       {/* Navbar desktop */}
       <div className="hidden md:block">
         <Navbar />

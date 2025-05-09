@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Navbar from "@/shared/components/Navbar";
 import NavbarMobilePublic from "@/shared/components/NavbarMobilePublic";
 import Footer from "@/shared/components/Footer";
+import ScrollToTop from "@/shared/components/ScrollToTop";
 
 export default function PublicLayout() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -20,6 +21,7 @@ export default function PublicLayout() {
 
   return (
     <div className="min-h-screen flex flex-col relative">
+      <ScrollToTop />
       {/* Navbar desktop */}
       <div className="hidden md:block">
         <Navbar />
