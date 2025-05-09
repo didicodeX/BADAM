@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { format } from "date-fns";
 import { Loader, Heart, HeartPlus, Share, MessageCircle } from "lucide-react";
@@ -12,6 +13,7 @@ import ReviewCard from "@/features/dashboard/components/ReviewCard";
 import Formateur from "@/shared/components/Formateur";
 import useRegistration from "@/features/dashboard/hooks/useRegistration";
 import useFavorites from "@/features/dashboard/hooks/useFavorites";
+import ReviewModal from "../components/ReviewModal";
 
 export default function SessionDetailPage() {
   const { id } = useParams();
@@ -19,6 +21,8 @@ export default function SessionDetailPage() {
     useHome(id);
   const { registerToSession, followedSessions } = useRegistration();
   const { myFavorites, isLoadinMyFavorites } = useFavorites();
+  
+  const [isReviewOpen, setIsReviewOpen] = useState(false);
 
   if (isLoadingsessionDetail || isLoadinMyFavorites) {
     return (
@@ -29,7 +33,6 @@ export default function SessionDetailPage() {
   }
 
   console.log(sessionDetail);
-  
 
   const session = sessionDetail.session;
   const reviews = sessionDetail.reviews;
@@ -96,25 +99,6 @@ export default function SessionDetailPage() {
             </button>
           </div>
         </div>
-        <div className="flex justify-center">
-          {!isRegistered ? (
-            <Button onClick={() => registerToSession(id)}>S'inscrire</Button>
-          ) : isPast ? (
-            <Button
-              variant="outline"
-              onClick={() => console.log("openReviewModal")}
-            >
-              Laisser un avis
-            </Button>
-          ) : (
-            <Button
-              variant="outline"
-              onClick={() => console.log("openChatPage")}
-            >
-              Accéder au chat
-            </Button>
-          )}
-        </div>
       </Section>
       <Section>
         <Formateur
@@ -124,6 +108,19 @@ export default function SessionDetailPage() {
           bio={createdBy.bio}
         />
       </Section>
+      <div className="flex justify-center">
+        {!isRegistered ? (
+          <Button onClick={() => registerToSession(id)}>S'inscrire</Button>
+        ) : isPast ? (
+          <Button variant="outline" onClick={() => setIsReviewOpen(true)}>
+            Laisser un avis
+          </Button>
+        ) : (
+          <Button variant="outline" onClick={() => console.log("openChatPage")}>
+            Accéder au chat
+          </Button>
+        )}
+      </div>
       <Section last>
         <h3>Les derniers Avis</h3>
         {reviews.length === 0 ? (
@@ -132,14 +129,21 @@ export default function SessionDetailPage() {
           </small>
         ) : (
           <Section last>
-            {reviews.map((review, index, array) => (
-              <Section key={review._id} last={index === array.length - 1}>
-                <ReviewCard review={review} />
-              </Section>
-            ))}
+            {[...reviews] 
+              .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)) 
+              .map((review, index, array) => (
+                <Section key={review._id} last={index === array.length - 1}>
+                  <ReviewCard review={review} />
+                </Section>
+              ))}
           </Section>
         )}
       </Section>
+      <ReviewModal
+        trainingId={training._id}
+        isOpen={isReviewOpen}
+        onClose={() => setIsReviewOpen(false)}
+      />
     </Content>
   );
 }

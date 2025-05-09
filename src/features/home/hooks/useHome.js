@@ -69,7 +69,7 @@ export default function useHome(id) {
   });
 
   const sessionDetailQuery = useQuery({
-    queryKey: ["sesionDetail"],
+    queryKey: ["sesionDetail",id],
     queryFn: () => HomeAPI.getSessionsDetail(id),
     enabled: !!id,
   });
