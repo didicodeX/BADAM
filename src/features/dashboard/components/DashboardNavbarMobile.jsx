@@ -17,11 +17,13 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useAuth } from "@/features/auth/hooks/useAuth";
 import { getInitials } from "@/shared/utils/getInitials";
 import { capitalizeFirstLetter } from "@/shared/utils/capitalizeFirstLetter";
+import useNotifications from "@/features/notifications/hooks/useNotifications";
 
 export default function DashboardNavbarMobile({ menuOpen, setMenuOpen }) {
   const { user } = useAuthStore();
   const { logout } = useAuth();
   const navigate = useNavigate();
+  const { hasUnreadNotifications } = useNotifications();
   const goToProfile = () => {
     navigate("/profile");
     setMenuOpen(false);
@@ -61,29 +63,29 @@ export default function DashboardNavbarMobile({ menuOpen, setMenuOpen }) {
             <div className="flex flex-col gap-y-6 hover:cursor-pointer">
               {user && (
                 <div
-                className="flex items-center gap-3 mb-6"
-                onClick={() => goToProfile()}
-              >
-                <div className="w-10 h-10 rounded-full overflow-hidden flex items-center justify-center hover:cursor-pointer transition-all border border-cta-200 hover:border-cta-500">
-                  {user.avatar ? (
-                    <img
-                      src={user.avatar}
-                      alt="avatar"
-                      className="w-full h-full object-cover"
-                    />
-                  ) : (
-                    <div className="w-full h-full rounded-full bg-cta-100 text-cta-700 flex items-center justify-center ">
-                      {getInitials(user.name)}
-                    </div>
-                  )}
+                  className="flex items-center gap-3 mb-6"
+                  onClick={() => goToProfile()}
+                >
+                  <div className="w-10 h-10 rounded-full overflow-hidden flex items-center justify-center hover:cursor-pointer transition-all border border-cta-200 hover:border-cta-500">
+                    {user.avatar ? (
+                      <img
+                        src={user.avatar}
+                        alt="avatar"
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <div className="w-full h-full rounded-full bg-cta-100 text-cta-700 flex items-center justify-center ">
+                        {getInitials(user.name)}
+                      </div>
+                    )}
+                  </div>
+                  <div>
+                    <p className="font-semibold">
+                      {capitalizeFirstLetter(user.name)}
+                    </p>
+                    <p className="text-sm text-text-400">{user.email}</p>
+                  </div>
                 </div>
-                <div>
-                  <p className="font-semibold">
-                    {capitalizeFirstLetter(user.name)}
-                  </p>
-                  <p className="text-sm text-text-400">{user.email}</p>
-                </div>
-              </div>
               )}
               <nav className="space-y-4 ">
                 <Link
@@ -112,10 +114,14 @@ export default function DashboardNavbarMobile({ menuOpen, setMenuOpen }) {
                 </Link>
                 <Link
                   to="/notifications"
-                  className="flex items-center gap-3 w-full hover:text-cta-500 rounded"
-                  onClick={() => setMenuOpen(false)}
+                  className="flex items-center gap-3 w-full hover:text-cta-500 rounded "
                 >
-                  <Bell className="w-5 h-5" />
+                  <div className="relative">
+                    <Bell className="w-5 h-5" />
+                    {hasUnreadNotifications && (
+                      <span className="absolute top-0 right-0 w-2 h-2 bg-cta-500 rounded-full" />
+                    )}
+                  </div>
                   Notifications
                 </Link>
                 <Link

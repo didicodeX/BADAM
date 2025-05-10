@@ -11,11 +11,11 @@ import {
 import { useAuth } from "@/features/auth/hooks/useAuth";
 import { getInitials } from "../utils/getInitials";
 import { capitalizeFirstLetter } from "../utils/capitalizeFirstLetter";
+import useNotifications from "@/features/notifications/hooks/useNotifications";
 
 export default function UserMenu({ user, onClose }) {
   const { logout } = useAuth();
-console.log(user);
-
+  const { hasUnreadNotifications } = useNotifications();
   return (
     <div className="absolute right-0 top-14 bg-background-50 border rounded shadow-md w-64 p-4 z-50">
       <div className="flex items-center gap-3 mb-4 border-b pb-2">
@@ -64,13 +64,18 @@ console.log(user);
           <User className="w-4 h-4" />
           Profil
         </Link>
-        <Link
-          to="/notifications"
-          className="flex items-center gap-2 hover:text-cta-500"
-        >
-          <Bell className="w-4 h-4" />
-          Notifications
-        </Link>
+                <Link
+                  to="/notifications"
+                  className="flex items-center gap-3 w-full hover:text-cta-500 rounded "
+                >
+                  <div className="relative">
+                    <Bell className="w-5 h-5" />
+                    {hasUnreadNotifications && (
+                      <span className="absolute top-0 right-0 w-2 h-2 bg-cta-500 rounded-full" />
+                    )}
+                  </div>
+                  Notifications
+                </Link>
         <Link
           to="/settings"
           className="flex items-center gap-2 hover:text-cta-500"

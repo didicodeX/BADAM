@@ -7,12 +7,16 @@ import { getInitials } from "../utils/getInitials";
 import SearchInput from "./SearchInput";
 import UserMenu from "./UserMenu"; // 👈 Crée ce fichier séparément
 import { baseStyle, solidStyle, outlineStyle } from "../styles/buttonStyle";
+import useNotifications from "@/features/notifications/hooks/useNotifications";
 
 export default function Navbar() {
   const { user } = useAuthStore();
   const [autoFocus, setAutoFocus] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const menuRef = useRef(null);
+  const { hasUnreadNotifications } = useNotifications();
+
+console.log("hasUnreadNotifications : " ,hasUnreadNotifications);
 
   useEffect(() => {
     const shouldFocus =
@@ -70,9 +74,12 @@ export default function Navbar() {
             </Link>
             <Link
               to="/notifications"
-              className="flex items-center hover:text-cta-500 rounded"
+              className="flex items-center hover:text-cta-500 rounded relative"
             >
               <Bell className="w-5 h-5" />
+              {hasUnreadNotifications && (
+                <span className="absolute top-0 right-0 w-2 h-2 bg-cta-500 rounded-full" />
+              )}
             </Link>
             <div
               className="w-10 h-10 rounded-full overflow-hidden flex items-center justify-center hover:cursor-pointer transition-all border border-cta-200 hover:border-cta-500"

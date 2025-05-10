@@ -4,7 +4,7 @@ import ReviewModal from "./ReviewModal";
 import useReviews from "@/features/dashboard/hooks/useReviews";
 import { Loader } from "lucide-react";
 
-export default function TrainingReviewSection({ trainingId, isReviewOpen, setIsReviewOpen }) {
+export default function TrainingReviewSection({ trainingId, sessionId, isReviewOpen, setIsReviewOpen }) {
   const { reviews, isLoadingReviews } = useReviews(trainingId);
 
   if (isLoadingReviews) {
@@ -41,6 +41,7 @@ export default function TrainingReviewSection({ trainingId, isReviewOpen, setIsR
       {/* 💬 Modale de review gérée depuis le parent */}
       <ReviewModal
         trainingId={trainingId}
+        sessionId={sessionId}
         isOpen={isReviewOpen}
         onClose={() => setIsReviewOpen(false)}
       />

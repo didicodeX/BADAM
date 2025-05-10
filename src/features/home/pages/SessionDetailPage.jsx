@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { format } from "date-fns";
 import { Loader, Heart, HeartPlus, Share, MessageCircle } from "lucide-react";
-import { enUS} from "date-fns/locale";
+import { enUS } from "date-fns/locale";
 import useHome from "../hooks/useHome";
 import Content from "@/shared/components/Content";
 import Section from "@/shared/components/Section";
@@ -38,7 +38,7 @@ export default function SessionDetailPage() {
   const session = sessionDetail.session;
   const training = session.training;
   const createdBy = session.createdBy;
-  const media = training.images;  
+  const media = training.images;
 
   const isFavorite = myFavorites.some((fav) => fav.session._id === session._id);
   const isRegistered = followedSessions.some(
@@ -99,6 +99,19 @@ export default function SessionDetailPage() {
             </button>
           </div>
         </div>
+        <div className="flex justify-center">
+          {!isRegistered ? (
+            <Button onClick={() => registerToSession(id)}>S'inscrire</Button>
+          ) : isPast ? (
+            <Button onClick={() => setIsReviewOpen(true)}>
+              Laisser un avis
+            </Button>
+          ) : (
+            <Button onClick={() => console.log("openChatPage")}>
+              Accéder au chat
+            </Button>
+          )}
+        </div>
       </Section>
       <Section>
         <Formateur
@@ -108,21 +121,9 @@ export default function SessionDetailPage() {
           bio={createdBy.bio}
         />
       </Section>
-      <div className="flex justify-center">
-        {!isRegistered ? (
-          <Button onClick={() => registerToSession(id)}>S'inscrire</Button>
-        ) : isPast ? (
-          <Button  onClick={() => setIsReviewOpen(true)}>
-            Laisser un avis
-          </Button>
-        ) : (
-          <Button onClick={() => console.log("openChatPage")}>
-            Accéder au chat
-          </Button>
-        )}
-      </div>
       <TrainingReviewSection
         trainingId={training._id}
+        sessionId={session._id}
         isReviewOpen={isReviewOpen}
         setIsReviewOpen={setIsReviewOpen}
       />
