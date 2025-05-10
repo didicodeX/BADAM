@@ -25,7 +25,6 @@ export default function useRegistration() {
     },
   });
 
-  // ... (ta mutation createRegistration et useQuery existants)
 
   const deleteRegistrationMutation = useMutation({
     mutationFn: RegistrationAPI.deleteRegistration,

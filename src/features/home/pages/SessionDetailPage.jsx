@@ -99,19 +99,6 @@ export default function SessionDetailPage() {
             </button>
           </div>
         </div>
-        <div className="flex justify-center">
-          {!isRegistered ? (
-            <Button onClick={() => registerToSession(id)}>S'inscrire</Button>
-          ) : isPast ? (
-            <Button onClick={() => setIsReviewOpen(true)}>
-              Laisser un avis
-            </Button>
-          ) : (
-            <Button onClick={() => console.log("openChatPage")}>
-              Accéder au chat
-            </Button>
-          )}
-        </div>
       </Section>
       <Section>
         <Formateur
@@ -121,6 +108,17 @@ export default function SessionDetailPage() {
           bio={createdBy.bio}
         />
       </Section>
+      <div className="flex justify-center">
+        {!isRegistered ? (
+          <Button onClick={() => registerToSession(id)}>S'inscrire</Button>
+        ) : isPast ? (
+          <Button onClick={() => setIsReviewOpen(true)}>Laisser un avis</Button>
+        ) : (
+          <Button onClick={() => console.log("openChatPage")}>
+            Accéder au chat
+          </Button>
+        )}
+      </div>
       <TrainingReviewSection
         trainingId={training._id}
         sessionId={session._id}

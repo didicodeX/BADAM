@@ -18,6 +18,9 @@ const TrainingDetailPage = lazy(() =>
 const CreatedTrainingsPage = lazy(() =>
   import("./pages/trainings/CreatedTrainingsPage")
 );
+const TrainingReviewsPage = lazy(() =>
+  import("./pages/trainings/TrainingReviewsPage")
+);
 
 // Sessions
 const CreateSessionPage = lazy(() =>
@@ -58,6 +61,7 @@ export default function DashboardRoutes() {
             <Route index element={<TrainingDetailPage />} />
             <Route path="edit" element={<EditTrainingPage />} />
             <Route path="edit" element={<EditTrainingPage />} />
+            <Route path="reviews" element={<TrainingReviewsPage />} />
             <Route path="sessions/create" element={<CreateSessionPage />} />
           </Route>
           {/*   */}

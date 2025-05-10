@@ -2,7 +2,6 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import * as NotificationAPI from "../api/notifications.api";
 import { useEffect } from "react";
 import { socket } from "@/shared/lib/socket";
-import { toastSuccess } from "@/shared/components/toast";
 import { useAuthStore } from "@/features/auth/store/auth.store";
 
 export default function useNotifications() {
@@ -21,8 +20,7 @@ export default function useNotifications() {
 
     socket.emit("joinRoom", user._id); // on entre dans la room privée
 
-    const handleNewNotif = (notif) => {
-      toastSuccess(notif.message);
+    const handleNewNotif = () => {
       queryClient.invalidateQueries(["notifications"]); // recharge la page
     };
 
