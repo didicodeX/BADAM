@@ -8,8 +8,7 @@ import Button from "@/shared/components/Button";
 export default function ReviewModal({ trainingId, isOpen, onClose }) {
   const { register, handleSubmit, reset } = useForm();
   const [rating, setRating] = useState(0);
-  const { createReview } = useReviews();
-console.log(trainingId);
+  const { createReview } = useReviews(trainingId);
 
   const onSubmit = (data) => {
     createReview({ trainingId, ...data, rating });

@@ -58,10 +58,10 @@ export default function useHome(id) {
     }
   };
 
-  // const topRatedQuery = useQuery({
-  //   queryKey: ["top-rated"],
-  //   queryFn: HomeAPI.getTopRatedSessions
-  // })
+  const topRatedQuery = useQuery({
+    queryKey: ["top-rated"],
+    queryFn: HomeAPI.getTopRatedSessions
+  })
 
   const latestQuery = useQuery({
     queryKey: ["latest"],
@@ -79,8 +79,8 @@ export default function useHome(id) {
     // isLoadingSessions: getAllSessionsQuery.isLoading,
     // isErrorSessions: getAllSessionsQuery.isError,
 
-    // topRated: topRatedQuery.data?.data || [],
-    // isLoadingtopRated: topRatedQuery.isLoading,
+    topRated: topRatedQuery.data?.data || [],
+    isLoadingtopRated: topRatedQuery.isLoading,
 
     allSessions: allSessionsQuery.data?.data || [],
     isLoadingAllSession: allSessionsQuery.isLoading,

@@ -13,7 +13,7 @@ export default function HomePage() {
   const { user } = useAuthStore();
   console.log(user);
 
-  const { handleToggleFavorite, latest } = useHome();
+  const { handleToggleFavorite, latest, topRated } = useHome();
 
   // if (isLoadingAllSession) {
   //   return (
@@ -25,6 +25,9 @@ export default function HomePage() {
 
   const sessions = useSessions();
   const favorites = useFavorites();
+
+  console.log("topRated", topRated);
+  
 
   return (
     <Section>
