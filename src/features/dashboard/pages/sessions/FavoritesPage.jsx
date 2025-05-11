@@ -1,5 +1,3 @@
-import { useState } from "react";
-import { Search } from "lucide-react";
 import Section from "@/shared/components/Section";
 import useFavorites from "../../hooks/useFavorites";
 import { useFavoriteStore } from "../../store/favorite.store";
@@ -9,31 +7,11 @@ import Button from "@/shared/components/Button";
 
 export default function FavoritesPage() {
   const { handleToggleFavorite } = useFavorites();
-  const [isFocused, setIsFocused] = useState(false);
   const favorites = useFavoriteStore((state) => state.favorites);
 
-  console.log(favorites);
-
   return (
-    <Content>
-      <h2 className="mb-4">Mes favoris</h2>
-      <Section last>
-        <div className="py-4 flex justify-center">
-          <div
-            className={`flex items-center justify-between border rounded-full focus:border-cta-500 px-6 py-3 w-full max-w-[500px] ${
-              isFocused ? "border-cta-500" : "border-text-200"
-            }`}
-          >
-            <input
-              type="search"
-              placeholder="Rechercher une formation..."
-              className="w-full  text-sm outline-none focus:outline-none"
-              onFocus={() => setIsFocused(true)}
-              onBlur={() => setIsFocused(false)}
-            />
-            <Search className="w-5 h-5" />
-          </div>
-        </div>
+    <Section last>
+        <h3>Mes favoris</h3>
         <div className="flex flex-wrap gap-6">
           {favorites.map((session) => (
             <FavoriteCard
@@ -56,6 +34,5 @@ export default function FavoritesPage() {
           </div>
         )}
       </Section>
-    </Content>
   );
 }

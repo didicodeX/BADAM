@@ -1,4 +1,3 @@
-import { useState } from "react";
 import LoadingScreen from "@/shared/components/LoadingScreen";
 import Content from "@/shared/components/Content";
 import { useSession } from "../../hooks/useSessions";
@@ -9,7 +8,6 @@ import Section from "@/shared/components/Section";
 import Button from "@/shared/components/Button";
 
 export default function CreatedSessionsPage() {
-  const [isFocused, setIsFocused] = useState(false);
   const { mySessions, isLoadingSessions } = useSession();
 
   if (isLoadingSessions) return <LoadingScreen />;
@@ -28,60 +26,39 @@ export default function CreatedSessionsPage() {
   }, {});
 
   return (
-    <Content>
-      <h2>Mes sessions créées</h2>
-      <Section last>
-        {/* Barre de recherche */}
-        <div className="py-4 flex justify-center">
-          <div
-            className={`flex items-center justify-between border rounded-full px-6 py-3 w-full max-w-[500px] ${
-              isFocused ? "border-cta-500" : "border-text-200"
-            }`}
-          >
-            <input
-              type="search"
-              placeholder="Rechercher une session..."
-              className="w-full text-sm focus:outline-none"
-              onFocus={() => setIsFocused(true)}
-              onBlur={() => setIsFocused(false)}
-            />
-            <Search className="w-5 h-5" />
+    <Section last>
+      <h3>Mes sessions créées</h3>
+      {/* Liste des formations et sessions */}
+      {Object.values(groupedSessions).map(({ training, sessions }) => (
+        <Section key={training._id}>
+          <div>
+            <h4 className="hover:text-cta-500 transition w-fit">
+              <Link to={`/dashboard/trainings/${training._id}`}>
+                {training.title}
+              </Link>
+            </h4>
           </div>
+          <div className="flex flex-wrap gap-6">
+            {sessions.map((session) => (
+              <SessionCard
+                key={session._id}
+                id={session._id}
+                trainingTitle={training.title}
+                trainingImage={session.coverImage || training.images[0]}
+                session={session}
+              />
+            ))}
+          </div>
+        </Section>
+      ))}
+      {mySessions.length === 0 && (
+        <div className="flex flex-col items-center gap-6">
+          <p className="text-center text-text-500 mt-8">
+            Vous devez d'abord creer une session.
+          </p>
+          <Button to={"/dashboard/trainings/create"}>Creer</Button>
         </div>
-
-        {/* Liste des formations et sessions */}
-        {Object.values(groupedSessions).map(({ training, sessions }) => (
-          <Section key={training._id}>
-            <div>
-              <h4>{training.title}</h4>
-              <small className="hover:text-cta-500 transition">
-                <Link to={`/dashboard/trainings/${training._id}`}>
-                  Voir la formation
-                </Link>
-              </small>
-            </div>
-            <div className="flex flex-wrap gap-6">
-              {sessions.map((session) => (
-                <SessionCard
-                  key={session._id}
-                  id={session._id}
-                  trainingTitle={training.title}
-                  trainingImage={session.coverImage || training.images[0]}
-                  session={session}
-                />
-              ))}
-            </div>
-          </Section>
-        ))}
-        {mySessions.length === 0 && (
-          <div className="flex flex-col items-center gap-6">
-            <p className="text-center text-text-500 mt-8">
-              Vous devez d'abord creer une session.
-            </p>
-            <Button to={"/dashboard/trainings/create"}>Creer</Button>
-          </div>
-        )}
-      </Section>
-    </Content>
+      )}
+    </Section>
   );
 }

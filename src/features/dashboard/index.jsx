@@ -65,24 +65,23 @@ export default function DashboardRoutes() {
           <Route path="home" element={<DashboardHomePage />} />
           <Route path="create-training" element={<CreateTrainingPage />} />
           <Route path="create-session" element={<CreateSessionMidPage />} />
+          <Route path="trainings" element={<TrainingsListPage />} />
+          <Route path="sessions" element={<SessionsListPage />} />
         </Route>
 
         {/* Trainings */}
         <Route path="trainings">
-          <Route index element={<TrainingsListPage />} />
-
           <Route path=":id" element={<TrainingLayout />}>
             <Route index element={<TrainingDetailPage />} />
             <Route path="edit" element={<EditTrainingPage />} />
             <Route path="reviews" element={<TrainingReviewsPage />} />
             <Route path="sessions" element={<SessionsListPage />} />
+            <Route path="create" element={<CreateSessionPage />} />
           </Route>
         </Route>
 
         {/* Sessions */}
         <Route path="sessions">
-          <Route index element={<SessionsListPage />} />
-
           <Route path=":id" element={<SessionLayout />}>
             <Route index element={<SessionDetailPage />} />
             <Route path="edit" element={<EditSessionPage />} />

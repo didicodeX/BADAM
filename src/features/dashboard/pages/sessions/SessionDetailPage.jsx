@@ -53,8 +53,6 @@ export default function SessionDetailPage() {
     );
   }
 
-  console.log(mySessionDetail);
-
   const { session, registrations = [], reviews = [] } = mySessionDetail;
   const training = session.training;
   const image = session.coverImage || training.images?.[0];
@@ -62,7 +60,11 @@ export default function SessionDetailPage() {
   return (
     <Content>
       <div className="flex justify-between items-center">
-        <h2>{training.title}</h2>
+        <h2 className="hover:text-cta-500 transition">
+          <Link to={`/dashboard/trainings/${training._id}`}>
+            {training.title}
+          </Link>
+        </h2>
         <div className="relative" ref={menuRef}>
           <MoreVertical
             className="w-5 h-5 cursor-pointer"

@@ -17,7 +17,7 @@ export default function NotificationCard({ notif, onRead, onDelete }) {
     <div
       onClick={handleClick}
       className={classNames(
-        "p-4 rounded-xl max-w-4xl shadow-sm bg-white transition cursor-pointer hover:bg-cta-50 border-l-4",
+        "p-4 rounded-xl shadow-sm bg-white transition cursor-pointer hover:bg-cta-50 border-l-4",
         isUnread ? "border-cta-500" : "border-transparent"
       )}
     >

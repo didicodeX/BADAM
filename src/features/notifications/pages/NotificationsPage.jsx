@@ -5,9 +5,9 @@ import Content from "@/shared/components/Content";
 import { Loader } from "lucide-react";
 
 export default function NotificationsPage() {
-  const { notifications, isLoading, markAsRead, deleteNotification } = useNotifications();
-console.log(notifications);
-
+  const { notifications, isLoading, markAsRead, deleteNotification } =
+    useNotifications();
+    
   if (isLoading) {
     return (
       <div className="flex justify-center items-center min-h-[200px]">
@@ -21,7 +21,9 @@ console.log(notifications);
       <h2>Mes notifications</h2>
       <Section>
         {notifications.length === 0 ? (
-          <p className="text-center text-text-500">Aucune notification reçue.</p>
+          <p className="text-center text-text-500">
+            Aucune notification reçue.
+          </p>
         ) : (
           <div className="space-y-4">
             {notifications.map((notif) => (

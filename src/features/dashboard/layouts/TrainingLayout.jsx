@@ -7,11 +7,11 @@ export default function TrainingLayout() {
   const { id } = useParams();
   const { training } = useTraining(id);
  
-
   return (
-    <>
+    <div className="px-4 md:px-6 pt-4">
       <TrainingBreadcrumb training={training} />
       <Outlet />
-    </>
+    </div>
   );
 }
+

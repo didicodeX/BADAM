@@ -55,17 +55,15 @@ export default function DashboardSidebar() {
 
   return (
     <aside
-      className={`bg-background-50 mt-14 shadow-sm border-r border-r-text-200 h-[calc(100vh-56px)] flex flex-col px-4 py-4 ${
-        isOpen ? "w-64" : "w-16"
+      className={`bg-background-50 mt-14 shadow-sm border-r border-r-text-200 h-[calc(100vh-56px)] flex flex-col px-4 py-4 items-start ${
+        isOpen ? "w-52" : "w-16"
       }`}
     >
       {/* Haut */}
       <div className="flex flex-col gap-6">
         <button
           onClick={toggleSidebar}
-          className={`w-full flex transition-colors hover:text-cta-500 ${
-            !isOpen ? "pl-1.5" : ""
-          }`}
+          className={`w-full flex transition-colors hover:text-cta-500`}
         >
           {isOpen ? (
             <PanelLeftClose className="w-5 h-5" />
@@ -81,7 +79,7 @@ export default function DashboardSidebar() {
 
             <button
               onClick={() => setMenuOpen(!menuOpen)}
-              className={`flex w-full justify-center hover:text-cta-500 transition-colors ${
+              className={`flex w-full hover:text-cta-500 transition-colors ${
                 isOpen ? "justify-start gap-3" : ""
               } ${
                 isCreatePage ? "text-cta-500 font-semibold" : "text-text-700"
@@ -99,6 +97,7 @@ export default function DashboardSidebar() {
                     navigate("/dashboard/create-training");
                   }}
                   className="flex items-center gap-2 px-2 py-1 hover:bg-background-100 text-sm rounded"
+                  title="formations"
                 >
                   <BookOpen className="w-4 h-4 text-cta-500" />
                   Créer une formation
@@ -109,6 +108,7 @@ export default function DashboardSidebar() {
                     navigate("/dashboard/create-session");
                   }}
                   className="flex items-center gap-2 px-2 py-1 hover:bg-background-100 text-sm rounded"
+                  title="Séssions"
                 >
                   <CalendarClock className="w-4 h-4 text-cta-500" />
                   Créer une session

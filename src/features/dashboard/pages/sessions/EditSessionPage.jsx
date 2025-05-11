@@ -22,7 +22,7 @@ export default function EditSessionPage() {
 
   const [mediaFiles, setMediaFiles] = useState([]);
   const [progress, setProgress] = useState(0);
-const training = mySessionDetail.session.training;
+  const training = mySessionDetail.session.training;
   const {
     control,
     register,
@@ -78,7 +78,10 @@ const training = mySessionDetail.session.training;
     }
 
     const startDateTime = new Date(data.startDate);
-    startDateTime.setHours(data.startTime.getHours(), data.startTime.getMinutes());
+    startDateTime.setHours(
+      data.startTime.getHours(),
+      data.startTime.getMinutes()
+    );
 
     const endDateTime = new Date(data.endDate);
     endDateTime.setHours(data.endTime.getHours(), data.endTime.getMinutes());
@@ -107,7 +110,9 @@ const training = mySessionDetail.session.training;
           <ImageGrid
             images={training?.images || []}
             selected={mediaFiles[0]?.preview}
-            onSelect={(imgUrl) => setMediaFiles([{ preview: imgUrl, type: "image" }])}
+            onSelect={(imgUrl) =>
+              setMediaFiles([{ preview: imgUrl, type: "image" }])
+            }
           />
 
           <MediaUploader
@@ -129,12 +134,35 @@ const training = mySessionDetail.session.training;
         <Section>
           <h3>Date et heure</h3>
           <div className="flex flex-wrap gap-4">
-            <DatePicker label="Date de début" name="startDate" control={control} error={errors.startDate} />
-            <DatePicker label="Date de fin" name="endDate" control={control} error={errors.endDate} />
-            <TimePicker label="Heure de début" name="startTime" control={control} error={errors.startTime} />
-            <TimePicker label="Heure de fin" name="endTime" control={control} error={errors.endTime} />
+            <DatePicker
+              label="Date de début"
+              name="startDate"
+              control={control}
+              error={errors.startDate}
+            />
+            <DatePicker
+              label="Date de fin"
+              name="endDate"
+              control={control}
+              error={errors.endDate}
+            />
+            <TimePicker
+              label="Heure de début"
+              name="startTime"
+              control={control}
+              error={errors.startTime}
+            />
+            <TimePicker
+              label="Heure de fin"
+              name="endTime"
+              control={control}
+              error={errors.endTime}
+            />
           </div>
-          <LocationPicker value={watch("address")} onChange={(val) => setValue("address", val)} />
+          <LocationPicker
+            value={watch("address")}
+            onChange={(val) => setValue("address", val)}
+          />
         </Section>
 
         <Section>
