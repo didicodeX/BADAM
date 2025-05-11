@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import useRegistration from "@/features/dashboard/hooks/useRegistration";
 import Statistique from "../../components/Statistique";
 import Content from "@/shared/components/Content";
@@ -5,13 +6,13 @@ import Section from "@/shared/components/Section";
 import { useSession } from "../../hooks/useSessions";
 import { useTraining } from "../../hooks/useTrainings";
 import { useAuthStore } from "@/features/auth/store/auth.store";
-import { capitalizeFirstLetter } from "@/shared/utils/capitalizeFirstLetter";
 import { Link } from "react-router-dom";
 import RegistrationCard from "../../components/RegistrationCard";
 import { Loader } from "lucide-react";
 import SessionCard from "../../components/SessionCard";
 import TrainingCard from "../../components/TrainingCard";
 import Button from "@/shared/components/Button";
+import { formatName } from "@/shared/utils/formatName";
 
 export default function DashboardHomePage() {
   const { user } = useAuthStore();
@@ -19,6 +20,7 @@ export default function DashboardHomePage() {
     useRegistration();
   const { mySessions } = useSession();
   const { myTrainings } = useTraining();
+  const navigate = useNavigate();
 
   if (isLoadingFollowedSession) {
     return (
@@ -34,7 +36,7 @@ export default function DashboardHomePage() {
 
   return (
     <Content>
-      <h1>Bienvenue, {capitalizeFirstLetter(user?.name)} !</h1>
+      <h1>Bienvenue, {formatName(user?.name)} !</h1>
 
       <Section>
         <div className="flex flex-wrap gap-4  justify-center">
@@ -50,18 +52,23 @@ export default function DashboardHomePage() {
           <p>Nous facilitons la planification...</p>
           <ul>
             <li className="text-text-500 cursor-pointer hover:text-cta-500">
-              <Link to={"/dashboard/trainings/create"}>
-                Créer une formation
-              </Link>
+              <Link to={"/dashboard/create-training"}>Créer une formation</Link>
             </li>
             <Link to="/dashboard/trainings" />
             <li className="text-text-500 cursor-pointer hover:text-cta-500">
-              <Link to={"/dashboard/sessions/participans"}>
-                Gérer les participans a vos sesions
-              </Link>
+              <Link to={"/dashboard/create-session"}>Créer une séssion </Link>
             </li>
             <li className="text-text-500 cursor-pointer hover:text-cta-500">
-              <Link to={"/dashboard/sessions/favorites"}>Voir vos favoris</Link>
+              <button
+                onClick={() => {
+                  navigate("/dashboard/sessions", {
+                    state: { tab: "favorites" },
+                  });
+                }}
+                className="flex items-center gap-2 hover:text-cta-500"
+              >
+                Voir vos favoris
+              </button>
             </li>
           </ul>
         </div>

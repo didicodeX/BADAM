@@ -1,5 +1,5 @@
 import { useAuthStore } from "@/features/auth/store/auth.store";
-import { getInitials } from "@/shared/utils/getInitials";
+import { formatName } from "@/shared/utils/formatName";
 import { Link } from "react-router-dom";
 
 export default function Hello() {
@@ -15,7 +15,7 @@ export default function Hello() {
           />
         ) : (
           <div className="w-full h-full rounded-full bg-cta-100 text-cta-700 flex items-center justify-center">
-            <h1>{getInitials(user.name)}</h1>
+            <h1>{formatName(user.name)}</h1>
           </div>
         )}
       </div>

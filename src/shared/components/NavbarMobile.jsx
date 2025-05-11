@@ -22,6 +22,7 @@ import { useAuth } from "@/features/auth/hooks/useAuth";
 import { getInitials } from "../utils/getInitials";
 import SearchInput from "./SearchInput";
 import { capitalizeFirstLetter } from "../utils/capitalizeFirstLetter";
+import useNotifications from "@/features/notifications/hooks/useNotifications";
 
 export default function NavbarMobile({
   menuOpen,
@@ -32,6 +33,7 @@ export default function NavbarMobile({
   const { logout } = useAuth();
   const [searchOpen, setSearchOpen] = useState(forceOpenSearchOnMount);
   const navigate = useNavigate();
+  const { hasUnreadNotifications } = useNotifications();
 
   const goToProfile = () => {
     navigate("/profile");
@@ -131,20 +133,28 @@ export default function NavbarMobile({
                   <LayoutDashboard className="w-5 h-5" />
                   Dashboard
                 </Link>
-                <Link
-                  to="/dashboard/sessions/favorites"
-                  className="flex items-center gap-3 w-full hover:text-cta-500 rounded"
-                  onClick={() => setMenuOpen(false)}
+                <button
+                  onClick={() => {
+                    setMenuOpen(false); // Ferme le menu si nécessaire
+                    navigate("/dashboard/sessions", {
+                      state: { tab: "favorites" },
+                    });
+                  }}
+                  className="flex items-center gap-2 hover:text-cta-500 w-full"
                 >
-                  <Heart className="w-5 h-5" />
-                  Mes favories
-                </Link>
+                  <Heart className="w-4 h-4" />
+                  Mes favoris
+                </button>
                 <Link
                   to="/notifications"
-                  className="flex items-center gap-3 w-full hover:text-cta-500 rounded"
-                  onClick={() => setMenuOpen(false)}
+                  className="flex items-center gap-3 w-full hover:text-cta-500 rounded "
                 >
-                  <Bell className="w-5 h-5" />
+                  <div className="relative">
+                    <Bell className="w-5 h-5" />
+                    {hasUnreadNotifications && (
+                      <span className="absolute top-0 right-0 w-2 h-2 bg-cta-500 rounded-full" />
+                    )}
+                  </div>
                   Notifications
                 </Link>
                 <Link

@@ -1,18 +1,21 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Heart, Bell } from "lucide-react";
 
 import { useState, useEffect, useRef } from "react";
 import { useAuthStore } from "@/features/auth/store/auth.store";
-import { getInitials } from "../utils/getInitials";
 import SearchInput from "./SearchInput";
 import UserMenu from "./UserMenu"; // 👈 Crée ce fichier séparément
 import { baseStyle, solidStyle, outlineStyle } from "../styles/buttonStyle";
+import useNotifications from "@/features/notifications/hooks/useNotifications";
+import Avatar from "@/features/dashboard/components/Avatar";
 
 export default function Navbar() {
   const { user } = useAuthStore();
   const [autoFocus, setAutoFocus] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const menuRef = useRef(null);
+  const { hasUnreadNotifications } = useNotifications();
+const navigate = useNavigate();
 
   useEffect(() => {
     const shouldFocus =
@@ -62,33 +65,30 @@ export default function Navbar() {
       <div className="relative flex gap-3 items-center" ref={menuRef}>
         {user ? (
           <>
-            <Link
-              to="/dashboard/sessions/favorites"
-              className="flex items-center hover:text-cta-500 rounded"
+            <button
+              onClick={() => {
+                navigate("/dashboard/sessions", {
+                  state: { tab: "favorites" },
+                });
+              }}
+              className="flex items-center gap-2 hover:text-cta-500"
             >
               <Heart className="w-5 h-5" />
-            </Link>
+            </button>
             <Link
               to="/notifications"
-              className="flex items-center hover:text-cta-500 rounded"
+              className="flex items-center hover:text-cta-500 rounded relative"
             >
               <Bell className="w-5 h-5" />
+              {hasUnreadNotifications && (
+                <span className="absolute top-0 right-0 w-2 h-2 bg-cta-500 rounded-full" />
+              )}
             </Link>
             <div
               className="w-10 h-10 rounded-full overflow-hidden flex items-center justify-center hover:cursor-pointer transition-all border border-cta-200 hover:border-cta-500"
               onClick={() => setUserMenuOpen(!userMenuOpen)}
             >
-              {user.avatar ? (
-                <img
-                  src={user.avatar}
-                  alt="avatar"
-                  className="w-full h-full object-cover"
-                />
-              ) : (
-                <div className="w-full h-full rounded-full bg-cta-100 text-cta-700 flex items-center justify-center ">
-                  {getInitials(user.name)}
-                </div>
-              )}
+              <Avatar user={user}/>
             </div>
 
             {userMenuOpen && (

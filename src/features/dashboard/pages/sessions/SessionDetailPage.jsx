@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { useSession } from "../../hooks/useSessions";
 import { format } from "date-fns";
 import { enUS } from "date-fns/locale";
@@ -21,7 +21,7 @@ export default function SessionDetailPage() {
 
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef(null);
-
+  const navigate = useNavigate();
   const { deleteSession } = useSession();
 
   const openDeleteModal = () => {
@@ -53,9 +53,6 @@ export default function SessionDetailPage() {
     );
   }
 
-  console.log(mySessionDetail);
-    
-
   const { session, registrations = [], reviews = [] } = mySessionDetail;
   const training = session.training;
   const image = session.coverImage || training.images?.[0];
@@ -63,7 +60,11 @@ export default function SessionDetailPage() {
   return (
     <Content>
       <div className="flex justify-between items-center">
-        <h2>{training.title}</h2>
+        <h2 className="hover:text-cta-500 transition">
+          <Link to={`/dashboard/trainings/${training._id}`}>
+            {training.title}
+          </Link>
+        </h2>
         <div className="relative" ref={menuRef}>
           <MoreVertical
             className="w-5 h-5 cursor-pointer"
@@ -126,16 +127,16 @@ export default function SessionDetailPage() {
           ) : (
             <div className="flex gap-6">
               <div className="flex items-center gap-4 flex-wrap w-1/2">
-                {registrations.slice(0, 5).map((r) => (
+                {registrations.slice(0, 2).map((r) => (
                   <ParticipantCard key={r._id} participant={r.participant} />
                 ))}
               </div>
-              {registrations.length > 5 && (
+              {registrations.length > 2 && (
                 <Link
                   className="w-14 h-14 rounded-full bg-background-100 flex items-center justify-center text-sm text-cta-500"
                   to={`/dashboard/sessions/${session._id}/participants`}
                 >
-                  +{registrations.length - 5}
+                  +{registrations.length - 2}
                 </Link>
               )}
             </div>
@@ -152,14 +153,19 @@ export default function SessionDetailPage() {
           </small>
         ) : (
           <Section last>
-            {reviews.slice(0, 3).map((review, index, array) => (
+            {reviews.slice(0, 5).map((review, index, array) => (
               <Section key={review._id} last={index === array.length - 1}>
                 <ReviewCard review={review} />
               </Section>
             ))}
-
-            {reviews.length > 3 && (
-              <Button to={`/dashboard/sessions/${session._id}/reviews`}>
+            {reviews.length > 5 && (
+              <Button
+                onClick={() =>
+                  navigate(`/dashboard/sessions/${session._id}/reviews`, {
+                    state: { trainingId: training._id },
+                  })
+                }
+              >
                 Voir tous les avis
               </Button>
             )}

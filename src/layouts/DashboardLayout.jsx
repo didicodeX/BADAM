@@ -6,6 +6,7 @@ import BottomNav from "@/features/dashboard/components/BottomNav";
 import { Outlet } from "react-router-dom";
 import { useEffect, useState } from "react";
 import ScrollToTop from "@/shared/components/ScrollToTop";
+import Breadcrumbs from "@/shared/components/Breadcrumbs";
 
 export default function DashboardLayout() {
   const [menuOpen, setMenuOpen] = useState(false);

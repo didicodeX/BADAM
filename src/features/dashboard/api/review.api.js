@@ -8,7 +8,11 @@ export const getMyReviews = () => {
   return api.get("/reviews/");
 }
 
-// ✅ Fonction pour récupérer toutes les reviews d'une formation
 export const getReviews = (trainingId) => {
   return api.get(`/reviews/${trainingId}`);
 };
+
+export const getReviewsBySession = (sessionId) =>
+  api.get(`/sessions/${sessionId}/reviews`);
+
+

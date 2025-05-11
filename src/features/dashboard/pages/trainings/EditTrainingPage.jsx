@@ -17,9 +17,9 @@ export default function EditTrainingPage() {
   const { training, isLoadingTraining, isErrorTraining, updateTraining } =
     useTraining(id);
 
-    const [images, setImages] = useState([]);
-    const [videos, setVideos] = useState([]);
-    
+  const [images, setImages] = useState([]);
+  const [videos, setVideos] = useState([]);
+
   const [newFiles, setNewFiles] = useState([]);
 
   const handleAddFiles = (files) => {
@@ -49,12 +49,11 @@ export default function EditTrainingPage() {
         title: training.title,
         description: training.description,
       });
-  
+
       setImages(training.images || []);
       setVideos(training.videos || []);
     }
   }, [training, reset]);
-  
 
   const onSubmit = async (formData) => {
     try {

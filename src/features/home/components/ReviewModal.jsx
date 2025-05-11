@@ -5,13 +5,13 @@ import { Star } from "lucide-react";
 import useReviews from "@/features/dashboard/hooks/useReviews";
 import Button from "@/shared/components/Button";
 
-export default function ReviewModal({ trainingId, isOpen, onClose }) {
+export default function ReviewModal({ trainingId,sessionId, isOpen, onClose }) {
   const { register, handleSubmit, reset } = useForm();
   const [rating, setRating] = useState(0);
   const { createReview } = useReviews(trainingId);
 
   const onSubmit = (data) => {
-    createReview({ trainingId, ...data, rating });
+    createReview({ trainingId,sessionId, ...data, rating });
     reset();
     onClose();
   };

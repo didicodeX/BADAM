@@ -62,7 +62,7 @@ sub {
   @apply px-6 md:px-12;
 }
 .padd-y {
-  @apply py-6 md:py-12;
+  @apply py-16 md:py-12;
 }
 
 .section {
@@ -133,4 +133,19 @@ input[type="time"]::-webkit-clear-button {
 .scrollbar-hide {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(10px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.3s ease-out forwards;
 }
