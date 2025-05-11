@@ -8,6 +8,7 @@ import {
   HelpCircle,
   LogOut,
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/features/auth/hooks/useAuth";
 import { getInitials } from "../utils/getInitials";
 import { capitalizeFirstLetter } from "../utils/capitalizeFirstLetter";
@@ -16,6 +17,7 @@ import useNotifications from "@/features/notifications/hooks/useNotifications";
 export default function UserMenu({ user, onClose }) {
   const { logout } = useAuth();
   const { hasUnreadNotifications } = useNotifications();
+const navigate = useNavigate();
   return (
     <div className="absolute right-0 top-14 bg-background-50 border rounded shadow-md w-64 p-4 z-50">
       <div className="flex items-center gap-3 mb-4 border-b pb-2">
@@ -27,9 +29,7 @@ export default function UserMenu({ user, onClose }) {
               className="w-full h-full object-cover"
             />
           ) : (
-            <span className="text-cta-700">
-              {getInitials(user.name)}
-            </span>
+            <span className="text-cta-700">{getInitials(user.name)}</span>
           )}
         </div>
 
@@ -47,13 +47,16 @@ export default function UserMenu({ user, onClose }) {
           <LayoutDashboard className="w-4 h-4" />
           Dashboard
         </Link>
-        <Link
-          to="/dashboard/sessions/favorites"
-          className="flex items-center gap-2 hover:text-cta-500"
+        <button
+          onClick={() => {
+            onClose(); // Ferme le menu si nécessaire
+            navigate("/dashboard/sessions", { state: { tab: "favorites" } });
+          }}
+          className="flex items-center gap-2 hover:text-cta-500 w-full"
         >
           <Heart className="w-4 h-4" />
-          Mes favories
-        </Link>
+          Mes favoris
+        </button>
       </div>
 
       <div className="space-y-2 mt-2 border-b pb-2">
@@ -64,18 +67,18 @@ export default function UserMenu({ user, onClose }) {
           <User className="w-4 h-4" />
           Profil
         </Link>
-                <Link
-                  to="/notifications"
-                  className="flex items-center gap-3 w-full hover:text-cta-500 rounded "
-                >
-                  <div className="relative">
-                    <Bell className="w-5 h-5" />
-                    {hasUnreadNotifications && (
-                      <span className="absolute top-0 right-0 w-2 h-2 bg-cta-500 rounded-full" />
-                    )}
-                  </div>
-                  Notifications
-                </Link>
+        <Link
+          to="/notifications"
+          className="flex items-center gap-3 w-full hover:text-cta-500 rounded "
+        >
+          <div className="relative">
+            <Bell className="w-5 h-5" />
+            {hasUnreadNotifications && (
+              <span className="absolute top-0 right-0 w-2 h-2 bg-cta-500 rounded-full" />
+            )}
+          </div>
+          Notifications
+        </Link>
         <Link
           to="/settings"
           className="flex items-center gap-2 hover:text-cta-500"

@@ -14,7 +14,7 @@ export default function CreatedTrainingsPage() {
 
   return (
     <Content>
-      <h2>Mes formations créées</h2>
+      <h2>Mes formations</h2>
       <Section last>
         <div className="py-4 flex justify-center">
           <div

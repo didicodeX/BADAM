@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Heart, Bell } from "lucide-react";
 
 import { useState, useEffect, useRef } from "react";
@@ -15,8 +15,7 @@ export default function Navbar() {
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const menuRef = useRef(null);
   const { hasUnreadNotifications } = useNotifications();
-
-console.log("hasUnreadNotifications : " ,hasUnreadNotifications);
+const navigate = useNavigate();
 
   useEffect(() => {
     const shouldFocus =
@@ -66,12 +65,16 @@ console.log("hasUnreadNotifications : " ,hasUnreadNotifications);
       <div className="relative flex gap-3 items-center" ref={menuRef}>
         {user ? (
           <>
-            <Link
-              to="/dashboard/sessions/favorites"
-              className="flex items-center hover:text-cta-500 rounded"
+            <button
+              onClick={() => {
+                navigate("/dashboard/sessions", {
+                  state: { tab: "favorites" },
+                });
+              }}
+              className="flex items-center gap-2 hover:text-cta-500"
             >
               <Heart className="w-5 h-5" />
-            </Link>
+            </button>
             <Link
               to="/notifications"
               className="flex items-center hover:text-cta-500 rounded relative"

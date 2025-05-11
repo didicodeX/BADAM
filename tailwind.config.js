@@ -60,6 +60,9 @@ export default {
           900: "#363B44",
         },
       },
+      transitionProperty: {
+        "transform-opacity": "transform, opacity",
+      },
     },
   },
   plugins: [],

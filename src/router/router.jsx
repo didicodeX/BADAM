@@ -23,11 +23,8 @@ const ForgotPasswordPage = lazy(() =>
 const RegisterPage = lazy(() => import("@/features/auth/pages/SignupPage"));
 const HomePage = lazy(() => import("@/features/home/pages/HomePage"));
 const ProfilePage = lazy(() => import("@/features/profile/pages/ProfilePage"));
-const SettingsPage = lazy(() =>
-  import("@/features/settings/pages/SettingsPage")
-);
 const NotificationsPage = lazy(() => import("@/features/notifications/pages/NotificationsPage"))
-const HelpPage = lazy(() => import("@/features/help/pages/HelpPage"))
+
 const NotFoundPage = lazy(() => import("@/shared/pages/NotFoundPage"));
 
 const SessionDetailPage = lazy(() => import("@/features/home/pages/SessionDetailPage"))
@@ -65,8 +62,6 @@ export const router = createBrowserRouter([
           { path: "/home", element: <HomePage /> },
           { path: "/sessions/:id", element: <SessionDetailPage /> },
           { path: "/profile", element: <ProfilePage /> },
-          { path: "/settings", element: <SettingsPage /> },
-          { path: "/help", element: <HelpPage /> },
           { path: "/notifications", element: <NotificationsPage /> },
         ],
       },

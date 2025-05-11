@@ -104,14 +104,18 @@ export default function DashboardNavbarMobile({ menuOpen, setMenuOpen }) {
                   <LayoutDashboard className="w-5 h-5" />
                   Dashboard
                 </Link>
-                <Link
-                  to="/dashboard/sessions/favorites"
-                  className="flex items-center gap-3 w-full hover:text-cta-500 rounded"
-                  onClick={() => setMenuOpen(false)}
+                <button
+                  onClick={() => {
+                    setMenuOpen(false); // Ferme le menu si nécessaire
+                    navigate("/dashboard/sessions", {
+                      state: { tab: "favorites" },
+                    });
+                  }}
+                  className="flex items-center gap-2 hover:text-cta-500 w-full"
                 >
-                  <Heart className="w-5 h-5" />
-                  Mes favories
-                </Link>
+                  <Heart className="w-4 h-4" />
+                  Mes favoris
+                </button>
                 <Link
                   to="/notifications"
                   className="flex items-center gap-3 w-full hover:text-cta-500 rounded "

@@ -6,7 +6,7 @@ export default function ActionMenuTraining({ formationId, closeMenu, onRequestDe
 
   const handleCreateSession = (e) => {
     e.stopPropagation();
-    navigate(`/dashboard/trainings/${formationId}/sessions/create`);
+    navigate(`/dashboard/trainings/${formationId}/create`);
     closeMenu();
   };
 

@@ -1,0 +1,18 @@
+export const breadcrumbLabels = {
+  createSession: "Créer une session",
+  trainings: "Mes formations",
+  "create-session": "Créer une session",
+  "create-training": "Créer une formation",
+  sessions: "Mes sessions",
+  favorites: "Favoris",
+  followed: "Sessions suivies",
+  created: "Créées",
+  edit: "Modifier",
+  create: "Créer",
+  reviews: "Avis",
+  participants: "Participants",
+  profile: "Profil",
+  settings: "Paramètres",
+  notifications: "Notifications",
+  help: "Aide",
+};
