@@ -10,45 +10,142 @@ body {
 }
 
 h1 {
-  @apply text-3xl sm:text-4xl md:text-5xl font-bold leading-tight
+  @apply text-3xl sm:text-4xl md:text-5xl font-bold leading-tight;
 }
 
 h2 {
-  @apply text-2xl sm:text-3xl md:text-4xl font-semibold leading-snug
+  @apply text-2xl sm:text-3xl md:text-4xl font-semibold leading-snug;
 }
 
 h3 {
-  @apply text-xl sm:text-2xl md:text-3xl font-semibold leading-normal
+  @apply text-xl sm:text-2xl md:text-3xl font-semibold leading-normal;
 }
 
 h4 {
-  @apply text-lg sm:text-xl md:text-2xl font-medium leading-normal
+  @apply text-lg sm:text-xl md:text-2xl font-bold leading-normal;
 }
 
-p{
- @apply text-base lg:text-lg font-normal leading-relaxed
+p {
+  @apply text-base lg:text-lg font-normal leading-relaxed;
 }
+
 
 small {
-  @apply text-sm font-normal leading-normal
+  @apply text-sm font-normal leading-normal;
+}
+
+sub {
+  @apply text-xs font-medium leading-4	
 }
 
 .text-large {
-  @apply text-lg md:text-lg lg:text-xl font-normal leading-relaxed
+  @apply text-lg md:text-lg lg:text-xl font-normal leading-relaxed;
 }
 
 .text-xsmall {
-  @apply text-xs font-medium leading-snug
+  @apply text-xs font-medium leading-snug;
 }
 
-.padding {
-  @apply px-6 md:px-12 lg:px-24
+.padd-l {
+  @apply pl-6 md:pl-12 lg:pl-16 xl:pl-20 2xl:pl-24;
+}
+.padd-r {
+  @apply pr-6 md:pr-12 lg:pr-16 xl:pr-20 2xl:pr-24;
+}
+.padd-t {
+  @apply pt-6 md:pt-12 lg:pt-16 xl:pt-20 2xl:pt-24;
+}
+.padd-b {
+  @apply pb-6 md:pb-12 lg:pb-16 xl:pb-20 2xl:pb-24;
+}
+.padd-x {
+  @apply px-6 md:px-12 lg:px-16 xl:px-20 2xl:px-24;
+}
+.padd-y {
+  @apply py-16 md:py-12 lg:py-16 xl:py-20 2xl:py-24;
 }
 
-section {
-  @apply p-6 border-b border-b-background-200
+.section {
+  @apply p-6 border-b border-b-background-200;
 }
 
 ::selection {
   @apply bg-background-500 text-white;
+}
+
+input::placeholder {
+  @apply text-text-700;
+}
+
+:focus-visible {
+  @apply outline outline-2 outline-cta-500;
+}
+
+form a {
+  @apply text-sm text-cta-500 ;
+}
+main div form {
+  @apply border-t border-t-background-100
+}
+form a:hover {
+  @apply underline
+}
+
+input[type="search"]{
+  background-color: transparent;
+}
+
+ textarea {
+  @apply w-full px-6 py-3 bg-transparent border rounded-md border-text-200 pr-10 resize-none h-24
+}
+
+/* Chrome, Edge, Safari */
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="time"]::-webkit-calendar-picker-indicator {
+  display: none;
+  -webkit-appearance: none;
+}
+
+/* Firefox */
+input[type="date"]::-moz-focus-inner,
+input[type="time"]::-moz-focus-inner {
+  border: 0;
+}
+
+input[type="date"],
+input[type="time"] {
+  appearance: none;            /* Standard */
+  -moz-appearance: textfield;  /* Firefox */
+  -webkit-appearance: none;    /* Chrome/Safari */
+  background: none;
+}
+
+/* Supprime le bouton clair dans Safari */
+input[type="date"]::-webkit-clear-button,
+input[type="time"]::-webkit-clear-button {
+  display: none;
+}
+
+/* Dans tailwind.css ou global.css */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(10px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.3s ease-out forwards;
 }
