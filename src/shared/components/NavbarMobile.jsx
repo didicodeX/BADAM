@@ -145,6 +145,7 @@ export default function NavbarMobile({
                 <Link
                   to="/notifications"
                   className="flex items-center gap-3 w-full hover:text-cta-500 rounded "
+                  onClick={() => setMenuOpen(false)}
                 >
                   <div className="relative">
                     <Bell className="w-5 h-5" />
@@ -155,7 +156,7 @@ export default function NavbarMobile({
                   Notifications
                 </Link>
                 <Link
-                  to="/settings"
+                  to="/coming-soon"
                   className="flex items-center gap-3 w-full hover:text-cta-500 rounded"
                   onClick={() => setMenuOpen(false)}
                 >
@@ -164,7 +165,7 @@ export default function NavbarMobile({
                 </Link>
                 <hr className="my-4" />
                 <Link
-                  to="/help"
+                  to="/coming-soon"
                   className="flex items-center gap-3 w-full hover:text-cta-500 rounded"
                   onClick={() => setMenuOpen(false)}
                 >

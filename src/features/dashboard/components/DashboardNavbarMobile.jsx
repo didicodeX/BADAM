@@ -45,11 +45,12 @@ export default function DashboardNavbarMobile({ menuOpen, setMenuOpen }) {
           />
         )}
 
-<Logo/>
+        <Logo />
 
         <Link
           to="/notifications"
           className="flex items-center hover:text-cta-500 rounded relative"
+          onClick={() => setMenuOpen(false)}
         >
           <Bell className="w-6 h-6" />
           {hasUnreadNotifications && (
@@ -136,7 +137,7 @@ export default function DashboardNavbarMobile({ menuOpen, setMenuOpen }) {
                   Notifications
                 </Link>
                 <Link
-                  to="/settings"
+                  to="/coming-soon"
                   className="flex items-center gap-3 w-full hover:text-cta-500 rounded"
                   onClick={() => setMenuOpen(false)}
                 >
@@ -145,7 +146,7 @@ export default function DashboardNavbarMobile({ menuOpen, setMenuOpen }) {
                 </Link>
                 <hr className="my-4" />
                 <Link
-                  to="/help"
+                  to="/coming-soon"
                   className="flex items-center gap-3 w-full hover:text-cta-500 rounded"
                   onClick={() => setMenuOpen(false)}
                 >
