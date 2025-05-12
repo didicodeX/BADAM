@@ -9,7 +9,7 @@ export default function TrainingLayout() {
   const { training } = useTraining(id);
  
   return (
-    <div className="px-4 md:px-6 pt-4">
+    <div>
       <ScrollToTop />
       <TrainingBreadcrumb training={training} />
       <Outlet />

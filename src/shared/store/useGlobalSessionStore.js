@@ -13,9 +13,7 @@ export const useGlobalSessionStore = create((set, get) => ({
       const res = await getAllSessions();
       set({ sessions: res.data });
     } catch (err) {
-      toastError("Erreur lors du chargement des sessions.");
-      console.log(err.message);
-      
+      toastError("Erreur lors du chargement des sessions.", err.message);
     } finally {
       set({ isLoading: false });
     }
@@ -27,9 +25,7 @@ export const useGlobalSessionStore = create((set, get) => ({
       const favoriteIds = res.data.map((session) => session._id); // ou res.data si c’est juste un tableau d’ID
       set({ favorites: favoriteIds });
     } catch (err) {
-      toastError("Erreur lors du chargement des favoris.");
-      console.log(err.message);
-
+      toastError("Erreur lors du chargement des favoris.", err.message);
     }
   },
 
@@ -45,9 +41,7 @@ export const useGlobalSessionStore = create((set, get) => ({
         set({ favorites: [...favorites, sessionId] });
       }
     } catch (err) {
-      toastError("Impossible de modifier les favoris.");
-      console.log(err.message);
-
+      toastError("Impossible de modifier les favoris.", err.message);
     }
   },
 }));

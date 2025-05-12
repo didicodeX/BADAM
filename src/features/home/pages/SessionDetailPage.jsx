@@ -39,8 +39,6 @@ export default function SessionDetailPage() {
     return <p className="text-error-700">Session introuvable.</p>;
   }
 
-  console.log(sessionDetail);
-
   const session = sessionDetail.session;
   const training = session.training;
   const createdBy = session.createdBy;
@@ -72,7 +70,7 @@ export default function SessionDetailPage() {
       <h2>{training.title}</h2>
       <Section>
         <h3>Informations sur la session</h3>
-        <div className="flex w-[400px] sm:w-[500px] md:w-[650px] lg:w-[900px xl:w-[1204px] overflow-hidden">
+        <div className="flex w-[330px] sm:w-[500px] md:w-[650px] lg:w-[900px xl:w-[1204px] overflow-hidden">
           {media.length > 0 && <MediaSlider slides={media} />}
         </div>
         <div className="flex flex-col gap-2">

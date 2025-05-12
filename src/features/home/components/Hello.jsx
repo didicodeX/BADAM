@@ -7,7 +7,7 @@ export default function Hello() {
   const { user } = useAuthStore();
   return (
     <Content>
-      <div className="flex flex-col gap-6 lg:flex-row lg:items-center">
+      <div className="flex flex-col gap-6 lg:flex-row lg:items-center pt-8">
         <div className="w-28 h-28">
           {user.avatar ? (
             <img
@@ -24,7 +24,7 @@ export default function Hello() {
         <div>
           <h2>
             Nous sommes ravis de vous retrouver,{" "}
-            <span className="capitalize">{user.name}</span>
+            <span className="capitalize font-extrabold">{user.name}</span>
           </h2>
           <h4>
             <Link className="hover:text-cta-500" to="/profile">

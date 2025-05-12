@@ -42,9 +42,7 @@ export default function ConfirmDeleteModal({
           {/* Actions */}
           <div className="flex justify-end gap-3">
             <Button variant="outline"
-              onClick={() => {
-                console.log("Cancel");
-                
+              onClick={() => {       
                 onClose(); // Appeler correctement onClose
               }}
               className="px-4 py-2 text-sm rounded hover:bg-cta-100 text-orange-700"
@@ -53,8 +51,6 @@ export default function ConfirmDeleteModal({
             </Button>
             <Button
               onClick={() => {
-                console.log("Confirm");
-                
                 onConfirm(); // Appeler correctement onConfirm
               }}
               className="px-4 py-2 text-sm rounded bg-cta-700/90 text-white hover:bg-cta-700"

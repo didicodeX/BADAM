@@ -4,6 +4,7 @@ import { useAuthStore } from "@/features/auth/store/auth.store";
 import { Bell, Plus } from "lucide-react";
 import { getInitials } from "@/shared/utils/getInitials";
 import UserMenu from "@/shared/components/UserMenu";
+import Logo from "@/shared/components/Logo";
 
 export default function DashboardNavbar() {
   const { user } = useAuthStore();
@@ -23,13 +24,9 @@ export default function DashboardNavbar() {
   }, []);
 
   return (
-    <header className="fixed top-0 left-0 w-full bg-background-50 px-6 py-4 h-14 shadow-sm flex items-center justify-between z-50">
+    <header className="fixed top-0 left-0 w-full flex items-center justify-between padd-x py-4 bg-background-50 z-50 shadow-sm h-16">
       {/* Logo */}
-      <div className="text-xl font-bold">
-        <Link to="/">
-          BA<span className="text-cta-500">DAM</span>
-        </Link>
-      </div>
+      <Logo/>
 
       <div className="flex gap-3 items-center relative" ref={menuRef}>
         <div

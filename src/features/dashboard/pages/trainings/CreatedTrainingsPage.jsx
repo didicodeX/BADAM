@@ -6,6 +6,7 @@ import { Search } from "lucide-react";
 import Content from "@/shared/components/Content";
 import Section from "@/shared/components/Section";
 import Button from "@/shared/components/Button";
+import CardListContainer from "@/shared/components/CardListContainer";
 
 export default function CreatedTrainingsPage() {
   const [isFocused, setIsFocused] = useState(false);
@@ -32,7 +33,7 @@ export default function CreatedTrainingsPage() {
             <Search className="w-5 h-5" />
           </div>
         </div>
-        <div className="flex gap-6 flex-wrap">
+        <CardListContainer>
           {myTrainings.map((training) => (
             <TrainingCard
               key={training._id}
@@ -42,7 +43,7 @@ export default function CreatedTrainingsPage() {
               imageUrl={training.images[0]}
             />
           ))}
-        </div>
+        </CardListContainer>
         {myTrainings.length === 0 && (
           <div className="flex flex-col items-center gap-6">
             <p className="text-center text-text-500 mt-8">

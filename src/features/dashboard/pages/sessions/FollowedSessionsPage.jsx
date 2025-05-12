@@ -5,6 +5,7 @@ import ConfirmDeleteModal from "@/shared/components/ConfirmDeleteModal";
 import Section from "@/shared/components/Section";
 import RegistrationCard from "../../components/RegistrationCard";
 import Button from "@/shared/components/Button";
+import CardListContainer from "@/shared/components/CardListContainer";
 
 export default function FollowedSessionsPage() {
   const { followedSessions, isLoadingFollowedSession, unfollowSession } =
@@ -58,7 +59,7 @@ export default function FollowedSessionsPage() {
               {training.title}
             </h4>
           </div>
-          <div className="flex flex-wrap gap-6">
+          <CardListContainer>
             {sessions.map((session) => (
               <RegistrationCard
                 key={session._id}
@@ -69,7 +70,7 @@ export default function FollowedSessionsPage() {
                 onUnfollow={() => handleRequestUnfollow(session._id)}
               />
             ))}
-          </div>
+          </CardListContainer>
         </Section>
       ))}
 

@@ -24,7 +24,7 @@ export default function SessionsIndexPage() {
       <h2 className="mb-4">Mes sessions</h2>
 
       {/* Tabs navigation */}
-      <div className="flex gap-4 border-b mb-6">
+      <div className="flex border-b mb-6">
         {[
           { key: "all", label: "Toutes" },
           { key: "followed", label: "Suivies" },

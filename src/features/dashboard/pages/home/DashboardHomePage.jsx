@@ -13,6 +13,7 @@ import SessionCard from "../../components/SessionCard";
 import TrainingCard from "../../components/TrainingCard";
 import Button from "@/shared/components/Button";
 import { formatName } from "@/shared/utils/formatName";
+import CardListContainer from "@/shared/components/CardListContainer";
 
 export default function DashboardHomePage() {
   const { user } = useAuthStore();
@@ -30,16 +31,12 @@ export default function DashboardHomePage() {
     );
   }
 
-  console.log("myTrainings : ", myTrainings);
-  console.log("mySessions : ", mySessions);
-  console.log("followedSessions : ", followedSessions);
-
   return (
     <Content>
       <h1>Bienvenue, {formatName(user?.name)} !</h1>
 
       <Section>
-        <div className="flex flex-wrap gap-4  justify-center">
+        <div className="flex flex-wrap gap-4 justify-center">
           <Statistique title="Formations créées" count={myTrainings.length} />
           <Statistique title="Sessions créées" count={mySessions.length} />
           <Statistique
@@ -75,7 +72,7 @@ export default function DashboardHomePage() {
       </Section>
       <Section>
         <h3>Mes Formations créées</h3>
-        <div className="flex gap-6 flex-wrap">
+        <CardListContainer>
           {myTrainings.slice(0, 3).map((training) => (
             <TrainingCard
               key={training._id}
@@ -85,7 +82,7 @@ export default function DashboardHomePage() {
               imageUrl={training.images[0]}
             />
           ))}
-        </div>
+        </CardListContainer>
         {myTrainings.length > 3 && (
           <Link
             className="w-14 h-14 rounded-full bg-background-100 flex items-center justify-center text-sm text-cta-500"
@@ -105,7 +102,7 @@ export default function DashboardHomePage() {
       </Section>
       <Section>
         <h3>Mes Sessions créées</h3>
-        <div className="flex gap-6 flex-wrap">
+        <CardListContainer>
           {mySessions.slice(0, 3).map((session) => (
             <SessionCard
               key={session._id}
@@ -115,7 +112,7 @@ export default function DashboardHomePage() {
               session={session}
             />
           ))}
-        </div>
+        </CardListContainer>
         {mySessions.length > 3 && (
           <Link
             className="w-14 h-14 rounded-full bg-background-100 flex items-center justify-center text-sm text-cta-500"
@@ -135,7 +132,7 @@ export default function DashboardHomePage() {
       </Section>
       <Section last>
         <h3>Mes Sessions suivies</h3>
-        <div className="flex flex-wrap gap-4">
+        <CardListContainer>
           {followedSessions.slice(0, 3).map((session) => (
             <RegistrationCard
               key={session._id}
@@ -149,7 +146,7 @@ export default function DashboardHomePage() {
               onUnfollow={() => unfollowSession(session._id)}
             />
           ))}
-        </div>
+        </CardListContainer>
         {followedSessions.length > 3 && (
           <Link
             className="w-14 h-14 rounded-full bg-background-100 flex items-center justify-center text-sm text-cta-500"

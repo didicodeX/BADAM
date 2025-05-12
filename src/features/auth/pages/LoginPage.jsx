@@ -12,7 +12,6 @@ export default function LoginPage() {
       navigate("/home");
     }
   }, [user, navigate]);
-  console.log(user);
   
   return (
     <>

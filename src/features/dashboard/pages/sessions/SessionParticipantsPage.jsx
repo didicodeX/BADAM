@@ -9,7 +9,6 @@ import ParticipantManageCard from "../../components/ParticipantManageCard";
 export default function SessionParticipantsPage() {
   const { id } = useParams();
   const { participants, isLoading, removeParticipant } = useParticipants(id);
-  console.log(participants);
 
   if (isLoading) {
     return (

@@ -1,9 +1,9 @@
 import Section from "@/shared/components/Section";
 import useFavorites from "../../hooks/useFavorites";
 import { useFavoriteStore } from "../../store/favorite.store";
-import Content from "@/shared/components/Content";
 import FavoriteCard from "@/features/home/components/FavoriteCard";
 import Button from "@/shared/components/Button";
+import CardListContainer from "@/shared/components/CardListContainer";
 
 export default function FavoritesPage() {
   const { handleToggleFavorite } = useFavorites();
@@ -12,7 +12,7 @@ export default function FavoritesPage() {
   return (
     <Section last>
         <h3>Mes favoris</h3>
-        <div className="flex flex-wrap gap-6">
+        <CardListContainer>
           {favorites.map((session) => (
             <FavoriteCard
               key={session._id}
@@ -24,7 +24,7 @@ export default function FavoritesPage() {
               onToggleFavorite={() => handleToggleFavorite(session)}
             />
           ))}
-        </div>
+        </CardListContainer>
         {favorites.length === 0 && (
           <div className="flex flex-col items-center gap-6">
             <p className="text-center text-text-500 mt-8">

@@ -12,7 +12,6 @@ const {isAuthenticated} = useAuth();
     async function getFavorites() {
       try {
         const favoriteRes = await FavoriteAPI.getFavorites();
-        console.log(favoriteRes.data);
         setFavorites(favoriteRes.data.map((fav) => fav.session));
       } catch (error) {
         console.log(error);

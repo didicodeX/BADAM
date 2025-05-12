@@ -7,6 +7,7 @@ import useLanding from "../hooks/useLanding";
 import Section from "@/shared/components/Section";
 import Content from "@/shared/components/Content";
 import Button from "@/shared/components/Button";
+import CardListContainer from "@/shared/components/CardListContainer";
 
 export default function FeaturedTrainingsSection() {
   const { allSessions, isLoadingAllSession } = useLanding();
@@ -37,7 +38,7 @@ export default function FeaturedTrainingsSection() {
       <h4 className="text-center">Apprendre en faisant</h4>
 
       <Section>
-        <div className="flex flex-wrap gap-6">
+        <CardListContainer>
           {visibleSessions.map((session) => (
             <FavoriteCard
               key={session._id}
@@ -49,7 +50,7 @@ export default function FeaturedTrainingsSection() {
               onToggleFavorite={() => handleFavoriteClick()}
             />
           ))}
-        </div>
+        </CardListContainer>
         {allSessions.length > visibleCount && (
           <div className="text-center mt-8">
             <Button onClick={() => setVisibleCount((prev) => prev + 6)}>
