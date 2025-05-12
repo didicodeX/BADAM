@@ -1,11 +1,10 @@
 import LoadingScreen from "@/shared/components/LoadingScreen";
-import Content from "@/shared/components/Content";
 import { useSession } from "../../hooks/useSessions";
-import { Search } from "lucide-react";
 import SessionCard from "../../components/SessionCard";
 import { Link } from "react-router-dom";
 import Section from "@/shared/components/Section";
 import Button from "@/shared/components/Button";
+import CardListContainer from "@/shared/components/CardListContainer";
 
 export default function CreatedSessionsPage() {
   const { mySessions, isLoadingSessions } = useSession();
@@ -38,7 +37,7 @@ export default function CreatedSessionsPage() {
               </Link>
             </h4>
           </div>
-          <div className="flex flex-wrap gap-6">
+          <CardListContainer>
             {sessions.map((session) => (
               <SessionCard
                 key={session._id}
@@ -48,7 +47,7 @@ export default function CreatedSessionsPage() {
                 session={session}
               />
             ))}
-          </div>
+          </CardListContainer>
         </Section>
       ))}
       {mySessions.length === 0 && (

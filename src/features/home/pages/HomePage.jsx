@@ -4,9 +4,9 @@ import FavoriteCard from "../components/FavoriteCard";
 import Content from "@/shared/components/Content";
 import useHome from "../hooks/useHome";
 import { useSessions, useFavorites } from "../store/useHome.store";
-import { Loader } from "lucide-react";
 import { useAuthStore } from "@/features/auth/store/auth.store";
 import SessionCard from "@/features/dashboard/components/SessionCard";
+import CardListContainer from "@/shared/components/CardListContainer";
 
 export default function HomePage() {
   const { user } = useAuthStore();
@@ -31,7 +31,7 @@ export default function HomePage() {
       <Content>
         <Section>
           <h3 className="mb-4">Les recommandations</h3>
-          <div className="flex flex-wrap gap-6">
+          <CardListContainer>
             {sessions.map((session) => {
               const isOwner = session.createdBy === user._id;
               return isOwner ? (
@@ -55,11 +55,11 @@ export default function HomePage() {
                 />
               );
             })}
-          </div>
+          </CardListContainer>
         </Section>
         <Section last>
           <h3 className="mb-4"> Les nouvelle sessions</h3>
-          <div className="flex flex-wrap gap-6">
+          <CardListContainer>
             {latest.map((session) => (
               <FavoriteCard
                 key={session._id}
@@ -71,7 +71,7 @@ export default function HomePage() {
                 onToggleFavorite={() => handleToggleFavorite(session._id)}
               />
             ))}
-          </div>
+          </CardListContainer>
         </Section>
       </Content>
     </Section>

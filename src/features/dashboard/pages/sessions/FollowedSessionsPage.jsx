@@ -58,7 +58,7 @@ export default function FollowedSessionsPage() {
               {training.title}
             </h4>
           </div>
-          <div className="flex flex-wrap gap-6">
+          <CardListContainer>
             {sessions.map((session) => (
               <RegistrationCard
                 key={session._id}
@@ -69,7 +69,7 @@ export default function FollowedSessionsPage() {
                 onUnfollow={() => handleRequestUnfollow(session._id)}
               />
             ))}
-          </div>
+          </CardListContainer>
         </Section>
       ))}
 
