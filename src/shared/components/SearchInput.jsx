@@ -1,18 +1,12 @@
-import { Search, X, ArrowLeft } from "lucide-react";
-import { useState, useEffect, useRef } from "react";
-import { useSearchQuery } from "@/features/search/hooks/useSearchQuery";
-import { useLiveSearchRedirect } from "@/features/search/hooks/useLiveSearchRedirect";
+// shared/components/SearchInput.jsx
+import { useState, useRef, useEffect } from "react";
+import { useSearchStore } from "@/features/search/store/search.store";
+import { Search, X } from "lucide-react";
 
-export default function SearchInput({
-  mobile = false,
-  onClose,
-  autoFocus = false,
-}) {
-  const { query, setQuery } = useSearchQuery();
-  const [isFocused, setIsFocused] = useState(false);
+export default function SearchInput({ autoFocus = false, onClose }) {
+  const { query, setQuery } = useSearchStore();
   const inputRef = useRef(null);
-
-  useLiveSearchRedirect(query);
+  const [isFocused, setIsFocused] = useState(false);
 
   useEffect(() => {
     if (autoFocus && inputRef.current) {
@@ -21,31 +15,26 @@ export default function SearchInput({
   }, [autoFocus]);
 
   const handleChange = (e) => {
-    setQuery(e.target.value);
+    const value = e.target.value;
+    setQuery(value);
+
+    if (!value.trim() && typeof onClose === "function") {
+      onClose(); // Revenir à la navbar mobile normale
+    }
+  };
+
+  const handleClear = () => {
+    setQuery("");
+    if (typeof onClose === "function") {
+      onClose();
+    }
   };
 
   return (
     <div
-      className={`${
-        mobile
-          ? `flex items-center gap-2 rounded px-3 py-2 ${
-              isFocused ? "border-cta-500" : "border-text-200"
-            }`
-          : `flex items-center gap-2 border rounded-full px-4 py-2 shadow-sm w-full max-w-xl ${
-              isFocused ? "border-cta-500" : "border-text-200"
-            }`
-      }`}
+      className={`flex items-center border rounded-full px-4 py-2 bg-transparent w-full max-w-xl transition
+    ${isFocused ? "border-cta-500  outline-cta-200" : "border-text-200"}`}
     >
-      {mobile && (
-        <ArrowLeft
-          className="w-5 h-5 cursor-pointer"
-          onClick={() => {
-            setQuery("");
-            if (onClose) onClose(); // onClose est appelé ici
-          }}
-        />
-      )}
-
       <input
         ref={inputRef}
         type="search"
@@ -53,22 +42,16 @@ export default function SearchInput({
         onChange={handleChange}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
-        placeholder="Rechercher une formation..."
-        className={`flex-1 bg-transparent text-sm outline-none placeholder-text-400 px-6 py-0.5 focus:outline-none ${
-          mobile ? "focus:border-b focus:border-cta-500" : ""
-        }`}
+        placeholder="Rechercher une session..."
+        className="flex-1 bg-transparent focus:outline-none text-sm placeholder-text-400"
       />
-
-      {query && (
+      {query ? (
         <X
-          type="button"
-          className="w-5 h-5 text-primary cursor-pointer"
-          onClick={() => setQuery("")}
+          className="w-5 h-5 cursor-pointer text-text-400"
+          onClick={handleClear}
         />
-      )}
-
-      {!mobile && !isFocused && !query && (
-        <Search className="w-5 h-5" />
+      ) : (
+        <Search className="w-5 h-5 text-text-400" />
       )}
     </div>
   );

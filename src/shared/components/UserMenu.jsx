@@ -17,7 +17,7 @@ import useNotifications from "@/features/notifications/hooks/useNotifications";
 export default function UserMenu({ user, onClose }) {
   const { logout } = useAuth();
   const { hasUnreadNotifications } = useNotifications();
-const navigate = useNavigate();
+  const navigate = useNavigate();
   return (
     <div className="absolute right-0 top-14 bg-background-50 border rounded shadow-md w-64 p-4 z-50">
       <div className="flex items-center gap-3 mb-4 border-b pb-2">
@@ -80,13 +80,16 @@ const navigate = useNavigate();
           Notifications
         </Link>
         <Link
-          to="/settings"
+          to="/coming-soon"
           className="flex items-center gap-2 hover:text-cta-500"
         >
           <Settings className="w-4 h-4" />
           Paramètres
         </Link>
-        <Link to="/help" className="flex items-center gap-2 hover:text-cta-500">
+        <Link
+          to="/coming-soon"
+          className="flex items-center gap-2 hover:text-cta-500"
+        >
           <HelpCircle className="w-4 h-4" />
           Aide
         </Link>

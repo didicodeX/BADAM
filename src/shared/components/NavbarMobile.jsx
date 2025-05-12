@@ -1,11 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Menu,
   Search,
   X,
   User,
-  ArrowLeft,
-  Plus,
   LayoutDashboard,
   Heart,
   Bell,
@@ -13,17 +11,16 @@ import {
   HelpCircle,
   LogOut,
 } from "lucide-react";
-import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuthStore } from "@/features/auth/store/auth.store";
 // eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "framer-motion";
+import { useAuthStore } from "@/features/auth/store/auth.store";
 import { useAuth } from "@/features/auth/hooks/useAuth";
-import { getInitials } from "../utils/getInitials";
-import SearchInput from "./SearchInput";
-import { capitalizeFirstLetter } from "../utils/capitalizeFirstLetter";
 import useNotifications from "@/features/notifications/hooks/useNotifications";
+import { getInitials } from "../utils/getInitials";
+import { capitalizeFirstLetter } from "../utils/capitalizeFirstLetter";
 import Logo from "./Logo";
+import SearchInput from "./SearchInput";
 
 export default function NavbarMobile({
   menuOpen,
@@ -32,19 +29,20 @@ export default function NavbarMobile({
 }) {
   const { user } = useAuthStore();
   const { logout } = useAuth();
-  const [searchOpen, setSearchOpen] = useState(forceOpenSearchOnMount);
   const navigate = useNavigate();
   const { hasUnreadNotifications } = useNotifications();
+  const [searchOpen, setSearchOpen] = useState(forceOpenSearchOnMount);
 
-  const goToProfile = () => {
-    navigate("/profile");
-    setMenuOpen(false);
-  };
   useEffect(() => {
     if (forceOpenSearchOnMount) {
       sessionStorage.removeItem("badam:search:autoFocus");
     }
   }, [forceOpenSearchOnMount]);
+
+  const goToProfile = () => {
+    navigate("/profile");
+    setMenuOpen(false);
+  };
 
   return (
     <header className="fixed top-0 left-0 w-full bg-background padd-x py-3 shadow-sm z-50 h-14 bg-background-50">
@@ -86,13 +84,13 @@ export default function NavbarMobile({
             transition={{ type: "tween", duration: 0.3 }}
             className="absolute top-full left-0 w-2/3 h-[calc(100vh-56px)] bg-background-50 border-t py-3 px-6 z-40 flex flex-col justify-between border-r border-r-text-100"
           >
-            <div className="flex flex-col gap-y-6 hover:cursor-pointer">
+            <div className="flex flex-col gap-y-6">
               {user && (
                 <div
                   className="flex items-center gap-3 mb-6"
-                  onClick={() => goToProfile()}
+                  onClick={goToProfile}
                 >
-                  <div className="w-10 h-10 rounded-full overflow-hidden flex items-center justify-center hover:cursor-pointer transition-all border border-cta-200 hover:border-cta-500">
+                  <div className="w-10 h-10 rounded-full overflow-hidden flex items-center justify-center border border-cta-200 hover:border-cta-500">
                     {user.avatar ? (
                       <img
                         src={user.avatar}
@@ -100,7 +98,7 @@ export default function NavbarMobile({
                         className="w-full h-full object-cover"
                       />
                     ) : (
-                      <div className="w-full h-full rounded-full bg-cta-100 text-cta-700 flex items-center justify-center ">
+                      <div className="w-full h-full rounded-full bg-cta-100 text-cta-700 flex items-center justify-center">
                         {getInitials(user.name)}
                       </div>
                     )}
@@ -113,38 +111,37 @@ export default function NavbarMobile({
                   </div>
                 </div>
               )}
-              <nav className="space-y-4 ">
+
+              <nav className="space-y-4">
                 <Link
                   to="/profile"
-                  className="flex items-center gap-3 w-full hover:text-cta-500 rounded"
                   onClick={() => setMenuOpen(false)}
+                  className="flex items-center gap-3 hover:text-cta-500"
                 >
-                  <User className="w-5 h-5" />
-                  Profil
+                  <User className="w-5 h-5" /> Profil
                 </Link>
                 <Link
                   to="/dashboard/home"
-                  className="flex items-center gap-3 w-full hover:text-cta-500 rounded"
                   onClick={() => setMenuOpen(false)}
+                  className="flex items-center gap-3 hover:text-cta-500"
                 >
-                  <LayoutDashboard className="w-5 h-5" />
-                  Dashboard
+                  <LayoutDashboard className="w-5 h-5" /> Dashboard
                 </Link>
                 <button
                   onClick={() => {
-                    setMenuOpen(false); // Ferme le menu si nécessaire
+                    setMenuOpen(false);
                     navigate("/dashboard/sessions", {
                       state: { tab: "favorites" },
                     });
                   }}
                   className="flex items-center gap-2 hover:text-cta-500 w-full"
                 >
-                  <Heart className="w-4 h-4" />
-                  Mes favoris
+                  <Heart className="w-4 h-4" /> Mes favoris
                 </button>
                 <Link
                   to="/notifications"
-                  className="flex items-center gap-3 w-full hover:text-cta-500 rounded "
+                  onClick={() => setMenuOpen(false)}
+                  className="flex items-center gap-3 hover:text-cta-500"
                 >
                   <div className="relative">
                     <Bell className="w-5 h-5" />
@@ -155,28 +152,26 @@ export default function NavbarMobile({
                   Notifications
                 </Link>
                 <Link
-                  to="/settings"
-                  className="flex items-center gap-3 w-full hover:text-cta-500 rounded"
+                  to="/coming-soon"
                   onClick={() => setMenuOpen(false)}
+                  className="flex items-center gap-3 hover:text-cta-500"
                 >
-                  <Settings className="w-5 h-5" />
-                  Paramètres
+                  <Settings className="w-5 h-5" /> Paramètres
                 </Link>
                 <hr className="my-4" />
                 <Link
-                  to="/help"
-                  className="flex items-center gap-3 w-full hover:text-cta-500 rounded"
+                  to="/coming-soon"
                   onClick={() => setMenuOpen(false)}
+                  className="flex items-center gap-3 hover:text-cta-500"
                 >
-                  <HelpCircle className="w-5 h-5" />
-                  Aide
+                  <HelpCircle className="w-5 h-5" /> Aide
                 </Link>
               </nav>
             </div>
 
             <div>
               <button
-                onClick={() => logout()}
+                onClick={logout}
                 className="flex items-center gap-2 text-error-500 hover:text-error-700"
               >
                 <LogOut className="w-5 h-5" /> Se déconnecter

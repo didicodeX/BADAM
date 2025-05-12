@@ -28,6 +28,8 @@ const NotFoundPage = lazy(() => import("@/shared/pages/NotFoundPage"));
 
 const SessionDetailPage = lazy(() => import("@/features/home/pages/SessionDetailPage"))
 
+const CommingSoonPage = lazy(() => import("@/shared/pages/ComingSoonPage"))
+
 export const router = createBrowserRouter([
   {
     element: <PublicLayout />,
@@ -35,13 +37,14 @@ export const router = createBrowserRouter([
       { path: "/", element: <SmartHomeRedirect /> },
       { path: "/landing", element: <LandingPage /> },
       { path: "/sessions/:id", element: <SessionDetailPage /> },
+      { path: "/search", element: <SearchPage /> }
     ],
   },
 
-  {
-    element: <AppLayout />,
-    children: [{ path: "/search", element: <SearchPage /> }],
-  },
+  // {
+  //   element: <AppLayout />,
+  //   children: [{ path: "/search", element: <SearchPage /> }],
+  // },
 
   {
     element: <AuthLayout />,
@@ -71,6 +74,7 @@ export const router = createBrowserRouter([
       },
     ],
   },
-
+  
   { path: "*", element: <NotFoundPage /> },
+  {path: "/coming-soon", element: <CommingSoonPage />},
 ]);

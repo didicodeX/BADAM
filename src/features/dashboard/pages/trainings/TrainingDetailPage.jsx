@@ -9,6 +9,7 @@ import ConfirmDeleteModal from "@/shared/components/ConfirmDeleteModal";
 import { useSession } from "../../hooks/useSessions";
 import Section from "@/shared/components/Section";
 import SessionCard from "../../components/SessionCard";
+import CardListContainer from "@/shared/components/CardListContainer";
 
 export default function TrainingDetailPage() {
   const { id } = useParams();
@@ -92,7 +93,7 @@ export default function TrainingDetailPage() {
       {/* session creer */}
       <Section last>
         <h3>Sessions créées pour cette formation</h3>
-        <div className="flex flex-wrap gap-6">
+        <CardListContainer>
           {sessions.map((session) => (
             <SessionCard
               key={session._id}
@@ -102,7 +103,7 @@ export default function TrainingDetailPage() {
               session={session}
             />
           ))}
-        </div>
+        </CardListContainer>
       </Section>
       <ConfirmDeleteModal
         isOpen={showConfirmDelete}

@@ -1,19 +1,20 @@
-import { useSearchParams } from "react-router-dom"
-import { useQuery } from "@tanstack/react-query"
-import * as SearchAPI from "@/features/search/api/search.api"
+// features/search/hooks/useSearch.js
+import { useQuery } from "@tanstack/react-query";
+import { searchSessions } from "../api/search.api";
+import { useDebounce } from "@/shared/hooks/useDebounce";
 
-export default function useSearchPage(){
-  const [searchParams] = useSearchParams();
-  const query = searchParams.get("query") || "";
+export function useSearch(query) {
+  const debouncedQuery = useDebounce(query, 300); // 300ms de délai
 
-  const queryResult = useQuery({
-    queryKey:["search",query],
-    queryFn:() => SearchAPI.searchFormations(query),
-    enabled: !!query.trim(), // ne lance pas la requete si vide
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["searchSessions", debouncedQuery],
+    queryFn: () => searchSessions(debouncedQuery),
+    enabled: !!debouncedQuery, // évite les appels vides
   });
 
   return {
-    ...queryResult,
-    query
-  }
+    results: data?.data || [],
+    isLoading,
+    error,
+  };
 }
