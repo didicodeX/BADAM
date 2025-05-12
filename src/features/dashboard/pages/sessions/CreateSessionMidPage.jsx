@@ -4,6 +4,7 @@ import Content from "@/shared/components/Content";
 import Section from "@/shared/components/Section";
 import Button from "@/shared/components/Button";
 import { useTraining } from "../../hooks/useTrainings";
+import EmptySection from "../../components/EmptySection";
 
 export default function CreateSessionMidPage() {
   const navigate = useNavigate();
@@ -22,7 +23,7 @@ export default function CreateSessionMidPage() {
 
   return (
     <Content>
-      <h2>Créer une session</h2>
+      <h2>Créer une séssion</h2>
       <Section>
         <p className="mb-4">Choisissez une formation pour continuer :</p>
         <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-2  lg:grid-cols-3">
@@ -40,10 +41,19 @@ export default function CreateSessionMidPage() {
               <img
                 src={training.images[0]}
                 alt={training.title}
-                className="w-full h-32 object-cover rounded mt-2" 
+                className="w-full h-32 object-cover rounded mt-2"
               />
             </button>
           ))}
+          {myTrainings.length === 0 && (
+            <EmptySection
+              title="Aucune formation créées pour le moment."
+              link={{
+                to: "/dashboard/create-training",
+                label: "Créées votre premiere formation",
+              }}
+            />
+          )}
         </div>
         <div className="mt-6">
           <Button disabled={!selectedTrainingId} onClick={handleContinue}>

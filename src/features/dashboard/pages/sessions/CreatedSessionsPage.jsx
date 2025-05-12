@@ -3,8 +3,9 @@ import { useSession } from "../../hooks/useSessions";
 import SessionCard from "../../components/SessionCard";
 import { Link } from "react-router-dom";
 import Section from "@/shared/components/Section";
-import Button from "@/shared/components/Button";
+import EmptySection from "../../components/EmptySection";
 import CardListContainer from "@/shared/components/CardListContainer";
+import { Plus } from "lucide-react";
 
 export default function CreatedSessionsPage() {
   const { mySessions, isLoadingSessions } = useSession();
@@ -26,7 +27,7 @@ export default function CreatedSessionsPage() {
 
   return (
     <Section last>
-      <h3>Mes sessions créées</h3>
+      <h3>Mes séssions créées</h3>
       {/* Liste des formations et sessions */}
       {Object.values(groupedSessions).map(({ training, sessions }) => (
         <Section key={training._id}>
@@ -51,12 +52,13 @@ export default function CreatedSessionsPage() {
         </Section>
       ))}
       {mySessions.length === 0 && (
-        <div className="flex flex-col items-center gap-6">
-          <p className="text-center text-text-500 mt-8">
-            Vous devez d'abord creer une session.
-          </p>
-          <Button to={"/dashboard/trainings/create"}>Creer</Button>
-        </div>
+        <EmptySection
+          title="Aucune session créées pour le moment."
+          link={{
+            to: "/dashboard/create-session",
+            label: "Créées votre première  séssion.",
+          }}
+        />
       )}
     </Section>
   );

@@ -5,7 +5,7 @@ import TrainingCard from "../../components/TrainingCard";
 import { Search } from "lucide-react";
 import Content from "@/shared/components/Content";
 import Section from "@/shared/components/Section";
-import Button from "@/shared/components/Button";
+import EmptySection from "../../components/EmptySection";
 import CardListContainer from "@/shared/components/CardListContainer";
 
 export default function CreatedTrainingsPage() {
@@ -45,12 +45,13 @@ export default function CreatedTrainingsPage() {
           ))}
         </CardListContainer>
         {myTrainings.length === 0 && (
-          <div className="flex flex-col items-center gap-6">
-            <p className="text-center text-text-500 mt-8">
-              Aucune formation pour le moment.
-            </p>
-            <Button to={"/dashboard/trainings/create"}>Creer</Button>
-          </div>
+          <EmptySection
+            title="Aucune formation créées pour le moment."
+            link={{
+              to: "/dashboard/create-training",
+              label: "Créées votre premiere formation",
+            }}
+          />
         )}
       </Section>
     </Content>
