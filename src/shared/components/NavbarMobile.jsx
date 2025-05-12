@@ -62,7 +62,7 @@ export default function NavbarMobile({
             />
           )}
 
-<Logo/>
+          <Logo />
 
           <Search
             className="w-6 h-6 text-primary cursor-pointer"

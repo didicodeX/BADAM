@@ -100,7 +100,7 @@ const navigate = useNavigate();
             >
               Se connecter
             </Link>
-            <Link to="/login" className={`${baseStyle} ${solidStyle} text-sm`}>
+            <Link to="/register" className={`${baseStyle} ${solidStyle} text-sm`}>
               S'inscrire
             </Link>
           </>

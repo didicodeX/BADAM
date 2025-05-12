@@ -1,11 +1,13 @@
 import { useState } from "react";
-import { Loader } from "lucide-react";
+import { Loader, Search, Star } from "lucide-react";
 import useRegistration from "../../hooks/useRegistration";
 import ConfirmDeleteModal from "@/shared/components/ConfirmDeleteModal";
 import Section from "@/shared/components/Section";
 import RegistrationCard from "../../components/RegistrationCard";
 import Button from "@/shared/components/Button";
 import CardListContainer from "@/shared/components/CardListContainer";
+import { Link } from "react-router-dom";
+import EmptySection from "../../components/EmptySection";
 
 export default function FollowedSessionsPage() {
   const { followedSessions, isLoadingFollowedSession, unfollowSession } =
@@ -50,7 +52,7 @@ export default function FollowedSessionsPage() {
 
   return (
     <Section last>
-      <h3>Mes sessions suivies</h3>
+      <h3>Mes séssions suivies</h3>
       {/* Liste des formations avec leurs sessions suivies */}
       {Object.values(grouped).map(({ training, sessions }) => (
         <Section key={training._id}>
@@ -75,19 +77,18 @@ export default function FollowedSessionsPage() {
       ))}
 
       {Object.keys(grouped).length === 0 && (
-        <div className="flex flex-col items-center gap-6">
-          <p className="text-center text-text-500 mt-8">
-            Aucune session suivie pour le moment.
-          </p>
-          <Button to={"/"}>rechercher une session</Button>
-        </div>
+        <EmptySection
+          title="Aucune séssion suivie pour le moment."
+          link={{ to: "/", label: "Rechercher une session" }}
+          icon={<Search className="w-5 h-5" />}
+        />
       )}
       {/* Modal de confirmation de suppression */}
       <ConfirmDeleteModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onConfirm={handleConfirmUnfollow}
-        title="Se désinscrire de la session"
+        title="Se désinscrire de la séssion"
         message="Tu es sur le point de te désinscrire. Cette action est irréversible. Veux-tu continuer ?"
         confirmText="Se désinscrire"
       />
