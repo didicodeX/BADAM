@@ -7,7 +7,7 @@ export default function Hello() {
   const { user } = useAuthStore();
   return (
     <Content>
-      <div className="flex flex-col gap-6 lg:flex-row lg:items-center pt-8">
+      <div className="flex flex-col gap-6 lg:flex-row lg:items-center">
         <div className="w-28 h-28">
           {user.avatar ? (
             <img

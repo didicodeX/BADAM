@@ -37,13 +37,14 @@ export const router = createBrowserRouter([
       { path: "/", element: <SmartHomeRedirect /> },
       { path: "/landing", element: <LandingPage /> },
       { path: "/sessions/:id", element: <SessionDetailPage /> },
+      { path: "/search", element: <SearchPage /> }
     ],
   },
 
-  {
-    element: <AppLayout />,
-    children: [{ path: "/search", element: <SearchPage /> }],
-  },
+  // {
+  //   element: <AppLayout />,
+  //   children: [{ path: "/search", element: <SearchPage /> }],
+  // },
 
   {
     element: <AuthLayout />,

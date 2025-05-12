@@ -6,11 +6,14 @@ import { useEffect, useState } from "react";
 import { useAuthStore } from "@/features/auth/store/auth.store";
 import Footer from "@/shared/components/Footer";
 import ScrollToTop from "@/shared/components/ScrollToTop";
+import { useSearchStore } from "@/features/search/store/search.store";
+import SearchPage from "@/features/search/pages/SearchPage";
 
 export default function AppLayout() {
   const { user } = useAuthStore();
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
+  const { query } = useSearchStore();
 
   const forceOpenSearch =
     location.pathname === "/search" &&
@@ -59,12 +62,14 @@ export default function AppLayout() {
             onClick={() => setMenuOpen(false)}
           />
         )}
-        <main className={`${menuOpen ? "z-0" : "relative z-20"} transition-all`}>
-          <Outlet />
+        <main
+          className={`${menuOpen ? "z-0" : "relative z-20"} transition-all pt-16`}
+        >
+          {query.trim() ? <SearchPage /> : <Outlet />}
         </main>
       </div>
       <div>
-        <Footer/>
+        <Footer />
       </div>
     </div>
   );

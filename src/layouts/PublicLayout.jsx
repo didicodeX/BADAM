@@ -4,10 +4,12 @@ import Navbar from "@/shared/components/Navbar";
 import NavbarMobilePublic from "@/shared/components/NavbarMobilePublic";
 import Footer from "@/shared/components/Footer";
 import ScrollToTop from "@/shared/components/ScrollToTop";
+import { useSearchStore } from "@/features/search/store/search.store";
+import SearchPage from "@/features/search/pages/SearchPage";
 
 export default function PublicLayout() {
   const [menuOpen, setMenuOpen] = useState(false);
-
+  const { query } = useSearchStore();
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 640) {
@@ -42,10 +44,12 @@ export default function PublicLayout() {
 
       {/* Contenu principal */}
       <main className={`${menuOpen ? "z-0" : "relative z-20"} pt-16 flex-1`}>
-        <Outlet />
+        {query.trim() ? <SearchPage /> : <Outlet />}
       </main>
 
-      <footer className={`${menuOpen ? "z-0" : "relative z-20"}`}><Footer variant="minimal"/> </footer>
+      <footer className={`${menuOpen ? "z-0" : "relative z-20"}`}>
+        <Footer variant="minimal" />{" "}
+      </footer>
     </div>
   );
 }

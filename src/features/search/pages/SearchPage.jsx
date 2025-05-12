@@ -1,63 +1,57 @@
-import { useSearchParams } from "react-router-dom";
-import { useState, useEffect } from "react";
-import SearchInput from "@/shared/components/SearchInput";
+// features/search/pages/SearchPage.jsx
+import { useSearchStore } from "../store/search.store";
+import { useAuthStore } from "@/features/auth/store/auth.store";
+import CardListContainer from "@/shared/components/CardListContainer";
+import SessionCard from "@/features/dashboard/components/SessionCard";
+import FavoriteCard from "@/features/home/components/FavoriteCard";
+import useHome from "@/features/home/hooks/useHome";
+import Content from "@/shared/components/Content";
 
 export default function SearchPage() {
-  const [searchParams] = useSearchParams();
-  const initialQuery = searchParams.get("query") || "";
-  const [search, setSearch] = useState(initialQuery);
-  const [searchOpen, setSearchOpen] = useState(false);
+  const { results, loading, error, query } = useSearchStore();
+  const { user } = useAuthStore();
+  const { handleToggleFavorite } = useHome();
+  const favorites = user?.favorites || [];
 
-  useEffect(() => {
-    setSearch(initialQuery);
-  }, [initialQuery]);
-
-  useEffect(() => {
-    const shouldOpen = sessionStorage.getItem("badam:search:autoFocus") === "1";
-    if (shouldOpen) {
-      setSearchOpen(true);
-    }
-  }, []);
+  if (!query.trim()) return null;
 
   return (
-    <div className="p-4 space-y-4">
-      {searchOpen && (
-        <SearchInput mobile onClose={() => setSearchOpen(false)} />
-      )}
-
+    <Content>
       <div>
-        Affichage des résultats pour : <strong>{search}</strong>
+        <h2 className="text-xl font-bold mb-4">Résultats de recherche</h2>
+        {loading && <p>Chargement...</p>}
+        {error && <p className="text-red-500">{error}</p>}
+        {results.length > 0 && (
+          <p className="text-sm text-text-700 mb-4">
+            {results.length} session{results.length > 1 ? "s" : ""} trouvée{results.length > 1 ? "s" : ""} pour "<strong>{query}</strong>"
+          </p>
+        )}
       </div>
-    </div>
+
+      <CardListContainer>
+        {results.map((session) => {
+          const isOwner = session.createdBy === user?._id;
+          return isOwner ? (
+            <SessionCard
+              key={session._id}
+              id={session._id}
+              trainingTitle={session.training.title}
+              trainingImage={session.coverImage || session.training.images[0]}
+              session={session}
+            />
+          ) : (
+            <FavoriteCard
+              key={session._id}
+              id={session._id}
+              trainingTitle={session.training.title}
+              trainingImage={session.coverImage || session.training.images[0]}
+              session={session}
+              isFavorite={favorites.includes(session._id)}
+              onToggleFavorite={() => handleToggleFavorite(session._id)}
+            />
+          );
+        })}
+      </CardListContainer>
+    </Content>
   );
 }
-
-/**
- * import { useSearchResults } from "@/features/search/hooks/useSearchResults";
-
-export default function SearchPage() {
-  const { query, data, isLoading, isError } = useSearchResults();
-
-  return (
-    <div className="p-4">
-      <h1 className="text-xl font-bold mb-4">
-        Résultats pour : <span className="text-cta-500">{query}</span>
-      </h1>
-
-      {isLoading && <p>Chargement...</p>}
-      {isError && <p className="text-error-500">Une erreur est survenue.</p>}
-      {data?.length === 0 && <p>Aucun résultat trouvé.</p>}
-
-      <ul className="space-y-4">
-        {data?.map((formation) => (
-          <li key={formation._id} className="border p-4 rounded">
-            <h2 className="font-semibold">{formation.title}</h2>
-            <p>{formation.description}</p>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
- */
