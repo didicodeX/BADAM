@@ -30,10 +30,6 @@ export default function DashboardHomePage() {
     );
   }
 
-  console.log("myTrainings : ", myTrainings);
-  console.log("mySessions : ", mySessions);
-  console.log("followedSessions : ", followedSessions);
-
   return (
     <Content>
       <h1>Bienvenue, {formatName(user?.name)} !</h1>

@@ -12,7 +12,6 @@ export default function SignupPage() {
       navigate("/home");
     }
   }, [user, navigate]);
-  console.log(user);
   
   return (
     <>

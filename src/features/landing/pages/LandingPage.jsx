@@ -18,7 +18,7 @@ export default function LandingPage() {
       navigate("/home");
     }
   }, [user, navigate]);
-  console.log(user);
+
    return (
     <main className="flex flex-col gap-6 pt-6">
       <HeroSection />

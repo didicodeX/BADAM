@@ -12,8 +12,6 @@ export default function ProfileNameField({ user }) {
     formatName(user.name)
   };
 
-  console.log(formatName(user.name))
-
   return (
     <div className="flex flex-col py-6 border-b border-b-background-100">
       <h4>Nom du profil</h4>

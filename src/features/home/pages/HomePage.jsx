@@ -9,11 +9,9 @@ import { useAuthStore } from "@/features/auth/store/auth.store";
 import SessionCard from "@/features/dashboard/components/SessionCard";
 
 export default function HomePage() {
-  // const { handleToggleFavorite,latest} = useHome();
   const { user } = useAuthStore();
-  console.log(user);
 
-  const { handleToggleFavorite, latest, topRated } = useHome();
+  const { handleToggleFavorite, latest } = useHome();
 
   // if (isLoadingAllSession) {
   //   return (
@@ -25,9 +23,6 @@ export default function HomePage() {
 
   const sessions = useSessions();
   const favorites = useFavorites();
-
-  console.log("topRated", topRated);
-  
 
   return (
     <Section>
