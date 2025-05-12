@@ -23,12 +23,12 @@ export default function PublicLayout() {
     <div className="min-h-screen flex flex-col relative">
       <ScrollToTop />
       {/* Navbar desktop */}
-      <div className="hidden md:block">
+      <div className="hidden lg:block">
         <Navbar />
       </div>
 
       {/* Navbar mobile */}
-      <div className="block md:hidden">
+      <div className="block lg:hidden">
         <NavbarMobilePublic menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
       </div>
 

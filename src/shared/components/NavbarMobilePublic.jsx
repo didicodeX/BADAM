@@ -18,7 +18,7 @@ export default function NavbarMobilePublic({
     }
   }, [forceOpenSearchOnMount]);
   return (
-    <header className="fixed top-0 left-0 w-full bg-background-50 px-4 py-3 shadow-sm  z-50 h-14">
+    <header className="fixed top-0 left-0 w-full bg-background-50 padd-x py-3 shadow-sm  z-50 h-14">
       {!searchOpen ? (
         <div className="flex items-center justify-between">
           {menuOpen ? (

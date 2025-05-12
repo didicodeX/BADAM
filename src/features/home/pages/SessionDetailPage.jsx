@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { format } from "date-fns";
 import { Loader, Heart, HeartPlus, Share, MessageCircle } from "lucide-react";
 import { enUS } from "date-fns/locale";
@@ -15,11 +15,14 @@ import useRegistration from "@/features/dashboard/hooks/useRegistration";
 import useFavorites from "@/features/dashboard/hooks/useFavorites";
 import ReviewModal from "../components/ReviewModal";
 import TrainingReviewSection from "../components/TrainingReviewSection";
+import { useAuth } from "@/features/auth/hooks/useAuth";
 
 export default function SessionDetailPage() {
   const { id } = useParams();
   const { sessionDetail, isLoadingsessionDetail, handleToggleFavorite } =
     useHome(id);
+  const { isAuthenticated } = useAuth();
+  const navigate = useNavigate();
   const { registerToSession, followedSessions } = useRegistration();
   const { myFavorites, isLoadinMyFavorites } = useFavorites();
 
@@ -31,6 +34,9 @@ export default function SessionDetailPage() {
         <Loader className="animate-spin w-6 h-6 text-text-500" />
       </div>
     );
+  }
+  if (!sessionDetail) {
+    return <p className="text-error-700">Session introuvable.</p>;
   }
 
   console.log(sessionDetail);
@@ -46,6 +52,21 @@ export default function SessionDetailPage() {
   );
   const isPast = new Date(session.endDateTime) < new Date();
 
+  const handleRegisterClick = () => {
+    if (!isAuthenticated) {
+      navigate("/login"); // ou ouvrir une modale si tu préfères
+      return;
+    }
+    registerToSession(id);
+  };
+
+  const handleToggleFavoriteClick = () => {
+    if (!isAuthenticated) {
+      navigate("/login");
+      return;
+    }
+    handleToggleFavorite(id);
+  }
   return (
     <Content>
       <h2>{training.title}</h2>
@@ -81,7 +102,7 @@ export default function SessionDetailPage() {
               type="button"
               onClick={(e) => {
                 e.stopPropagation();
-                handleToggleFavorite(session._id);
+                handleToggleFavoriteClick();
               }}
               className="cursor-pointer transition-colors hover:text-cta-500 text-text-900"
             >
@@ -110,7 +131,7 @@ export default function SessionDetailPage() {
       </Section>
       <div className="flex justify-center">
         {!isRegistered ? (
-          <Button onClick={() => registerToSession(id)}>S'inscrire</Button>
+          <Button onClick={() => handleRegisterClick()}>S'inscrire</Button>
         ) : isPast ? (
           <Button onClick={() => setIsReviewOpen(true)}>Laisser un avis</Button>
         ) : (

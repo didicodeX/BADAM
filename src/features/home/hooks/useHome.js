@@ -2,7 +2,6 @@ import { useMutation, useQueryClient, useQuery } from "@tanstack/react-query";
 import * as HomeAPI from "../api/home.api";
 import { useHomeStore } from "../store/useHome.store";
 import { useEffect } from "react";
-import { toastError } from "@/shared/components/toast";
 
 export default function useHome(id) {
   const queryClient = useQueryClient();
@@ -26,7 +25,6 @@ export default function useHome(id) {
 
         setFavorites(favoriteRes.data.map((fav) => fav.session._id));
       } catch (err) {
-        toastError("Erreur lors du chargement des données.");
         console.log(err.message);
       }
     }

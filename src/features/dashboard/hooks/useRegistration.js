@@ -2,14 +2,17 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import * as RegistrationAPI from "../api/registration.api";
 import { toastSuccess, toastError } from "@/shared/components/toast";
+import { useAuth } from "@/features/auth/hooks/useAuth";
 
 export default function useRegistration() {
+  const { isAuthenticated } = useAuth();
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
   const followedSessionQuery = useQuery({
     queryKey: ["followedSession"],
     queryFn: RegistrationAPI.getMyRegistrations,
+    enabled: isAuthenticated,
   });
 
   const createRegistrationMutation = useMutation({
@@ -24,7 +27,6 @@ export default function useRegistration() {
       toastError(message);
     },
   });
-
 
   const deleteRegistrationMutation = useMutation({
     mutationFn: RegistrationAPI.deleteRegistration,

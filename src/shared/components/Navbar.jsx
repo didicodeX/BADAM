@@ -48,7 +48,7 @@ const navigate = useNavigate();
   }, [userMenuOpen]);
 
   return (
-    <header className="fixed top-0 left-0 w-full flex items-center justify-between px-10 py-4 bg-background-50 z-50 shadow-sm h-16">
+    <header className="fixed top-0 left-0 w-full flex items-center justify-between padd-x py-4 bg-background-50 z-50 shadow-sm h-16">
       {/* Logo */}
       <div className="text-2xl font-bold">
         <Link to="/">

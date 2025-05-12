@@ -22,7 +22,12 @@ export default function TrainingReviewSection({
     );
   }
 
+  console.log("reviws : ",reviews);
+  
+
   const reviewsList = reviews.data;
+
+  console.log("reviewsList : ", reviewsList);
 
   // Grouper les reviews par session
   const grouped = reviewsList.reduce((acc, review) => {

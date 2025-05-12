@@ -2,14 +2,15 @@ import { useEffect } from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import * as ReviewAPI from "../api/review.api";
 import { socket } from "@/shared/lib/socket"; // Importer le socket
+import { useAuth } from "@/features/auth/hooks/useAuth";
 
 export default function useReviews(trainingId) {
   // Récupère les reviews de cette session (par exemple avec useQuery)
-  
+  const { isAuthenticated } = useAuth();
   const myReviewsQuery = useQuery({
-    queryKey: ["reviews", trainingId],  // Key unique pour chaque formation
-    queryFn: () => ReviewAPI.getReviews(trainingId),  // Supposons que tu aies cette fonction
-    enabled: !!trainingId, // ✅ ne s'exécute que si trainingId est défini
+    queryKey: ["reviews", trainingId], // Key unique pour chaque formation
+    queryFn: () => ReviewAPI.getReviews(trainingId), // Supposons que tu aies cette fonction
+    enabled: !!trainingId 
   });
 
   // Mutation pour créer une review
@@ -23,6 +24,7 @@ export default function useReviews(trainingId) {
 
   // Écouter l'événement `review_posted` du backend (via Socket.io)
   useEffect(() => {
+    if (!isAuthenticated || !trainingId) return;
     const handleNewReview = (newReview) => {
       // On vérifie que la review appartient à la session courante
       if (newReview.training._id === trainingId) {
@@ -37,7 +39,7 @@ export default function useReviews(trainingId) {
     return () => {
       socket.off("review_posted", handleNewReview);
     };
-  }, [trainingId, myReviewsQuery]);
+  }, [trainingId, myReviewsQuery,isAuthenticated]);
 
   return {
     createReview: createReviewMutation.mutate,

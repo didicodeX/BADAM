@@ -2,17 +2,19 @@ import { useMutation } from "@tanstack/react-query";
 import * as AuthAPI from "@/features/auth/api/auth.api";
 import { useAuthStore } from "../store/auth.store";
 import { useNavigate } from "react-router-dom";
-import { toastSuccess, toastError } from "@/shared/components/toast.jsx";
+import {  toastError } from "@/shared/components/toast.jsx";
 
 export function useAuth() {
   const navigate = useNavigate();
   const setUser = useAuthStore((state) => state.setUser);
+  const user = useAuthStore((state) => state.user); 
+
+  const isAuthenticated = !!user; 
 
   const loginMutation = useMutation({
     mutationFn: AuthAPI.login,
     onSuccess: ({ data }) => {
       setUser(data.user);
-      toastSuccess(data.message);
       navigate("/home");
     },
     onError: (error) => {
@@ -25,7 +27,6 @@ export function useAuth() {
     mutationFn: AuthAPI.register,
     onSuccess: ({ data }) => {
       setUser(data.user);
-      toastSuccess(data.message);
       navigate("/login");
     },
     onError: (error) => {
@@ -36,9 +37,8 @@ export function useAuth() {
 
   const logoutMutation = useMutation({
     mutationFn: AuthAPI.logout,
-    onSuccess: ({ data }) => {
+    onSuccess: () => {
       setUser(null);
-      toastSuccess(data.message);
       navigate("/login");
     },
     onError: ({ data }) => {
@@ -52,5 +52,7 @@ export function useAuth() {
     logout: logoutMutation.mutate,
     isLoggingIn: loginMutation.isPending,
     isLoggingOut: logoutMutation.isPending,
+    user,
+    isAuthenticated,
   };
 }

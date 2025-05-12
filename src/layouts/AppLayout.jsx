@@ -59,7 +59,7 @@ export default function AppLayout() {
             onClick={() => setMenuOpen(false)}
           />
         )}
-        <main className={`${menuOpen ? "z-0" : "relative z-20"} transition-all pt-16`}>
+        <main className={`${menuOpen ? "z-0" : "relative z-20"} transition-all`}>
           <Outlet />
         </main>
       </div>
