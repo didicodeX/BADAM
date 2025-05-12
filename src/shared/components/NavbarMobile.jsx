@@ -23,6 +23,7 @@ import { getInitials } from "../utils/getInitials";
 import SearchInput from "./SearchInput";
 import { capitalizeFirstLetter } from "../utils/capitalizeFirstLetter";
 import useNotifications from "@/features/notifications/hooks/useNotifications";
+import Logo from "./Logo";
 
 export default function NavbarMobile({
   menuOpen,
@@ -61,11 +62,7 @@ export default function NavbarMobile({
             />
           )}
 
-          <div className="text-xl font-bold">
-            <Link to="/">
-              BA<span className="text-cta-500">DAM</span>
-            </Link>
-          </div>
+<Logo/>
 
           <Search
             className="w-6 h-6 text-primary cursor-pointer"

@@ -8,6 +8,7 @@ import UserMenu from "./UserMenu"; // 👈 Crée ce fichier séparément
 import { baseStyle, solidStyle, outlineStyle } from "../styles/buttonStyle";
 import useNotifications from "@/features/notifications/hooks/useNotifications";
 import Avatar from "@/features/dashboard/components/Avatar";
+import Logo from "./Logo"; // Assurez-vous que le chemin est correct
 
 export default function Navbar() {
   const { user } = useAuthStore();
@@ -50,11 +51,7 @@ const navigate = useNavigate();
   return (
     <header className="fixed top-0 left-0 w-full flex items-center justify-between padd-x py-4 bg-background-50 z-50 shadow-sm h-16">
       {/* Logo */}
-      <div className="text-xl font-bold">
-        <Link to="/">
-          BA<span className="text-cta-500">DAM</span>
-        </Link>
-      </div>
+<Logo/> 
 
       {/* Barre de recherche */}
       <div className="flex-1 mx-8 max-w-xl">

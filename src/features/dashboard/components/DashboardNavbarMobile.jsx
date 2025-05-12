@@ -18,6 +18,7 @@ import { useAuth } from "@/features/auth/hooks/useAuth";
 import { getInitials } from "@/shared/utils/getInitials";
 import { capitalizeFirstLetter } from "@/shared/utils/capitalizeFirstLetter";
 import useNotifications from "@/features/notifications/hooks/useNotifications";
+import Logo from "@/shared/components/Logo";
 
 export default function DashboardNavbarMobile({ menuOpen, setMenuOpen }) {
   const { user } = useAuthStore();
@@ -44,11 +45,17 @@ export default function DashboardNavbarMobile({ menuOpen, setMenuOpen }) {
           />
         )}
 
-        <div className="text-xl text-center font-bold w-full">
-          <Link to="/">
-            BA<span className="text-cta-500">DAM</span>
-          </Link>
-        </div>
+<Logo/>
+
+        <Link
+          to="/notifications"
+          className="flex items-center hover:text-cta-500 rounded relative"
+        >
+          <Bell className="w-6 h-6" />
+          {hasUnreadNotifications && (
+            <span className="absolute top-0 right-0 w-2.5 h-2.5 bg-cta-500 rounded-full" />
+          )}
+        </Link>
       </div>
 
       <AnimatePresence>

@@ -5,6 +5,7 @@ import ConfirmDeleteModal from "@/shared/components/ConfirmDeleteModal";
 import Section from "@/shared/components/Section";
 import RegistrationCard from "../../components/RegistrationCard";
 import Button from "@/shared/components/Button";
+import CardListContainer from "@/shared/components/CardListContainer";
 
 export default function FollowedSessionsPage() {
   const { followedSessions, isLoadingFollowedSession, unfollowSession } =
