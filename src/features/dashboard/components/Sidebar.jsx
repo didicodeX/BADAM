@@ -10,7 +10,7 @@ import {
 import { Link, useLocation, matchPath, useNavigate } from "react-router-dom";
 
 
-export default function DashboardSidebar() {
+export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef(null);
