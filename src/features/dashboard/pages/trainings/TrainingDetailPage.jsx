@@ -84,7 +84,7 @@ export default function TrainingDetailPage() {
       {/* infos training */}
       <Section>
         <h3>Informations sur la formation</h3>
-        <div className="flex w-[400px] sm:w-[500px] md:w-[650px] lg:w-[900px xl:w-[1204px] overflow-hidden">
+        <div className="flex w-[330px] sm:w-[500px] md:w-[650px] lg:w-[900px xl:w-[1204px] overflow-hidden">
           {media.length > 0 && <MediaSlider slides={media} />}
         </div>
         <p>{training.description}</p>

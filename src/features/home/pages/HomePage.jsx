@@ -25,7 +25,7 @@ export default function HomePage() {
   const favorites = useFavorites();
 
   return (
-    <Section>
+    <Section last>
       <Hello />
       <img src="/img/Hero.png" alt="hero" className="w-full" />
       <Content>
@@ -57,7 +57,7 @@ export default function HomePage() {
             })}
           </div>
         </Section>
-        <Section>
+        <Section last>
           <h3 className="mb-4"> Les nouvelle sessions</h3>
           <div className="flex flex-wrap gap-6">
             {latest.map((session) => (

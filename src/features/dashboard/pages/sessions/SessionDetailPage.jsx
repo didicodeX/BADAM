@@ -88,7 +88,7 @@ export default function SessionDetailPage() {
           <img
             src={image}
             alt="cover"
-            className="w-full md:max-h-[330px] max-w-[900px] max-h-[300px] rounded-xl"
+            className="w-full md:max-h-[400px] max-w-[900px] max-h-[300px] rounded-xl"
           />
           <div className="flex flex-col gap-2">
             <p>{training.description}</p>

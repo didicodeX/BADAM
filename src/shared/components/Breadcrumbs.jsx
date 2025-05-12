@@ -13,7 +13,7 @@ export default function Breadcrumbs({ currentLabel, customLabels = {} }) {
   const buildPath = (i) => "/" + allSegments.slice(0, i + 1).join("/");
 
   return (
-    <nav className="text-sm text-text-500 mb-4 flex items-center gap-2 flex-wrap px-4 md:px-6 pt-4">
+    <nav className="text-sm text-text-500 flex items-center gap-2 flex-wrap px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 pt-6">
       <Link to="/dashboard/home" className="hover:underline font-medium">
         Dashboard
       </Link>

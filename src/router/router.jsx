@@ -10,7 +10,6 @@ import ProtectedRoute from "./ProtectedRoute";
 import SmartHomeRedirect from "./SmartHomeRedirect";
 
 // Page de test
-import TestPage from "../test/TestPage";
 import SearchPage from "@/features/search/pages/SearchPage";
 import DashboardRoutes from "@/features/dashboard";
 
@@ -35,7 +34,6 @@ export const router = createBrowserRouter([
     children: [
       { path: "/", element: <SmartHomeRedirect /> },
       { path: "/landing", element: <LandingPage /> },
-      { path: "/test", element: <TestPage /> },
       { path: "/sessions/:id", element: <SessionDetailPage /> },
     ],
   },
