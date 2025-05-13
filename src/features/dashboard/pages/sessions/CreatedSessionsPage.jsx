@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import Section from "@/shared/components/Section";
 import EmptySection from "../../components/EmptySection";
 import CardListContainer from "@/shared/components/CardListContainer";
-import { Plus } from "lucide-react";
 
 export default function CreatedSessionsPage() {
   const { mySessions, isLoadingSessions } = useSession();

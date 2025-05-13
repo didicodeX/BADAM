@@ -1,9 +1,9 @@
+import { MoreVertical } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { useSession } from "../../hooks/useSessions";
 import { format } from "date-fns";
 import { enUS } from "date-fns/locale";
-import { Loader, MoreVertical } from "lucide-react";
 import Section from "@/shared/components/Section";
 import Status from "../../../../shared/components/Status";
 import Button from "@/shared/components/Button";
@@ -12,6 +12,7 @@ import Content from "@/shared/components/Content";
 import ConfirmDeleteModal from "@/shared/components/ConfirmDeleteModal";
 import ActionMenuSession from "../../components/ActionMenuSession";
 import ParticipantCard from "../../components/ParticipantCard";
+import LoadingScreen from "@/shared/components/LoadingScreen";
 
 export default function SessionDetailPage() {
   const { id } = useParams();
@@ -45,13 +46,7 @@ export default function SessionDetailPage() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  if (isLoadingMySessionDetail) {
-    return (
-      <div className="flex justify-center items-center min-h-[200px]">
-        <Loader className="animate-spin w-6 h-6 text-text-500" />
-      </div>
-    );
-  }
+  if (isLoadingMySessionDetail) return <LoadingScreen/>
 
   const { session, registrations = [], reviews = [] } = mySessionDetail;
   const training = session.training;

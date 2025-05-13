@@ -13,14 +13,6 @@ export default function HomePage() {
 
   const { handleToggleFavorite, latest } = useHome();
 
-  // if (isLoadingAllSession) {
-  //   return (
-  //     <div className="flex justify-center items-center min-h-[200px]">
-  //       <Loader className="animate-spin w-6 h-6 text-text-500" />
-  //     </div>
-  //   );
-  // }
-
   const sessions = useSessions();
   const favorites = useFavorites();
 
@@ -39,9 +31,12 @@ export default function HomePage() {
                   key={session._id}
                   id={session._id}
                   trainingTitle={session.training.title}
-                  trainingImage={session.coverImage || session.training.images[0]}
+                  trainingImage={
+                    session.coverImage || session.training.images[0]
+                  }
                   session={session}
-                />              ) : (
+                />
+              ) : (
                 <FavoriteCard
                   key={session._id}
                   id={session._id}
@@ -60,17 +55,32 @@ export default function HomePage() {
         <Section last>
           <h3 className="mb-4"> Les nouvelle sessions</h3>
           <CardListContainer>
-            {latest.map((session) => (
-              <FavoriteCard
-                key={session._id}
-                id={session._id}
-                trainingTitle={session.training.title}
-                trainingImage={session.coverImage || session.training.images[0]}
-                session={session}
-                isFavorite={favorites.includes(session._id)}
-                onToggleFavorite={() => handleToggleFavorite(session._id)}
-              />
-            ))}
+            {latest.map((session) => {
+              const isOwner = session.createdBy === user._id;
+              return isOwner ? (
+                <SessionCard
+                  key={session._id}
+                  id={session._id}
+                  trainingTitle={session.training.title}
+                  trainingImage={
+                    session.coverImage || session.training.images[0]
+                  }
+                  session={session}
+                />
+              ) : (
+                <FavoriteCard
+                  key={session._id}
+                  id={session._id}
+                  trainingTitle={session.training.title}
+                  trainingImage={
+                    session.coverImage || session.training.images[0]
+                  }
+                  session={session}
+                  isFavorite={favorites.includes(session._id)}
+                  onToggleFavorite={() => handleToggleFavorite(session._id)}
+                />
+              );
+            })}
           </CardListContainer>
         </Section>
       </Content>

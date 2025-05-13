@@ -4,6 +4,10 @@ export const getMyRegistrations = () => {
   return api.get("/registrations");
 };
 
+export const getArchivedRegistrations = () => {
+  return api.get("/registrations/archived");
+}
+
 export const getParticipantsBySession = (sessionId) => {
   return api.get(`/registrations/sessions/${sessionId}`);
 };

@@ -4,7 +4,8 @@ import Section from "@/shared/components/Section";
 import ReviewCard from "@/features/dashboard/components/ReviewCard";
 import ReviewModal from "./ReviewModal";
 import useReviews from "@/features/dashboard/hooks/useReviews";
-import { Loader, Star } from "lucide-react";
+import { Star } from "lucide-react";
+import LoadingScreen from "@/shared/components/LoadingScreen";
 
 export default function TrainingReviewSection({
   trainingId,
@@ -14,13 +15,7 @@ export default function TrainingReviewSection({
 }) {
   const { reviews, isLoadingReviews } = useReviews(trainingId);
 
-  if (isLoadingReviews) {
-    return (
-      <div className="flex justify-center items-center min-h-[200px]">
-        <Loader className="animate-spin w-6 h-6 text-text-500" />
-      </div>
-    );
-  }
+  if (isLoadingReviews) return <LoadingScreen />;
 
   const reviewsList = reviews.data;
 
@@ -43,14 +38,13 @@ export default function TrainingReviewSection({
     <>
       <Section last>
         <h3 className="text-lg font-semibold mb-2">
-          {reviewsList.length} {reviewsList.length > 1 ? "avis laissés" : "avis laissé"}{" "}
-          par les participants
+          {reviewsList.length}{" "}
+          {reviewsList.length > 1 ? "avis laissés" : "avis laissé"} par les
+          participants
         </h3>
 
         {isLoadingReviews ? (
-          <div className="flex justify-center items-center min-h-[150px]">
-            <Loader className="w-6 h-6 animate-spin text-text-500" />
-          </div>
+          <LoadingScreen />
         ) : groupedArray.length === 0 ? (
           <small className="text-cta-500">
             Aucun avis n'a encore été laissé pour cette formation.

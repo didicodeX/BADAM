@@ -2,19 +2,13 @@ import useNotifications from "../hooks/useNotifications";
 import NotificationCard from "../components/NotificationCard";
 import Section from "@/shared/components/Section";
 import Content from "@/shared/components/Content";
-import { Loader } from "lucide-react";
+import LoadingScreen from "@/shared/components/LoadingScreen";
 
 export default function NotificationsPage() {
   const { notifications, isLoading, markAsRead, deleteNotification } =
     useNotifications();
-    
-  if (isLoading) {
-    return (
-      <div className="flex justify-center items-center min-h-[200px]">
-        <Loader className="animate-spin w-6 h-6 text-text-500" />
-      </div>
-    );
-  }
+
+  if (isLoading) return <LoadingScreen />;
 
   return (
     <Content>

@@ -3,10 +3,10 @@ import classNames from "classnames";
 
 export default function Avatar({ user, size = "md" }) {
   const sizeMap = {
-    sm: "w-8 h-8 text-sm",
-    md: "w-10 h-10 text-base",
-    lg: "w-14 h-14 text-lg",
-    xl: "w-20 h-20 text-xl",
+    sm: "min-w-8 h-8 text-sm",
+    md: "min-w-10 h-10 text-base",
+    lg: "min-w-14 h-14 text-lg",
+    xl: "min-w-20 h-20 text-xl",
   };
 
   return (

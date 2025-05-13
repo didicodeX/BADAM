@@ -1,3 +1,4 @@
+import { Search } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import useRegistration from "@/features/dashboard/hooks/useRegistration";
 import Statistique from "../../components/Statistique";
@@ -8,12 +9,12 @@ import { useTraining } from "../../hooks/useTrainings";
 import { useAuthStore } from "@/features/auth/store/auth.store";
 import { Link } from "react-router-dom";
 import RegistrationCard from "../../components/RegistrationCard";
-import { Loader } from "lucide-react";
 import SessionCard from "../../components/SessionCard";
 import TrainingCard from "../../components/TrainingCard";
-import Button from "@/shared/components/Button";
 import { formatName } from "@/shared/utils/formatName";
 import CardListContainer from "@/shared/components/CardListContainer";
+import EmptySection from "../../components/EmptySection";
+import LoadingScreen from "@/shared/components/LoadingScreen";
 
 export default function DashboardHomePage() {
   const { user } = useAuthStore();
@@ -23,13 +24,7 @@ export default function DashboardHomePage() {
   const { myTrainings } = useTraining();
   const navigate = useNavigate();
 
-  if (isLoadingFollowedSession) {
-    return (
-      <div className="flex justify-center items-center min-h-[200px]">
-        <Loader className="animate-spin w-6 h-6 text-text-500" />
-      </div>
-    );
-  }
+  if (isLoadingFollowedSession) return <LoadingScreen/>
 
   return (
     <Content>
@@ -86,18 +81,19 @@ export default function DashboardHomePage() {
         {myTrainings.length > 3 && (
           <Link
             className="w-14 h-14 rounded-full bg-background-100 flex items-center justify-center text-sm text-cta-500"
-            to={`/dashboard/trainings/created`}
+            to={`/dashboard/trainings`}
           >
             +{myTrainings.length - 3}
           </Link>
         )}
         {myTrainings.length === 0 && (
-          <div className="flex flex-col items-center gap-6">
-            <p className="text-center text-text-500 mt-8">
-              Aucune formation pour le moment.
-            </p>
-            <Button to={"/dashboard/trainings/create"}>Creer</Button>
-          </div>
+          <EmptySection
+            title="Aucune formation créées pour le moment."
+            link={{
+              to: "/dashboard/create-training",
+              label: "Créées votre première  séssion.",
+            }}
+          />
         )}
       </Section>
       <Section>
@@ -114,20 +110,25 @@ export default function DashboardHomePage() {
           ))}
         </CardListContainer>
         {mySessions.length > 3 && (
-          <Link
+          <button
             className="w-14 h-14 rounded-full bg-background-100 flex items-center justify-center text-sm text-cta-500"
-            to={`/dashboard/sessions/created`}
+            onClick={() =>
+              navigate("/dashboard/sessions", {
+                state: { tab: "created" },
+              })
+            }
           >
             +{mySessions.length - 3}
-          </Link>
+          </button>
         )}
         {mySessions.length === 0 && (
-          <div className="flex flex-col items-center gap-6">
-            <p className="text-center text-text-500 mt-8">
-              Vous devez d'abord creer une session.
-            </p>
-            <Button to={"/dashboard/trainings/create"}>Creer</Button>
-          </div>
+          <EmptySection
+            title="Aucune session créées pour le moment."
+            link={{
+              to: "/dashboard/create-session",
+              label: "Créées votre première  séssion.",
+            }}
+          />
         )}
       </Section>
       <Section last>
@@ -148,20 +149,23 @@ export default function DashboardHomePage() {
           ))}
         </CardListContainer>
         {followedSessions.length > 3 && (
-          <Link
+          <button
             className="w-14 h-14 rounded-full bg-background-100 flex items-center justify-center text-sm text-cta-500"
-            to={`/dashboard/sessions/followed`}
+            onClick={() =>
+              navigate("/dashboard/sessions", {
+                state: { tab: "followed" },
+              })
+            }
           >
             +{mySessions.length - 3}
-          </Link>
+          </button>
         )}
         {followedSessions.length === 0 && (
-          <div className="flex flex-col items-center gap-6">
-            <p className="text-center text-text-500 mt-8">
-              Aucune session suivie pour le moment.
-            </p>
-            <Button to={"/"}>rechercher une session</Button>
-          </div>
+          <EmptySection
+            title="Aucune séssion suivie pour le moment."
+            link={{ to: "/", label: "Rechercher une session" }}
+            icon={<Search className="w-5 h-5" />}
+          />
         )}
       </Section>
     </Content>

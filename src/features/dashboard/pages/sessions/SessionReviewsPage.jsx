@@ -3,19 +3,13 @@ import useSessionReviews from "@/features/dashboard/hooks/useSessionReviews";
 import Content from "@/shared/components/Content";
 import Section from "@/shared/components/Section";
 import ReviewCard from "@/features/dashboard/components/ReviewCard";
-import { Loader } from "lucide-react";
+import LoadingScreen from "@/shared/components/LoadingScreen";
 
 export default function SessionReviewsPage() {
   const { id } = useParams();
   const { reviews, isLoading } = useSessionReviews(id);
 
-  if (isLoading) {
-    return (
-      <div className="flex justify-center items-center min-h-[200px]">
-        <Loader className="animate-spin w-6 h-6 text-text-500" />
-      </div>
-    );
-  }
+  if (isLoading) return <LoadingScreen />;
 
   return (
     <Content>

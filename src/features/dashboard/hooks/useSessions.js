@@ -14,7 +14,9 @@ export function useSession(id, trainingId) {
     onSuccess: ({ data }) => {
       setSession(data);
       toastSuccess("Session créée avec succès !");
-      navigate("/dashboard/sessions/created");
+      navigate("/dashboard/sessions", {
+        state: { tab: "created" },
+      });
     },
     onError: (error) => {
       const message = error?.response?.data?.message || "Erreur inconnue";

@@ -15,12 +15,20 @@ export default function useRegistration() {
     enabled: isAuthenticated,
   });
 
+  const archivedSessionQuery = useQuery({
+    queryKey: ["archivedSession"],
+    queryFn: RegistrationAPI.getArchivedRegistrations,
+    enabled: isAuthenticated,
+  });
+
   const createRegistrationMutation = useMutation({
     mutationFn: (sessionId) => RegistrationAPI.createRegistration(sessionId),
 
     onSuccess: ({ data }) => {
       toastSuccess(data.message);
-      navigate("/dashboard/sessions/followed");
+      navigate("/dashboard/sessions", {
+        state: { tab: "followed" },
+      });
     },
     onError: (error) => {
       const message = error?.response?.data?.message || "Erreur inconnue";
@@ -42,6 +50,8 @@ export default function useRegistration() {
   return {
     followedSessions: followedSessionQuery.data?.data || [],
     isLoadingFollowedSession: followedSessionQuery.isLoading,
+    archivedSessions: archivedSessionQuery.data?.data || [],
+    isLoadingArchivedSession: archivedSessionQuery.isLoading,
     registerToSession: createRegistrationMutation.mutate,
     unfollowSession: deleteRegistrationMutation.mutate,
   };

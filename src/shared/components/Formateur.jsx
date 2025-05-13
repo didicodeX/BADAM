@@ -13,7 +13,7 @@ export default function Formateur({ name, joinedDate, bio, avatar }) {
           className="w-32 h-48 object-cover rounded-full"
         />
       ) : (
-        <span className="text-cta-700 bg-background-100 w-32 h-48 flex items-center justify-center rounded-full text-5xl">
+        <span className="text-cta-700 bg-background-100 w-32 h-48 px-5 flex items-center justify-center rounded-full text-5xl">
           {getInitials(name)}
         </span>
       )}

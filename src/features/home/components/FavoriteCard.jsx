@@ -3,6 +3,7 @@ import { format } from "date-fns";
 import { enUS } from "date-fns/locale";
 import { Heart, HeartPlus } from "lucide-react";
 import Status from "@/shared/components/Status";
+import { useSearchStore } from "@/features/search/store/search.store";
 
 export default function FavoriteCard({
   id,
@@ -13,9 +14,11 @@ export default function FavoriteCard({
   onToggleFavorite,
 }) {
   const navigate = useNavigate();
+  const {setQuery} = useSearchStore();
 
   const handleCardClick = () => {
-    navigate(`/sessions/${id}`); // ou `/dashboard/sessions/${id}` si c’est dans ton dashboard
+    setQuery("");
+    navigate(`/sessions/${id}`);
   };
 
   return (

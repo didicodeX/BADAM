@@ -12,7 +12,7 @@ export function useTraining(id) {
     mutationFn: TrainingAPI.createTraining,
     onSuccess: ({ data }) => {
       toastSuccess(data.message);
-      navigate("/dashboard/trainings/created");
+      navigate("/dashboard/trainings");
     },
     onError: (error) => {
       const message = error?.response?.data?.message || "Erreur inconnue";
@@ -38,7 +38,7 @@ export function useTraining(id) {
     onSuccess: ({ data }) => {
       toastSuccess(data.message);
       myTrainingsQuery.refetch();
-      navigate("/dashboard/trainings/created");
+      navigate("/dashboard/trainings");
     },
   });
 

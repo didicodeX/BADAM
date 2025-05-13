@@ -8,8 +8,8 @@ import CardListContainer from "@/shared/components/CardListContainer";
 import EmptySection from "../../components/EmptySection";
 import LoadingScreen from "@/shared/components/LoadingScreen";
 
-export default function FollowedSessionsPage() {
-  const { followedSessions, isLoadingFollowedSession, unfollowSession } =
+export default function ArchivedSessionsPage() {
+  const { archivedSessions, isLoadingArchivedSession, unfollowSession } =
     useRegistration();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -28,10 +28,10 @@ export default function FollowedSessionsPage() {
     }
   };
 
-  if (isLoadingFollowedSession) return <LoadingScreen />;
+  if (isLoadingArchivedSession) return <LoadingScreen />;
 
   // Grouper les sessions par formation
-  const grouped = followedSessions.reduce((acc, reg) => {
+  const grouped = archivedSessions.reduce((acc, reg) => {
     const trainingId = reg.session.training?._id;
     if (!acc[trainingId]) {
       acc[trainingId] = {
@@ -45,7 +45,7 @@ export default function FollowedSessionsPage() {
 
   return (
     <Section last>
-      <h3>Mes séssions suivies</h3>
+      <h3>Mes séssions archivées</h3>
       {/* Liste des formations avec leurs sessions suivies */}
       {Object.values(grouped).map(({ training, sessions }) => (
         <Section key={training._id}>
@@ -70,19 +70,24 @@ export default function FollowedSessionsPage() {
       ))}
 
       {Object.keys(grouped).length === 0 && (
-        <EmptySection
-          title="Aucune séssion suivie pour le moment."
-          link={{ to: "/", label: "Rechercher une session" }}
-          icon={<Search className="w-5 h-5" />}
-        />
+        // <EmptySection
+        //   title="Aucune séssion suivie pour le moment."
+        //   link={{ to: "/", label: "Rechercher une session" }}
+        //   icon={<Search className="w-5 h-5" />}
+        // />
+        <div className="flex flex-col items-center text-center gap-2 text-text-500 justify-center w-full">
+          <p className="text-center mt-4">
+            Aucune séssion archivées pour le moment.
+          </p>
+        </div>
       )}
       {/* Modal de confirmation de suppression */}
       <ConfirmDeleteModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onConfirm={handleConfirmUnfollow}
-        title="Se désinscrire de la séssion"
-        message="Tu es sur le point de te désinscrire. Cette action est irréversible. Veux-tu continuer ?"
+        title="suppression de la séssion"
+        message="Tu es sur le point de supprimer définitivement cette session. Cette action est irréversible. Veux-tu continuer ?"
         confirmText="Se désinscrire"
       />
     </Section>

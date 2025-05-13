@@ -1,11 +1,12 @@
 import { useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { Search } from "lucide-react";
+import { Archive, Search } from "lucide-react";
 import Content from "@/shared/components/Content";
 import Section from "@/shared/components/Section";
 import FollowedSessionsPage from "./FollowedSessionsPage";
 import CreatedSessionsPage from "./CreatedSessionsPage";
 import FavoritesPage from "./FavoritesPage";
+import ArchivedSessionsPage from "./ArchivedSessionsPage";
 
 export default function SessionsIndexPage() {
   const location = useLocation();
@@ -30,11 +31,12 @@ export default function SessionsIndexPage() {
           { key: "followed", label: "Suivies" },
           { key: "created", label: "Créées" },
           { key: "favorites", label: "Favoris" },
+          { key: "archived", label: "Archivées" },
         ].map(({ key, label }) => (
           <button
             key={key}
             onClick={() => setActiveTab(key)}
-            className={`px-4 py-2 font-medium border-b-2 ${
+            className={`px-2.5 py-2 font-medium text-[13px] border-b-2 ${
               activeTab === key
                 ? "border-cta-500 text-cta-500"
                 : "border-transparent text-text-500 hover:text-cta-500"
@@ -83,6 +85,9 @@ export default function SessionsIndexPage() {
         {activeTab === "created" && <CreatedSessionsPage />}
 
         {activeTab === "favorites" && <FavoritesPage />}
+
+        {activeTab === "archived" && <ArchivedSessionsPage />}
+
       </Section>
     </Content>
   );

@@ -131,7 +131,7 @@ export default function CreateSessionPage() {
         </Section>
 
         <Section>
-          <h3>Participants</h3>
+          <h3>Nombre maximal de participants</h3>
           <InputField
             label="Nombre max de participants"
             type="number"

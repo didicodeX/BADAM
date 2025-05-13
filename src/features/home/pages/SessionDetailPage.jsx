@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { format } from "date-fns";
-import { Loader, Heart, HeartPlus, Share, MessageCircle } from "lucide-react";
+import { Heart, HeartPlus, Share, MessageCircle } from "lucide-react";
 import { enUS } from "date-fns/locale";
 import useHome from "../hooks/useHome";
 import Content from "@/shared/components/Content";
@@ -16,6 +16,7 @@ import useFavorites from "@/features/dashboard/hooks/useFavorites";
 import ReviewModal from "../components/ReviewModal";
 import TrainingReviewSection from "../components/TrainingReviewSection";
 import { useAuth } from "@/features/auth/hooks/useAuth";
+import LoadingScreen from "@/shared/components/LoadingScreen";
 
 export default function SessionDetailPage() {
   const { id } = useParams();
@@ -28,13 +29,8 @@ export default function SessionDetailPage() {
 
   const [isReviewOpen, setIsReviewOpen] = useState(false);
 
-  if (isLoadingsessionDetail || isLoadinMyFavorites) {
-    return (
-      <div className="flex justify-center items-center min-h-[200px]">
-        <Loader className="animate-spin w-6 h-6 text-text-500" />
-      </div>
-    );
-  }
+  if (isLoadingsessionDetail || isLoadinMyFavorites) return <LoadingScreen />;
+
   if (!sessionDetail) {
     return <p className="text-error-700">Session introuvable.</p>;
   }
@@ -64,7 +60,7 @@ export default function SessionDetailPage() {
       return;
     }
     handleToggleFavorite(id);
-  }
+  };
   return (
     <Content>
       <h2>{training.title}</h2>

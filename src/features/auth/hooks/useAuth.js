@@ -27,7 +27,7 @@ export function useAuth() {
     mutationFn: AuthAPI.register,
     onSuccess: ({ data }) => {
       setUser(data.user);
-      navigate("/login");
+      navigate("/home");
     },
     onError: (error) => {
       const message = error?.response?.data?.message || "Erreur inconnue";

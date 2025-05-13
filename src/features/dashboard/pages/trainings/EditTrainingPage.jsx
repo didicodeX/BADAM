@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import { useTraining } from "../../hooks/useTrainings";
-import { Loader } from "lucide-react";
 import InputField from "@/shared/components/InputField";
 import Content from "@/shared/components/Content";
 import Section from "@/shared/components/Section";
@@ -11,6 +10,7 @@ import MediaUploader from "../../components/MediaUploader";
 import { uploadToCloudinary } from "@/shared/utils/uploadToCloudinary";
 import { toastError } from "@/shared/components/toast";
 import MediaPreviewList from "../../components/MediaPreviewList";
+import LoadingScreen from "@/shared/components/LoadingScreen";
 
 export default function EditTrainingPage() {
   const { id } = useParams();
@@ -80,13 +80,7 @@ export default function EditTrainingPage() {
     }
   };
 
-  if (isLoadingTraining) {
-    return (
-      <div className="flex justify-center items-center min-h-[200px]">
-        <Loader className="animate-spin w-6 h-6 text-text-500" />
-      </div>
-    );
-  }
+  if (isLoadingTraining) return <LoadingScreen />;
 
   if (isErrorTraining || !training) {
     return (

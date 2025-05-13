@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import ActionMenuTraining from "../../components/ActionMenuTraining";
 import { useParams } from "react-router-dom";
 import { useTraining } from "../../hooks/useTrainings";
-import { Loader, MoreVertical } from "lucide-react";
+import { MoreVertical } from "lucide-react";
 import Content from "@/shared/components/Content";
 import MediaSlider from "../../components/Slider";
 import ConfirmDeleteModal from "@/shared/components/ConfirmDeleteModal";
@@ -10,6 +10,7 @@ import { useSession } from "../../hooks/useSessions";
 import Section from "@/shared/components/Section";
 import SessionCard from "../../components/SessionCard";
 import CardListContainer from "@/shared/components/CardListContainer";
+import LoadingScreen from "@/shared/components/LoadingScreen";
 
 export default function TrainingDetailPage() {
   const { id } = useParams();
@@ -39,13 +40,7 @@ export default function TrainingDetailPage() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  if (isLoadingTraining) {
-    return (
-      <div className="flex justify-center items-center min-h-[200px]">
-        <Loader className="animate-spin w-6 h-6 text-text-500" />
-      </div>
-    );
-  }
+  if (isLoadingTraining) return <LoadingScreen />;
 
   if (isErrorTraining || !training) {
     return (
