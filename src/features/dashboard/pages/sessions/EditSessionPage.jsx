@@ -22,7 +22,7 @@ export default function EditSessionPage() {
 
   const [mediaFiles, setMediaFiles] = useState([]);
   const [progress, setProgress] = useState(0);
-  const training = mySessionDetail.session.training;
+  const training = mySessionDetail?.session?.training;
   const {
     control,
     register,

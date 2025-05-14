@@ -29,7 +29,7 @@ export default function Hello() {
           </h2>
           <h4>
             <Link className="hover:text-cta-500" to="/profile">
-              Modifier vos informations professionnelles
+              Modifier vos informations personnelles
             </Link>
           </h4>
         </div>

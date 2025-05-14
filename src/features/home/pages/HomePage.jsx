@@ -18,6 +18,7 @@ export default function HomePage() {
     isLoadingFollowedSession,
     isLoadingArchivedSession,
   } = useRegistration();
+  
   const { handleToggleFavorite, latest } = useHome();
 
   const sessions = useSessions();
@@ -34,7 +35,7 @@ export default function HomePage() {
         <Section>
           <h3 className="mb-4">Les recommandations</h3>
           <CardListContainer>
-            {sessions.map((session) => {
+            {sessions.slice(0,5).map((session) => {
               const isOwner = session.createdBy === user._id;
               const isRegistered = followedSessions.some(
                 (reg) => reg.session?._id === session._id

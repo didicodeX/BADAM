@@ -92,7 +92,7 @@ export default function DashboardHomePage() {
             title="Aucune formation créées pour le moment."
             link={{
               to: "/dashboard/create-training",
-              label: "Créées votre première  séssion.",
+              label: "Créées votre première formation.",
             }}
           />
         )}
