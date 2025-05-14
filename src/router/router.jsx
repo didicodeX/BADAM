@@ -40,12 +40,7 @@ export const router = createBrowserRouter([
       { path: "/search", element: <SearchPage /> }
     ],
   },
-
-  // {
-  //   element: <AppLayout />,
-  //   children: [{ path: "/search", element: <SearchPage /> }],
-  // },
-
+  // Auth routes
   {
     element: <AuthLayout />,
     children: [
@@ -54,7 +49,7 @@ export const router = createBrowserRouter([
       { path: "/forgot-password", element: <ForgotPasswordPage /> },
     ],
   },
-
+  // App routes
   {
     element: <ProtectedRoute />,
     children: [

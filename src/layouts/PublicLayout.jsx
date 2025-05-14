@@ -6,10 +6,14 @@ import Footer from "@/shared/components/Footer";
 import ScrollToTop from "@/shared/components/ScrollToTop";
 import { useSearchStore } from "@/features/search/store/search.store";
 import SearchPage from "@/features/search/pages/SearchPage";
+import { useAuthStore } from "@/features/auth/store/auth.store";
+import NavbarMobile from "@/shared/components/NavbarMobile";
 
 export default function PublicLayout() {
   const [menuOpen, setMenuOpen] = useState(false);
   const { query } = useSearchStore();
+  const { user } = useAuthStore();
+
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 640) {
@@ -21,6 +25,10 @@ export default function PublicLayout() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  const forceOpenSearch =
+    location.pathname === "/search" &&
+    sessionStorage.getItem("badam:search:autoFocus") === "1";
+
   return (
     <div className="min-h-screen flex flex-col relative">
       <ScrollToTop />
@@ -31,7 +39,19 @@ export default function PublicLayout() {
 
       {/* Navbar mobile */}
       <div className="block lg:hidden">
-        <NavbarMobilePublic menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
+        {user ? (
+          <NavbarMobile
+            menuOpen={menuOpen}
+            setMenuOpen={setMenuOpen}
+            forceOpenSearchOnMount={forceOpenSearch}
+          />
+        ) : (
+          <NavbarMobilePublic
+            menuOpen={menuOpen}
+            setMenuOpen={setMenuOpen}
+            forceOpenSearchOnMount={forceOpenSearch}
+          />
+        )}{" "}
       </div>
 
       {/* Overlay quand menu mobile est ouvert */}

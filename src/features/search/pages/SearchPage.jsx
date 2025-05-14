@@ -6,12 +6,14 @@ import SessionCard from "@/features/dashboard/components/SessionCard";
 import FavoriteCard from "@/features/home/components/FavoriteCard";
 import useHome from "@/features/home/hooks/useHome";
 import Content from "@/shared/components/Content";
+import { useFavorites } from "@/features/home/store/useHome.store";
 
 export default function SearchPage() {
   const { results, loading, error, query } = useSearchStore();
   const { user } = useAuthStore();
   const { handleToggleFavorite } = useHome();
-  const favorites = user?.favorites || [];
+  const  favorites  = useFavorites();
+  // const favorites = user?.favorites || [];
 
   if (!query.trim()) return null;
 

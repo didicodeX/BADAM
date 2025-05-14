@@ -82,7 +82,7 @@ export default function NavbarMobile({
             animate={{ x: 0 }}
             exit={{ x: "-100%" }}
             transition={{ type: "tween", duration: 0.3 }}
-            className="absolute top-full left-0 min-w-2/3 h-[calc(100vh-56px)] bg-background-50 border-t py-3 px-6 z-40 flex flex-col justify-between border-r border-r-text-100"
+            className="absolute top-full left-0 w-2/3 h-[calc(100vh-56px)] bg-background-50 border-t py-3 px-6 z-40 flex flex-col justify-between border-r border-r-text-100 padd-x text-wrap"
           >
             <div className="flex flex-col gap-y-6">
               {user && (
@@ -90,12 +90,12 @@ export default function NavbarMobile({
                   className="flex items-center gap-3 mb-6"
                   onClick={goToProfile}
                 >
-                  <Avatar user={user}/>
+                  <Avatar user={user} />
                   <div>
-                    <p className="font-semibold">
-                      {formatName(user.name)}
+                    <p className="font-semibold">{formatName(user.name)}</p>
+                    <p className="text-sm text-text-400 truncate max-w-[180px]">
+                      {user.email}
                     </p>
-                    <p className="text-sm text-text-400">{user.email}</p>
                   </div>
                 </div>
               )}
@@ -124,7 +124,7 @@ export default function NavbarMobile({
                   }}
                   className="flex items-center gap-2 hover:text-cta-500 w-full"
                 >
-                  <Heart className="w-4 h-4" /> Mes favoris
+                  <Heart className="w-5 h-5" /> Mes favoris
                 </button>
                 <Link
                   to="/notifications"

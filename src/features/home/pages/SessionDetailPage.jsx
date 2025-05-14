@@ -136,13 +136,13 @@ export default function SessionDetailPage() {
             return (
               <div className="flex flex-col items-center gap-2">
                 {isFavorite ? (
-                  <span className="text-text-500">Déjà ajouté aux favoris</span>
+                  <small className="text-text-500">Déjà ajouté aux favoris</small>
                 ) : (
                   <div className="flex flex-col items-center gap-2">
-                    <span className="text-text-500 text-center">
+                    <small className="text-text-500 text-center text-sm">
                       Cette session est terminée. Ajoutez-la à vos favoris pour
                       être notifié lorsqu'une nouvelle session sera disponible.
-                    </span>
+                    </small>
                     <Button
                       onClick={() => {
                         handleToggleFavoriteClick();

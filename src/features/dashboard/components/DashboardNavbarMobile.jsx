@@ -91,7 +91,9 @@ export default function DashboardNavbarMobile({ menuOpen, setMenuOpen }) {
                     <p className="font-semibold">
                       {capitalizeFirstLetter(user.name)}
                     </p>
-                    <p className="text-sm text-text-400">{user.email}</p>
+                    <p className="text-sm text-text-400 truncate max-w-[180px]">
+                      {user.email}
+                    </p>
                   </div>
                 </div>
               )}

@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { Menu, Search, X, ArrowLeft, LogIn, UserPlus } from "lucide-react";
+import { Menu, Search, X, LogIn, UserPlus } from "lucide-react";
 import { Link } from "react-router-dom";
 // eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "framer-motion";
 import SearchInput from "./SearchInput";
-
+import Logo from "./Logo";
 
 export default function NavbarMobilePublic({
   menuOpen,
@@ -24,18 +24,23 @@ export default function NavbarMobilePublic({
       {!searchOpen ? (
         <div className="flex items-center justify-between">
           {menuOpen ? (
-            <X className="w-6 h-6 text-primary cursor-pointer" onClick={() => setMenuOpen(false)} />
+            <X
+              className="w-6 h-6 text-primary cursor-pointer"
+              onClick={() => setMenuOpen(false)}
+            />
           ) : (
-            <Menu className="w-6 h-6 text-primary cursor-pointer" onClick={() => setMenuOpen(true)} />
+            <Menu
+              className="w-6 h-6 text-primary cursor-pointer"
+              onClick={() => setMenuOpen(true)}
+            />
           )}
 
-          <div className="text-xl font-bold">
-            <Link to="/">
-              BA<span className="text-cta-500">DAM</span>
-            </Link>
-          </div>
+          <Logo />
 
-          <Search className="w-6 h-6 text-primary cursor-pointer" onClick={() => setSearchOpen(true)} />
+          <Search
+            className="w-6 h-6 text-primary cursor-pointer"
+            onClick={() => setSearchOpen(true)}
+          />
         </div>
       ) : (
         <SearchInput
@@ -45,7 +50,7 @@ export default function NavbarMobilePublic({
         />
       )}
 
-      {/* menu mobile */}
+      {/* menu mobile public */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
@@ -55,16 +60,34 @@ export default function NavbarMobilePublic({
             transition={{ type: "tween", duration: 0.3 }}
             className="absolute top-full left-0 w-2/3 h-[calc(100vh-56px)] bg-background-50 border-t py-3 px-6 z-40 flex flex-col justify-between border-r border-r-text-100"
           >
-            <nav className="space-y-4">
-              <Link to="/login" className="flex items-center gap-3 hover:text-cta-500">
-                <LogIn className="w-5 h-5" /> Se connecter
-              </Link>
-              <Link to="/register" className="flex items-center gap-3 hover:text-cta-500">
-                <UserPlus className="w-5 h-5" /> S'inscrire
-              </Link>
-            </nav>
+            <div className="flex flex-col gap-y-6">
+              <nav className="space-y-4">
+                <Link
+                  to="/login"
+                  onClick={() => setMenuOpen(false)}
+                  className="flex items-center gap-3 hover:text-cta-500"
+                >
+                  <LogIn className="w-5 h-5" /> Se connecter
+                </Link>
+                <Link
+                  to="/register"
+                  onClick={() => setMenuOpen(false)}
+                  className="flex items-center gap-3 hover:text-cta-500"
+                >
+                  <UserPlus className="w-5 h-5" /> S'inscrire
+                </Link>
+              </nav>
 
-            <p className="text-sm">Aide & FAQ</p>
+              <hr className="my-4" />
+
+              <Link
+                to="/coming-soon"
+                onClick={() => setMenuOpen(false)}
+                className="text-sm hover:text-cta-500"
+              >
+                Aide & FAQ
+              </Link>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
