@@ -112,7 +112,7 @@ export default function Sidebar() {
                   title="Séssions"
                 >
                   <CalendarClock className="w-4 h-4 text-cta-500" />
-                  Créer une session
+                  Créer une séssion
                 </button>
               </div>
             )}
@@ -126,7 +126,7 @@ export default function Sidebar() {
           )}
           {renderItem(
             "sessions",
-            "Mes sessions",
+            "Mes séssions",
             <CalendarClock className="w-5 h-5" />
           )}
         </nav>

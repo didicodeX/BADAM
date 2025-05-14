@@ -4,7 +4,7 @@ import Section from "@/shared/components/Section";
 import ReviewCard from "@/features/dashboard/components/ReviewCard";
 import Content from "@/shared/components/Content";
 import { format } from "date-fns";
-import { enUS } from "date-fns/locale";
+import { frCA } from "date-fns/locale";
 import { Star } from "lucide-react";
 import LoadingScreen from "@/shared/components/LoadingScreen";
 
@@ -51,7 +51,7 @@ export default function TrainingReviewsPage() {
 
       {groupedArray.map(({ session, reviews }, idx) => {
         const dateLabel = session?.startDateTime
-          ? format(new Date(session.startDateTime), "d MMMM yyyy", { locale: enUS })
+          ? format(new Date(session.startDateTime), "d MMMM yyyy", { locale: frCA })
           : "Session inconnue";
 
         const avg =

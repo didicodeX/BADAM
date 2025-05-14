@@ -30,7 +30,7 @@ export default function ActionMenuSession({
         className="w-full flex items-center gap-2 px-3 py-2 hover:bg-background-100 rounded text-sm text-left"
       >
         <Pencil className="w-4 h-4 text-cta-500" />
-        Modifier la session
+        Modifier la séssion
       </button>
 
       <button
@@ -54,7 +54,7 @@ export default function ActionMenuSession({
         className="w-full flex items-center gap-2 px-3 py-2 hover:bg-background-100 rounded text-sm text-left"
       >
         <Trash className="w-4 h-4 text-error-500" />
-        Supprimer la session
+        Supprimer la séssion
       </button>
     </div>
   );

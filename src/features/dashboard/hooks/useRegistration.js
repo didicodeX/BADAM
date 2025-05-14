@@ -42,8 +42,9 @@ export default function useRegistration() {
       toastSuccess(data.message);
       queryClient.invalidateQueries(["followedSession"]);
     },
-    onError: () => {
+    onError: ({data}) => {
       toastError("Impossible de se désinscrire pour le moment.");
+      console.log(data);
     },
   });
 

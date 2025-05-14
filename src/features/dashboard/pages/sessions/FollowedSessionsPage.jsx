@@ -1,7 +1,5 @@
-import { useState } from "react";
 import { Search } from "lucide-react";
 import useRegistration from "../../hooks/useRegistration";
-import ConfirmDeleteModal from "@/shared/components/ConfirmDeleteModal";
 import Section from "@/shared/components/Section";
 import RegistrationCard from "../../components/RegistrationCard";
 import CardListContainer from "@/shared/components/CardListContainer";
@@ -12,25 +10,8 @@ export default function FollowedSessionsPage() {
   const { followedSessions, isLoadingFollowedSession, unfollowSession } =
     useRegistration();
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedSessionId, setSelectedSessionId] = useState(null);
-
-  const handleRequestUnfollow = (sessionId) => {
-    setSelectedSessionId(sessionId);
-    setIsModalOpen(true);
-  };
-
-  const handleConfirmUnfollow = () => {
-    if (selectedSessionId) {
-      unfollowSession(selectedSessionId);
-      setIsModalOpen(false);
-      setSelectedSessionId(null);
-    }
-  };
-
   if (isLoadingFollowedSession) return <LoadingScreen />;
 
-  // Grouper les sessions par formation
   const grouped = followedSessions.reduce((acc, reg) => {
     const trainingId = reg.session.training?._id;
     if (!acc[trainingId]) {
@@ -46,7 +27,6 @@ export default function FollowedSessionsPage() {
   return (
     <Section last>
       <h3>Mes séssions suivies</h3>
-      {/* Liste des formations avec leurs sessions suivies */}
       {Object.values(grouped).map(({ training, sessions }) => (
         <Section key={training._id}>
           <div>
@@ -62,7 +42,7 @@ export default function FollowedSessionsPage() {
                 trainingTitle={training.title}
                 trainingImage={session.coverImage || training.images?.[0]}
                 session={session}
-                onUnfollow={() => handleRequestUnfollow(session._id)}
+                onUnfollow={unfollowSession} // ✅ fonction directe
               />
             ))}
           </CardListContainer>
@@ -76,15 +56,6 @@ export default function FollowedSessionsPage() {
           icon={<Search className="w-5 h-5" />}
         />
       )}
-      {/* Modal de confirmation de suppression */}
-      <ConfirmDeleteModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        onConfirm={handleConfirmUnfollow}
-        title="Se désinscrire de la séssion"
-        message="Tu es sur le point de te désinscrire. Cette action est irréversible. Veux-tu continuer ?"
-        confirmText="Se désinscrire"
-      />
     </Section>
   );
 }

@@ -32,7 +32,7 @@ export default function ActionMenuTraining({
         className="w-full flex items-center gap-2 px-3 py-2 hover:bg-background-100 rounded text-sm text-left"
       >
         <Plus className="w-4 h-4 text-cta-500" />
-        Créer une session
+        Créer une séssion
       </button>
       <button
         onClick={handleEdit}

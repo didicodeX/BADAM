@@ -14,7 +14,7 @@ export default function FeaturedTrainingsSection() {
   const { isAuthenticated } = useAuth();
   const navigate = useNavigate();
 
-  const [visibleCount, setVisibleCount] = useState(6);
+  const [visibleCount, setVisibleCount] = useState(10);
 
   const handleFavoriteClick = () => {
     if (!isAuthenticated) {
@@ -47,7 +47,7 @@ export default function FeaturedTrainingsSection() {
         </CardListContainer>
         {allSessions.length > visibleCount && (
           <div className="text-center mt-8">
-            <Button onClick={() => setVisibleCount((prev) => prev + 6)}>
+            <Button onClick={() => setVisibleCount((prev) => prev + 10)}>
               Voir plus
             </Button>
           </div>

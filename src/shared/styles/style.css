@@ -25,8 +25,12 @@ h4 {
   @apply text-lg sm:text-xl md:text-2xl font-bold leading-normal;
 }
 
+h5 {
+  @apply text-base sm:text-lg md:text-xl font-semibold leading-normal;
+}
+
 p {
-  @apply text-base lg:text-lg font-normal leading-relaxed;
+  @apply text-sm sm:text-base lg:text-lg font-normal leading-relaxed;
 }
 
 

@@ -7,14 +7,24 @@ import { useSessions, useFavorites } from "../store/useHome.store";
 import { useAuthStore } from "@/features/auth/store/auth.store";
 import SessionCard from "@/features/dashboard/components/SessionCard";
 import CardListContainer from "@/shared/components/CardListContainer";
+import useRegistration from "@/features/dashboard/hooks/useRegistration";
+import RegistrationCard from "@/features/dashboard/components/RegistrationCard"; // ✅ à ajouter si ce n’est pas fait
+import LoadingScreen from "@/shared/components/LoadingScreen"; // tu l'avais oublié
 
 export default function HomePage() {
   const { user } = useAuthStore();
-
+  const {
+    followedSessions,
+    isLoadingFollowedSession,
+    isLoadingArchivedSession,
+  } = useRegistration();
   const { handleToggleFavorite, latest } = useHome();
 
   const sessions = useSessions();
   const favorites = useFavorites();
+
+  if (isLoadingFollowedSession || isLoadingArchivedSession)
+    return <LoadingScreen />;
 
   return (
     <Section last>
@@ -26,17 +36,42 @@ export default function HomePage() {
           <CardListContainer>
             {sessions.map((session) => {
               const isOwner = session.createdBy === user._id;
-              return isOwner ? (
-                <SessionCard
-                  key={session._id}
-                  id={session._id}
-                  trainingTitle={session.training.title}
-                  trainingImage={
-                    session.coverImage || session.training.images[0]
-                  }
-                  session={session}
-                />
-              ) : (
+              const isRegistered = followedSessions.some(
+                (reg) => reg.session?._id === session._id
+              );
+
+              if (isOwner) {
+                return (
+                  <SessionCard
+                    key={session._id}
+                    id={session._id}
+                    trainingTitle={session.training.title}
+                    trainingImage={
+                      session.coverImage || session.training.images[0]
+                    }
+                    session={session}
+                  />
+                );
+              }
+
+              if (isRegistered) {
+                return (
+                  <RegistrationCard
+                    key={session._id}
+                    id={session._id}
+                    trainingTitle={session.training.title}
+                    trainingImage={
+                      session.coverImage || session.training.images[0]
+                    }
+                    session={session}
+                    onUnfollow={() =>
+                      console.log("Unfollow from homepage (TODO)")
+                    }
+                  />
+                );
+              }
+
+              return (
                 <FavoriteCard
                   key={session._id}
                   id={session._id}
@@ -57,17 +92,42 @@ export default function HomePage() {
           <CardListContainer>
             {latest.map((session) => {
               const isOwner = session.createdBy === user._id;
-              return isOwner ? (
-                <SessionCard
-                  key={session._id}
-                  id={session._id}
-                  trainingTitle={session.training.title}
-                  trainingImage={
-                    session.coverImage || session.training.images[0]
-                  }
-                  session={session}
-                />
-              ) : (
+              const isRegistered = followedSessions.some(
+                (reg) => reg.session?._id === session._id
+              );
+
+              if (isOwner) {
+                return (
+                  <SessionCard
+                    key={session._id}
+                    id={session._id}
+                    trainingTitle={session.training.title}
+                    trainingImage={
+                      session.coverImage || session.training.images[0]
+                    }
+                    session={session}
+                  />
+                );
+              }
+
+              if (isRegistered) {
+                return (
+                  <RegistrationCard
+                    key={session._id}
+                    id={session._id}
+                    trainingTitle={session.training.title}
+                    trainingImage={
+                      session.coverImage || session.training.images[0]
+                    }
+                    session={session}
+                    onUnfollow={() =>
+                      console.log("Unfollow from homepage (TODO)")
+                    }
+                  />
+                );
+              }
+
+              return (
                 <FavoriteCard
                   key={session._id}
                   id={session._id}

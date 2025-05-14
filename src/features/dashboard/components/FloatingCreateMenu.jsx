@@ -61,7 +61,7 @@ export default function FloatingCreateMenu() {
       }
       pointer-events-auto
     `}
-          title="Créer une session"
+          title="Créer une séssion"
         >
           <CalendarClock className="w-5 h-5 text-cta-500" />
         </button>

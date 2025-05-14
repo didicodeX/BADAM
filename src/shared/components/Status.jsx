@@ -2,7 +2,7 @@ export default function Status({ taken = 0, total = 0, expired = false }) {
   if (expired) {
     return (
       <span className="w-fit mt-2 bg-error-50 text-error-500 text-xs font-semibold px-3 py-1.5 rounded-full shadow">
-        Expirée
+        Terminée
       </span>
     );
   }

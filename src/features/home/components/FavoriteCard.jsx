@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { format } from "date-fns";
-import { enUS } from "date-fns/locale";
+import { frCA } from "date-fns/locale";
 import { Heart, HeartPlus } from "lucide-react";
 import Status from "@/shared/components/Status";
 import { useSearchStore } from "@/features/search/store/search.store";
@@ -14,7 +14,7 @@ export default function FavoriteCard({
   onToggleFavorite,
 }) {
   const navigate = useNavigate();
-  const {setQuery} = useSearchStore();
+  const { setQuery } = useSearchStore();
 
   const handleCardClick = () => {
     setQuery("");
@@ -35,25 +35,17 @@ export default function FavoriteCard({
       )}
       <div className="flex justify-between gap-2 items-start">
         <div className="flex flex-col">
-          <h4 className="line-clamp-1">{trainingTitle}</h4>
+          <h5 className="line-clamp-1 font-bold">{trainingTitle}</h5>
           <small>{session.address}</small>
           <sub>
-            {format(new Date(session.startDateTime), "MMMM d", {
-              locale: enUS,
+            Du{" "}
+            {format(new Date(session.startDateTime), "d MMMM yyyy 'à' p", {
+              locale: frCA,
             })}{" "}
-            to{" "}
-            {format(new Date(session.endDateTime), "MMMM d", {
-              locale: enUS,
+            au{" "}
+            {format(new Date(session.endDateTime), "d MMMM yyyy 'à' p", {
+              locale: frCA,
             })}
-            ,{" "}
-            {format(new Date(session.startDateTime), "p", {
-              locale: enUS,
-            })}{" "}
-            to{" "}
-            {format(new Date(session.endDateTime), "p", {
-              locale: enUS,
-            })}{" "}
-            ADT
           </sub>
           <Status
             taken={session.currentNbParticipants}

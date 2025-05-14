@@ -1,4 +1,3 @@
-import { Search } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import useRegistration from "@/features/dashboard/hooks/useRegistration";
 import Statistique from "../../components/Statistique";
@@ -11,10 +10,12 @@ import { Link } from "react-router-dom";
 import RegistrationCard from "../../components/RegistrationCard";
 import SessionCard from "../../components/SessionCard";
 import TrainingCard from "../../components/TrainingCard";
+import Button from "@/shared/components/Button";
 import { formatName } from "@/shared/utils/formatName";
 import CardListContainer from "@/shared/components/CardListContainer";
 import EmptySection from "../../components/EmptySection";
 import LoadingScreen from "@/shared/components/LoadingScreen";
+import { Search } from "lucide-react";
 
 export default function DashboardHomePage() {
   const { user } = useAuthStore();
@@ -24,7 +25,7 @@ export default function DashboardHomePage() {
   const { myTrainings } = useTraining();
   const navigate = useNavigate();
 
-  if (isLoadingFollowedSession) return <LoadingScreen/>
+  if (isLoadingFollowedSession) return <LoadingScreen />;
 
   return (
     <Content>
@@ -97,7 +98,7 @@ export default function DashboardHomePage() {
         )}
       </Section>
       <Section>
-        <h3>Mes Sessions créées</h3>
+        <h3>Mes Séssions créées</h3>
         <CardListContainer>
           {mySessions.slice(0, 3).map((session) => (
             <SessionCard
@@ -132,7 +133,7 @@ export default function DashboardHomePage() {
         )}
       </Section>
       <Section last>
-        <h3>Mes Sessions suivies</h3>
+        <h3>Mes Séssions suivies</h3>
         <CardListContainer>
           {followedSessions.slice(0, 3).map((session) => (
             <RegistrationCard
@@ -144,7 +145,7 @@ export default function DashboardHomePage() {
                 session.session.training.images?.[0]
               }
               session={session.session}
-              onUnfollow={() => unfollowSession(session._id)}
+              onUnfollow={unfollowSession}
             />
           ))}
         </CardListContainer>

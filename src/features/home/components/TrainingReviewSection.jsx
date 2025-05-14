@@ -1,5 +1,5 @@
 import { format } from "date-fns";
-import { enUS } from "date-fns/locale";
+import { frCA } from "date-fns/locale";
 import Section from "@/shared/components/Section";
 import ReviewCard from "@/features/dashboard/components/ReviewCard";
 import ReviewModal from "./ReviewModal";
@@ -57,7 +57,7 @@ export default function TrainingReviewSection({
 
             const date = session?.startDateTime
               ? format(new Date(session.startDateTime), "d MMMM yyyy", {
-                  locale: enUS,
+                  locale: frCA,
                 })
               : "Session inconnue";
 

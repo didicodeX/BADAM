@@ -17,10 +17,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useAuthStore } from "@/features/auth/store/auth.store";
 import { useAuth } from "@/features/auth/hooks/useAuth";
 import useNotifications from "@/features/notifications/hooks/useNotifications";
-import { getInitials } from "../utils/getInitials";
-import { capitalizeFirstLetter } from "../utils/capitalizeFirstLetter";
 import Logo from "./Logo";
 import SearchInput from "./SearchInput";
+import { formatName } from "../utils/formatName";
+import Avatar from "@/features/dashboard/components/Avatar";
 
 export default function NavbarMobile({
   menuOpen,
@@ -70,7 +70,7 @@ export default function NavbarMobile({
       ) : (
         <SearchInput
           mobile
-          autoFocus={forceOpenSearchOnMount}
+          autoFocus={true}
           onClose={() => setSearchOpen(false)}
         />
       )}
@@ -82,7 +82,7 @@ export default function NavbarMobile({
             animate={{ x: 0 }}
             exit={{ x: "-100%" }}
             transition={{ type: "tween", duration: 0.3 }}
-            className="absolute top-full left-0 w-2/3 h-[calc(100vh-56px)] bg-background-50 border-t py-3 px-6 z-40 flex flex-col justify-between border-r border-r-text-100"
+            className="absolute top-full left-0 min-w-2/3 h-[calc(100vh-56px)] bg-background-50 border-t py-3 px-6 z-40 flex flex-col justify-between border-r border-r-text-100"
           >
             <div className="flex flex-col gap-y-6">
               {user && (
@@ -90,22 +90,10 @@ export default function NavbarMobile({
                   className="flex items-center gap-3 mb-6"
                   onClick={goToProfile}
                 >
-                  <div className="w-10 h-10 rounded-full overflow-hidden flex items-center justify-center border border-cta-200 hover:border-cta-500">
-                    {user.avatar ? (
-                      <img
-                        src={user.avatar}
-                        alt="avatar"
-                        className="w-full h-full object-cover"
-                      />
-                    ) : (
-                      <div className="w-full h-full rounded-full bg-cta-100 text-cta-700 flex items-center justify-center">
-                        {getInitials(user.name)}
-                      </div>
-                    )}
-                  </div>
+                  <Avatar user={user}/>
                   <div>
                     <p className="font-semibold">
-                      {capitalizeFirstLetter(user.name)}
+                      {formatName(user.name)}
                     </p>
                     <p className="text-sm text-text-400">{user.email}</p>
                   </div>

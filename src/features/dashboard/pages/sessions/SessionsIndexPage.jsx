@@ -22,7 +22,7 @@ export default function SessionsIndexPage() {
 
   return (
     <Content>
-      <h2 className="mb-4">Mes sessions</h2>
+      <h2 className="mb-4">Mes séssions</h2>
 
       {/* Tabs navigation */}
       <div className="flex border-b mb-6">
@@ -36,7 +36,7 @@ export default function SessionsIndexPage() {
           <button
             key={key}
             onClick={() => setActiveTab(key)}
-            className={`px-2.5 py-2 font-medium text-[13px] border-b-2 ${
+            className={`px-2.5 py-2 font-medium text-[13px] sm:text-sm md:text-base border-b-2 ${
               activeTab === key
                 ? "border-cta-500 text-cta-500"
                 : "border-transparent text-text-500 hover:text-cta-500"

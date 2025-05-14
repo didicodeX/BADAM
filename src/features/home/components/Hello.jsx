@@ -1,5 +1,6 @@
 import { useAuthStore } from "@/features/auth/store/auth.store";
 import Content from "@/shared/components/Content";
+import { formatName } from "@/shared/utils/formatName";
 import { getInitials } from "@/shared/utils/getInitials";
 import { Link } from "react-router-dom";
 
@@ -24,7 +25,7 @@ export default function Hello() {
         <div>
           <h2>
             Nous sommes ravis de vous retrouver,{" "}
-            <span className="capitalize font-extrabold">{user.name}</span>
+            <span className="capitalize font-extrabold">{formatName(user.name)}</span>
           </h2>
           <h4>
             <Link className="hover:text-cta-500" to="/profile">

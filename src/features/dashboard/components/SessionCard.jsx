@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { MoreHorizontal } from "lucide-react";
 import { format } from "date-fns";
-import { enUS } from "date-fns/locale";
+import { frCA } from "date-fns/locale";
 import Status from "../../../shared/components/Status";
 import ConfirmDeleteModal from "@/shared/components/ConfirmDeleteModal";
 import ActionMenuSession from "./ActionMenuSession";
@@ -62,13 +62,14 @@ export default function SessionCard({
           <h4 className="line-clamp-1">{trainingTitle}</h4>
           <small>{session.address}</small>
           <sub>
-            {format(new Date(session.startDateTime), "MMMM d", {
-              locale: enUS,
+            Du{" "}
+            {format(new Date(session.startDateTime), "EEEE MMMM yyyy 'à' p", {
+              locale: frCA,
             })}{" "}
-            to{" "}
-            {format(new Date(session.endDateTime), "MMMM d", { locale: enUS })},{" "}
-            {format(new Date(session.startDateTime), "p", { locale: enUS })} to{" "}
-            {format(new Date(session.endDateTime), "p", { locale: enUS })} ADT
+            au{" "}
+            {format(new Date(session.endDateTime), "EEEE MMMM yyyy 'à' p", {
+              locale: frCA,
+            })}
           </sub>
           <Status
             taken={session.currentNbParticipants}
@@ -103,8 +104,8 @@ export default function SessionCard({
         isOpen={showConfirmDelete}
         onClose={() => setShowConfirmDelete(false)}
         onConfirm={handleConfirmDelete}
-        title="Supprimer cette formation"
-        message="Cette action est irréversible. Es-tu sûr de vouloir supprimer cette formation ?"
+        title="Supprimer cette session"
+        message="Cette action est irréversible. Es-tu sûr de vouloir supprimer cette session ?"
         confirmText="Supprimer"
       />
     </div>

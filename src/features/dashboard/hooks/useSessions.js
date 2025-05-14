@@ -67,7 +67,7 @@ export function useSession(id, trainingId) {
     onSuccess: ({ data }) => {
       toastSuccess(data.message);
       mySessionsQuery.refetch();
-      navigate("/dashboard/sessions/created");
+      navigate("/dashboard/sessions");
     },
   });
 

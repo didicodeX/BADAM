@@ -3,7 +3,7 @@ import { useState, useRef, useEffect } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { useSession } from "../../hooks/useSessions";
 import { format } from "date-fns";
-import { enUS } from "date-fns/locale";
+import { frCA } from "date-fns/locale";
 import Section from "@/shared/components/Section";
 import Status from "../../../../shared/components/Status";
 import Button from "@/shared/components/Button";
@@ -46,7 +46,7 @@ export default function SessionDetailPage() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  if (isLoadingMySessionDetail) return <LoadingScreen/>
+  if (isLoadingMySessionDetail) return <LoadingScreen />;
 
   const { session, registrations = [], reviews = [] } = mySessionDetail;
   const training = session.training;
@@ -89,16 +89,14 @@ export default function SessionDetailPage() {
             <p>{training.description}</p>
             <p className="font-bold">{session.address}</p>
             <small className="font-bold">
-              {format(new Date(session.startDateTime), "MMMM d", {
-                locale: enUS,
+              Du{" "}
+              {format(new Date(session.startDateTime), "EEEE d MMMM yyyy 'à' p", {
+                locale: frCA,
               })}{" "}
-              to{" "}
-              {format(new Date(session.endDateTime), "MMMM d", {
-                locale: enUS,
+              au{" "}
+              {format(new Date(session.endDateTime), "EEEE d MMMM yyyy 'à' p", {
+                locale: frCA,
               })}
-              , {format(new Date(session.startDateTime), "p", { locale: enUS })}{" "}
-              to {format(new Date(session.endDateTime), "p", { locale: enUS })}{" "}
-              ADT
             </small>
           </div>
           <div>

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { format } from "date-fns";
 import { Heart, HeartPlus, Share, MessageCircle } from "lucide-react";
-import { enUS } from "date-fns/locale";
+import { frCA } from "date-fns/locale";
 import useHome from "../hooks/useHome";
 import Content from "@/shared/components/Content";
 import Section from "@/shared/components/Section";
@@ -73,16 +73,14 @@ export default function SessionDetailPage() {
           <p>{training.description}</p>
           <p className="font-bold">{session.address}</p>
           <small className="font-bold">
-            {format(new Date(session.startDateTime), "MMMM d", {
-              locale: enUS,
+            Du{" "}
+            {format(new Date(session.startDateTime), "EEEE d MMMM yyyy 'à' p", {
+              locale: frCA,
             })}{" "}
-            to{" "}
-            {format(new Date(session.endDateTime), "MMMM d", {
-              locale: enUS,
+            au{" "}
+            {format(new Date(session.endDateTime), "EEEE d MMMM yyyy 'à' p", {
+              locale: frCA,
             })}
-            , {format(new Date(session.startDateTime), "p", { locale: enUS })}{" "}
-            to {format(new Date(session.endDateTime), "p", { locale: enUS })}{" "}
-            ADT
           </small>
         </div>
         <div className="flex justify-between">
@@ -121,19 +119,60 @@ export default function SessionDetailPage() {
           joinedDate={createdBy.createdAt}
           avatar={createdBy.avatar}
           bio={createdBy.bio}
+          phone={createdBy.phone}
         />
       </Section>
       <div className="flex justify-center">
-        {!isRegistered ? (
-          <Button onClick={() => handleRegisterClick()}>S'inscrire</Button>
-        ) : isPast ? (
-          <Button onClick={() => setIsReviewOpen(true)}>Laisser un avis</Button>
-        ) : (
-          <Button onClick={() => console.log("openChatPage")}>
-            Accéder au chat
-          </Button>
-        )}
+        {(() => {
+          if (isPast) {
+            if (isRegistered) {
+              return (
+                <Button onClick={() => setIsReviewOpen(true)}>
+                  Laisser un avis
+                </Button>
+              );
+            }
+
+            return (
+              <div className="flex flex-col items-center gap-2">
+                {isFavorite ? (
+                  <span className="text-text-500">Déjà ajouté aux favoris</span>
+                ) : (
+                  <div className="flex flex-col items-center gap-2">
+                    <span className="text-text-500 text-center">
+                      Cette session est terminée. Ajoutez-la à vos favoris pour
+                      être notifié lorsqu'une nouvelle session sera disponible.
+                    </span>
+                    <Button
+                      onClick={() => {
+                        handleToggleFavoriteClick();
+                        navigate("/dashboard/sessions", {
+                          state: { tab: "favorites" },
+                        });
+                      }}
+                    >
+                      Ajouter
+                    </Button>
+                  </div>
+                )}
+              </div>
+            );
+          }
+
+          // Session active
+          if (isRegistered) {
+            return (
+              <Button onClick={() => console.log("openChatPage")}>
+                Accéder au chat
+              </Button>
+            );
+          }
+
+          // Session active mais non suivie
+          return <Button onClick={handleRegisterClick}>S'inscrire</Button>;
+        })()}
       </div>
+
       <TrainingReviewSection
         trainingId={training._id}
         sessionId={session._id}

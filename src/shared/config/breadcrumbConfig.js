@@ -2,7 +2,7 @@ export const breadcrumbLabels = {
   trainings: "Mes formations",
   "create-session": "Créer une séssion",
   "create-training": "Créer une formation",
-  sessions: "Mes sessions",
+  sessions: "Mes séssions",
   favorites: "Favoris",
   followed: "Sessions suivies",
   created: "Créées",
