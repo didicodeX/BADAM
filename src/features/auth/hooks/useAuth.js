@@ -25,9 +25,8 @@ export function useAuth() {
 
   const signupMutation = useMutation({
     mutationFn: AuthAPI.register,
-    onSuccess: ({ data }) => {
-      setUser(data.user);
-      navigate("/home");
+    onSuccess: () => {
+      navigate("/login");
     },
     onError: (error) => {
       const message = error?.response?.data?.message || "Erreur inconnue";
