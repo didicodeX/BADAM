@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { signupSchema } from "../schemas/signup.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -8,6 +9,7 @@ import Button from "@/shared/components/Button";
 
 export function SignupForm() {
   const { signup } = useAuth();
+  const navigate = useNavigate();
 
   const {
     register,
@@ -19,6 +21,7 @@ export function SignupForm() {
 
   const onSubmit = (values) => {
     signup(values);
+    navigate("/login");
   };
 
   return (

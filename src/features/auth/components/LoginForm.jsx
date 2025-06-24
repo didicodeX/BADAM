@@ -43,7 +43,7 @@ export function LoginForm() {
 
       <div>
         <Button type="submit">
-          {isSubmitting ? "connexioin" : "Se connecter"}
+          {isSubmitting ? "connexion" : "Se connecter"}
         </Button>
       </div>
       <div className=" items-center flex flex-col xl:flex-row gap-6 justify-center">

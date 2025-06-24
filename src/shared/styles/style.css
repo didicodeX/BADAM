@@ -22,7 +22,7 @@ h3 {
 }
 
 h4 {
-  @apply text-lg sm:text-xl md:text-2xl font-bold leading-normal;
+  @apply text-lg sm:text-xl md:text-2xl font-medium leading-normal;
 }
 
 h5 {
