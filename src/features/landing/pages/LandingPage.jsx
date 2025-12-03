@@ -4,7 +4,7 @@ import { useAuthStore } from "@/features/auth/store/auth.store";
 import Hero from "../components/Hero";
 import Faq from "../components/Faq";
 import CTA from "../components/CTA";
-import WhyBadam from "../components/Whybadam";
+import WhyBadam from "../components/WhyBadam";
 import Avis from "../components/Avis";
 // LandingPage.jsx
 export default function LandingPage() {
